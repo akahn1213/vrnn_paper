@@ -1,0 +1,905 @@
+\documentclass[12pt, a4paper]{article}
+%\usepackage{jheppub}
+%\usepackage{scicite}
+\usepackage{times}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{rotating}
+\usepackage{xfrac}
+\usepackage{soul}
+\usepackage[ruled,vlined]{algorithm2e}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{shapes.misc, positioning}
+\sectionfont{\fontsize{14}{15}\selectfont}
+\topmargin -2.0cm
+\oddsidemargin 0.2cm
+\textwidth 16cm 
+\textheight 26cm
+\footskip 1cm
+
+\setlength\parindent{0pt}
+\setlength\parskip{8pt}
+
+\newenvironment{sciabstract}{%
+\begin{quote}}
+{\end{quote}}
+\renewcommand\refname{References and Notes}
+\newcounter{lastnote}
+\newenvironment{scilastnote}{%
+\setcounter{lastnote}{\value{enumiv}}%
+\addtocounter{lastnote}{+1}%
+\begin{list}%
+{\arabic{lastnote}.}
+{\setlength{\leftmargin}{.22in}}
+{\setlength{\labelsep}{.5em}}}
+{\end{list}}
+
+
+
+
+
+\definecolor{iocolor}{RGB}{169,205,236}
+\definecolor{hlvcolor}{RGB}{224,235,245}
+\definecolor{hscolor}{RGB}{166,166,166}
+\definecolor{layercolor}{RGB}{218,218,218}
+\definecolor{featcolor}{RGB}{202,203,229}
+\definecolor{grucolor}{RGB}{222, 236, 239}
+
+%\definecolor{hlvlinecolor}{RGB}{12, 178, 236}
+%\definecolor{featurelinecolor}{RGB}{100, 159, 206}
+\definecolor{hlvlinecolor}{RGB}{0, 148, 197}
+\definecolor{featurelinecolor}{RGB}{0, 43, 152}
+\definecolor{hslinecolor}{RGB}{85, 85, 85}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%%
+
+\linethickness{0.5mm}
+\title{\bf{Anomalous Jet Tagging via Sequence Modeling}\\\line(1,0){450}} 
+
+\author
+{Alan Kahn$^{\dagger}$, Julia Gonski$^{\dagger}$, In\^{e}s Ochoa$^{\ddagger}$, Daniel Williams$^{\dagger}$, Gustaaf Brooijmans$^{\dagger}$\\
+\\
+\normalsize{$^{\dagger}$Nevis Laboratories, Columbia University in the City of New York, USA}\\
+\normalsize{$^{\ddagger}$Laboratory of Instrumentation and Experimental Particle Physics, Lisbon, Portugal}
+}
+
+\date{}
+
+%%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%
+
+
+
+\begin{document} 
+
+
+\pagenumbering{gobble}
+
+\baselineskip16pt
+
+\maketitle 
+
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+
+%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%
+
+\begin{sciabstract}
+  \begin{center}
+  {\large\bf{Abstract}\\}
+  \end{center}
+  
+  \vspace{0.4cm}
+
+  We present a novel method of searching for boosted hadronically
+  decaying objects by treating them as anomalous elements of
+  a contaminated dataset. Our method uses a \textit{Variational Recurrent Neural Network} (VRNN) to model jets as sequences of four-vector constituents. 
+  Along with a carefully considered method of pre-processing, we show that our method can produce an \textit{Anomaly Score} capable of distinguishing signal jets from background jets due to their substructure without the need for high-level variables, and while being robust against mass and $p_{T}$ correlations when compared to traditionally used substructure variables. In addition, our Anomaly Score shows consistent performance along a wide range of signal contamination amounts, for both two and three-pronged jet substructure hypotheses. Our implementation trains the model in an entirely unsupervised setting, opening up the possibility for our model to be trained directly on data. Performance is evaluated both on the jet level as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. Our results demonstrate a direct and substantial improvement in the signal significance while being able to retain a smoothly falling background mass distribution. (Note: rewrite without "we/our"s?)
+    
+  
+\end{sciabstract}
+
+
+\clearpage
+
+%\tableofcontents
+
+\clearpage
+
+
+
+
+%%%%%%%%%%%%%%%%%% Start of Text %%%%%%%%%%%%%%%%%
+
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Introduction %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+Since the discovery of the Higgs boson in 2012 by the ATLAS and CMS collaborations at the Large Hadron Collider, researchers at CERN have been searching for new Beyond-the-Standard-Model (BSM) particles which could help explain some of the open questions on the frontier of high-energy physics. 
+Currently, no such signals of new physics have been made evident. 
+As analyses increase in complexity to further accommodate potential new-physics models, an increasing amount of time and effort is being spent on developing new analysis tools which could help researchers track down rare signals which traditional methods may be insensitive to. 
+Occupying one of the avenues of development is novel machine learning models.
+
+Machine learning is being consistently integrated into new physics searches at the LHC. 
+While many applications focus on classifying known signatures, such as top quarks or Higgs bosons, there are a number of emerging techniques aimed at aiding the discovery of BSM particles. 
+Many of these techniques use classifier models to try search for particular model hypotheses, by training and evaluating a model using Monte Carlo simulated data of the new signal.
+While these models show promising performance, they are subject to inaccuracies between simulated samples and data, which occur most severely in the regime of QCD processes due to its non-perturbative nature~\cite{pdg}.
+One way to circumvent these inaccuracies is to be able to develop a model that trains directly on data, without requiring the need for simulated inputs.
+Such data-driven approaches are difficult mainly due to the inability to provide training labels, and therefore any methods of supervised learning are naturally incompatible.
+However, there has been a significant amount of effort in developing methods focused on distinguishing potential new-physics objects using entirely unsupervised, data-driven methods~\cite{CWoLa}.
+In this paper, one such method is explored, in which new BSM particles are identified via Anomaly Detection.
+
+Fundamentally, Anomaly Detection describes a process in which anomalous elements are identified within a contaminated dataset. 
+In a machine learning context, a model capable of learning an underlying distribution of data points, characterized by high-level features of the data, can identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. A popular candidate architecture for anomaly detection, which has been previously studied in particle physics contexts, is the Autoencoder (AE)~\cite{bank2020autoencoders, Farina_2020}.
+
+\subsection{Autoencoders}
+
+Autoencoders are an example of a generative model in which a network is trained to reconstruct a given input. 
+Figure \ref{fig:AE} shows an example of a standard autoencoder architecture.
+A key feature of autoencoders is a latent layer in the center of the architecture which is often of a lower dimensionality than the input, directly restricting the network's ability to perfectly reconstruct its input. 
+In such a case, the network achieves its training goal best when it can represent high-level features of the input as vectors, or $codes$, in its latent space. 
+The accuracy at which each code represents the input can be verified by decoding it, and comparing
+its result with the original input. In this way, the autoencoder is considered
+to act as two neural networks being trained in parallel: An $encoder$ network $f$
+which acts as the map from data to the latent space, ${\textbf z}=f({\textbf x})$, and
+a $decoder$ network $g$ which then attempts to reconstruct the original input from 
+its encoded representation, ${\textbf y}=g({\textbf z})$. The loss function of the
+autoencoder can be any function of the form $L({\textbf x}, {\textbf y}=g(f({\textbf x})))$ which 
+is minimal when ${\textbf y}={\textbf x}$. A common such function is the {\it Mean Squared Error} (MSE)
+between the input and output of the autoencoder:
+\[L=|{\textbf y} - {\textbf x}|^2\]
+In the context of Anomaly Detection, elements which represent a small portion of
+a dataset will contribute relatively less during the training process, and will
+be more poorly represented by the learned codes when compared to elements belonging to the majority class of data. One
+can therefore expect the reconstruction of anomalous elements to be worse, placing them in the
+tails of the loss function's distribution after training. Such methods have been 
+explored in anomalous jet tagging, by representing the jets as images~\cite{Farina_2020}, and lists 
+of constituents~\cite{Heimel_2019}, among others. 
+
+%Autoencoder Diagram
+\begin{figure}[H]
+  \begin{center}
+  
+    \def\layersep{2.5cm}
+    
+    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+        \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+        \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+        \tikzstyle{input neuron}=[neuron, fill=black!20!green];
+        \tikzstyle{output neuron}=[neuron, fill=red!50];
+        \tikzstyle{latent neuron}=[neuron, fill=black!5!orange];
+        \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+        \tikzstyle{annot} = [text width=4em, text centered]
+    
+        % Draw the input layer nodes
+        \foreach \name / \y in {1,...,6}
+        % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+            \node[input neuron] (I-\name) at (0,-\y) {};
+            %\node[input neuron, pin=left:Input \#\y] (I-\name) at (0,-\y) {};
+    
+        % Draw the hidden layer nodes
+        \foreach \name / \y in {1,...,4}
+            \path[yshift=-1.0cm]
+                node[hidden neuron] (H-\name) at (\layersep,-\y cm) {};
+    
+        % Latent Space Nodes
+        %\foreach \name / \y in {1,...,2}
+        %    \path[yshift=-2.0cm]
+        %        node[latent neuron] (L-\name) at (5.0cm,-\y cm) {};
+        \path[yshift=-2.0cm] node[latent neuron] (L-1) at (5.0cm, -1cm) {};
+        \path[yshift=-2.0cm] node[latent neuron, label=below:$z$] (L-2) at (5.0cm, -2cm) {};
+    
+        % Draw the hidden layer 2 nodes
+        \foreach \name / \y in {1,...,4}
+            \path[yshift=-1.0cm]
+                node[hidden neuron] (H2-\name) at (7.5cm,-\y cm) {};
+    
+        % Draw the output layer nodes
+        \foreach \name / \y in {1,...,6}
+            \node[output neuron] (O-\name) at (10cm, -\y cm) {};
+            %\node[output neuron,pin={[pin edge={->}]right:Output \#\y}] (O-\name) at (10cm, -\y cm) {};
+    
+        % Connect every node in the input layer with every node in the
+        % hidden layer.
+        \foreach \source in {1,...,6}
+            \foreach \dest in {1,...,4}
+                \path (I-\source) edge (H-\dest);
+    
+        \foreach \source in {1,...,4}
+            \foreach \dest in {1,...,2}
+                \path (H-\source) edge (L-\dest);
+    
+        \foreach \source in {1,...,2}
+            \foreach \dest in {1,...,4}
+                \path (L-\source) edge (H2-\dest);
+    
+        \foreach \source in {1,...,4}
+            \foreach \dest in {1,...,6}
+                \path (H2-\source) edge (O-\dest);
+    
+        % Annotate the layers
+        \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer 1};
+        \node[annot,left of=hl] {Input layer};
+        \node[annot,right of=hl] (hla) {Latent layer};
+        \node[annot,right of=hla] (hl2) {Hidden layer 2};
+        \node[annot,right of=hl2] {Output layer};
+
+        \draw [decorate,decoration={brace,amplitude=10pt, mirror},xshift=-4pt,yshift=0pt] (-0.25cm,-0.75cm) -- (-0.25cm,-6.25cm) node [black,midway,xshift=-0.6cm] {\footnotesize $x$}; 
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (10.5cm,-0.75cm) -- (10.5cm,-6.25cm) node [black,midway,xshift=0.6cm] {\footnotesize $y$}; 
+
+    \end{tikzpicture}
+  
+  \end{center}
+  \caption{A standard autoencoder}
+  \label{fig:AE}
+\end{figure}
+
+\subsection{Variational Autoencoders}
+
+Variational Autoencoders, built upon the idea of standard autoencoders, are designed to be able to perform
+Bayesian inference, in which it is assumed that observed data $\textbf x$ is generated by some
+hidden random variable $\textbf z$ whose posterior distribution $p(\textbf{z}|\textbf{x})$ 
+is intractable. The goal of a VAE is to learn an approximate posterior distribution, $q(\textbf{z}|\textbf{x})$, through training.
+
+The architecture of a VAE is very close to that of a standard autoencoder, with the main difference
+being that the latent space is designed to accomodate an encoder which maps data to a distribution 
+rather than a single vector in the latent space. A common choice for the form of the approximate 
+posterior distribution is a multivariate gaussian of diagonal covariance. In this case, the encoder can be designed to map a given input to two independent layers, each with the same 
+dimensionality as the latent space, representing the means and standard deviations of the encoded gaussian distribution for each dimension respectively. 
+Decoding then requires sampling from this resulting distribution. 
+This can be easily performed in the case of a gaussian approximate posterior by use of the \textit{reparametrization trick}.
+Instead of sampling the distribution directly, a particular value of $z$ can be represented in the following way:
+\[z=\mu + \sigma \epsilon\]
+where $\epsilon$ is sampled from a unit isotropic normal distribution $\epsilon \sim \mathcal{N}(0, 1)$~\cite{kingma2014autoencoding}.
+
+
+The objective function of a VAE is designed to perform \textit{Bayesian Inference}, by determining the marginal likelihood which is the result of an often intractable calculation:
+
+\begin{align*}
+p(x) &= \int p(z)p(x|z)dz
+\end{align*}
+
+By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL) Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. 
+
+\begin{align*}
+\log(p(x))  &= \mathbb{E}_Z[\log p(x)] \\
+  &= \mathbb{E}_Z\bigg[\log \frac{p(x|z)p(z)}{p(z|x)}\bigg] \\
+  &= \mathbb{E}_Z\bigg[\log \frac{p(x|z)p(z)}{p(z|x)} \frac{q(z|x)}{q(z|x)}\bigg] \\
+  &= \mathbb{E}_Z[\log p(x|z)] - \mathbb{E}_Z\bigg[\log \frac{q(z|x)}{p(z)}\bigg] + \mathbb{E}_Z\bigg[\log \frac{q(z|x)}{p(z|x)}\bigg] \\
+  &= \underbrace{\mathbb{E}_Z[\log p(x|z)]}_\text{Reconstruction Error} - \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz}_{D_{KL}(q(z|x)||p(z))} + \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz}_{D_{KL}(q(z|x)||p(z|x))}
+\end{align*} 
+
+Since the true posterior distribution is still intractable, but knowing that the KL-Divergence is by definition non-negative, the first two terms of this result can be described as a \textit{lower bound on the evidence}. When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. Therefore, the negative of this lower bound is chosen as the loss function of the Variational Autoencoder, and is minimized through training. The mean-squared-error loss used in the ordinary Autoencoder is still chosen for the VAE reconstruction error, and for the prior, it is common to choose a unit isotropic gaussian centered at the origin, as the KL-Divergence between a gaussian approximate posterior and a gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+
+\begin{align*}
+\mathcal{L} &= - |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q(z|x)||p(z))
+\end{align*} 
+
+
+Variational Autoencoders provide a number of improvements over standard Autoencoders, both as a generative model~\cite{kingma2014autoencoding} and as an anomaly detection tool~\cite{An2015VariationalAB}. 
+
+
+%Variational Autoencoder Diagram
+\begin{figure}
+  \begin{center}
+  
+    \def\layersep{2.5cm}
+    
+    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+        \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+        \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+        \tikzstyle{input neuron}=[neuron, fill=black!20!green];
+        \tikzstyle{output neuron}=[neuron, fill=red!50];
+        \tikzstyle{latent neuron musig}=[neuron, fill=black!10!yellow];
+        \tikzstyle{latent neuron}=[neuron, fill=black!5!orange];
+        \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+        \tikzstyle{annot} = [text width=4em, text centered]
+    
+        % Draw the input layer nodes
+        \foreach \name / \y in {1,...,6}
+        % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+            \node[input neuron] (I-\name) at (0,-\y) {};
+    
+        % Draw the hidden layer nodes
+        \foreach \name / \y in {1,...,4}
+            \path[yshift=-1.0cm]
+                node[hidden neuron] (H-\name) at (2.0cm,-\y cm) {};
+    
+        % Latent Space Nodes
+        %Means
+        \foreach \name / \y in {1,...,2}
+            \path[yshift=-1.0cm]
+                node[latent neuron musig] (Lm-\name) at (4.0cm,-\y cm) {};
+  
+        %Sigmas
+        \foreach \name / \y in {1,...,2}
+            \path[yshift=-3.0cm]
+                node[latent neuron musig] (Ls-\name) at (4.0cm,-\y cm) {};
+  
+        %Z
+        \foreach \name / \y in {1,...,2}
+            \path[yshift=-2.0cm]
+                node[latent neuron] (Lz-\name) at (6.0cm,-\y cm) {};
+    
+        % Draw the hidden layer 2 nodes
+        \foreach \name / \y in {1,...,4}
+            \path[yshift=-1.0cm]
+                node[hidden neuron] (H2-\name) at (8cm,-\y cm) {};
+    
+    
+    
+        % Draw the output layer nodes
+        \foreach \name / \y in {1,...,6}
+            \node[output neuron] (O-\name) at (10cm, -\y cm) {};
+    
+        % Connect every node in the input layer with every node in the
+        % hidden layer.
+        \foreach \source in {1,...,6}
+            \foreach \dest in {1,...,4}
+                \path (I-\source) edge (H-\dest);
+    
+        \foreach \source in {1,...,4}
+            \foreach \dest in {1,...,2}
+                \path (H-\source) edge (Lm-\dest);
+  
+        \foreach \source in {1,...,4}
+            \foreach \dest in {1,...,2}
+                \path (H-\source) edge (Ls-\dest);
+  
+        \foreach \dest in {1,...,2}
+            \path (Lm-\dest) edge (Lz-\dest);
+  
+        \foreach \dest in {1,...,2}
+            \path (Ls-\dest) edge (Lz-\dest);
+    
+        \foreach \source in {1,...,2}
+            \foreach \dest in {1,...,4}
+                \path (Lz-\source) edge (H2-\dest);
+    
+        \foreach \source in {1,...,4}
+            \foreach \dest in {1,...,6}
+                \path (H2-\source) edge (O-\dest);
+    
+        % Annotate the layers
+        \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer 1};
+        \node[annot,above of=I-1, node distance=1cm] {Input layer};
+        \node[annot] (hla) at (5cm, 0cm) {Latent layer};
+        \node[annot,above of=H2-1, node distance=2cm] (hl2) {Hidden layer 2};
+        \node[annot,above of=O-1, node distance=1cm] {Output layer};
+        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=$\mu$] (r1) at (4cm, -2.5cm) {};
+        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:$\sigma$] (r1) at (4cm, -4.5cm) {};
+        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:{$z=\mu + \sigma \epsilon$}] (r1) at (6cm, -3.5cm) {};
+
+        \draw [decorate,decoration={brace,amplitude=10pt, mirror},xshift=-4pt,yshift=0pt] (-0.25cm,-0.75cm) -- (-0.25cm,-6.25cm) node [black,midway,xshift=-0.6cm] {\footnotesize $x$}; 
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (10.5cm,-0.75cm) -- (10.5cm,-6.25cm) node [black,midway,xshift=0.6cm] {\footnotesize $y$}; 
+
+  
+    \end{tikzpicture}
+    \caption{A Variational Autoencoder with a gaussian latent space parametrization.}
+    \label{fig:VAE}
+  \end{center}
+\end{figure}
+
+While VAEs have shown promise in the task of jet-level anomaly detection, there are a number of drawbacks due to VAEs being a fixed-length architecture. In particular, since fixed length architectures cannot accommodate a variable number of inputs, as is the case when trying to model jets via their constituent four-vectors, it is common to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. In classifier models, this is common and benign, as the loss function depends only on the output of the network and the ground-truth that it is trying to reproduce. In a VAE however, since the input layer's neuron values are a part of its loss function due to the MSE loss between the input and output layers, the zero padded elements directly correlate with the value of the loss function. In practice, this introduces a direct correlation between the VAE loss and the number of constituents in the input jet which can be difficult to remove. 
+
+A recurrent architecture naturally circumvents this drawback since it is designed to accommodate inputs of varying length. In a \textit{Recurrent Neural Network} (RNN), data is input as a sequence of features, where each feature has the same fixed dimensionality, yet the sequence itself can vary in length. The RNN is comprised of a small fixed architecture, or \textit{cell}, which expects as an input the fixed-length feature at each element, or \textit{time-step} in the sequence. While processing the sequence, the RNN updates a \textit{hidden state} at each time-step, which is carried over and accessed by the cell during the following time-step. The hidden state stores a long-term representation of information within the sequence, and is the key feature allowing RNNs to process sequential data of varying length. The RNN cell then acts as an encoder-decoder architecture which inputs the current time-step's feature and hidden state, and outputs an updated hidden state, and output feature if desired. In the interest of performing anomaly detection using a recurrent architecture, the model in this study has been chosen to be one which combines the recurrent property of RNNs with the VAE's ability to perform variational inference. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% VRNN %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Variational Recurrent Neural Network}
+
+The Variational Recurrent Neural Network (VRNN) used in this study is a sequence modeling architecture
+which replaces the encoder-decoder step of a traditional RNN with a Variational
+Autoencoder (VAE). An illustration of one cell of a VRNN can be seen
+in Figure \ref{fig:VRNN}. 
+In this model, the VAE's input at each timestep is given as the vector $x(t)$, which is then encoded and decoded into an output vector $y(t)$ which can be compared to $x(t)$ via the reconstruction loss.
+The $\phi_{x}$ and $\phi_{z}$ layers represent \textit{feature-extracting layers} which are interpreted as learned representations of the features of the input $x(t)$ and the encoded latent space distribution $z(t)$ respectively. After each time-step, the hidden state is updated via a recurrence relation in which the current hidden state $h(t-1)$ and the current set of extracted features $\phi_{x}$ and $\phi_{z}$ produce an updated hidden state $h(t)$ via the following equation~\cite{chung2016recurrent}:
+\begin{align*}
+h(t) &= f(\phi_{x}, \phi_{z}, h(t-1))
+\end{align*} 
+Performing this particular step is the primary function of traditional RNN architectures such as LSTMs~\cite{lstm} and GRUs~\cite{cho2014learning}, and so any such architecture can be conveniently chosen to perform this task.
+The VAE present in each cell of the VRNN notably differs from
+conventional VAEs in the following ways:
+\begin{enumerate}
+  \item{The encoder and decoder are conditioned on the current time-step's hidden state.
+  This is represented by the concatenation operation between the hidden state $h(t-1)$ and the respective feature-extraction layers $\phi_{x}$ and $\phi_{z}$.}
+  \item{The prior from which the KL Divergence is computed is no longer a unit gaussian
+  at the origin, but rather a multivariate gaussian whose means and variances in each 
+  dimension are determined from the current time-step's hidden state.}
+\end{enumerate}
+
+
+The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, such as what one would expect in a jet represented by a sequence of constituent four-vectors.
+
+In more detail, each time-step's latent space prior distribution parameters $\mu_{t}$ and $\sigma_{t}$ are functions of the current time-step's hidden state:
+\begin{align*}
+z_{t} \sim \mathcal{N}(\mu_{t}, \sigma_{t}), \text{ where } \mu_{t}, \sigma_{t} &= f^{prior}(h_{t-1})
+\end{align*} 
+Similarly, the latent space approximate posterior is defined by parameters $\mu$ and $\sigma$ which are functions of the input's extracted features $\phi_{x}$ and the hidden state $h_{t-1}$
+\begin{align*}
+z \sim \mathcal{N}(\mu, \sigma), \text{ where } \mu, \sigma &= f^{post.}(\phi_{x}, h_{t-1})
+\end{align*} 
+The generated output is then decoded from features extracted from the latent space distribution $\phi_{z} = f(z)$, while also being conditioned on the hidden state
+\begin{align*}
+y(t) = f^{dec}(\phi_{z}, h(t-1))
+\end{align*} 
+
+A loss for each time-step $\mathcal{L}(t)$ can then be computed by incorporating both the reconstruction error between the input constituent $x(t)$ and generated output constituent $y(t)$, as well as the KL-Divergence between the approximate posterior $z$ and the learned prior $z_{t}$. A constant $\lambda$ is also included which weights the KL-Divergence term's contribution to the loss. 
+\begin{align*}
+\mathcal{L}(t) = |{\bf y}(t) - {\bf x}(t)|^{2} + \lambda D_{KL}(z||z_{t})
+\end{align*} 
+
+An overall loss $\mathcal{L}$ over the sequence is then computed by averaging the individual time-step losses over the length of the sequence $N$
+
+\begin{align*}
+\mathcal{L} = \frac{\mathcal{L}(t)}{N}
+\end{align*} 
+
+
+%VRNN Diagram
+\begin{figure}[H]
+  \begin{center}
+  
+    \def\layersep{2.5cm}
+    
+    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+        \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+        \tikzstyle{neuron}=[rectangle,fill=black!25, draw=black!80, very thick, minimum width=0.75cm, minimum height=2.5cm, inner sep=0pt]
+        \tikzstyle{input neuron}=[neuron, fill=iocolor, rotate=90, minimum width = 3cm, minimum height = 1cm];
+        \tikzstyle{gru}=[rounded rectangle, draw=black!80, very thick, rotate=90, minimum width = 2.5cm, minimum height = 0.75cm, inner sep=0pt];
+        \tikzstyle{output neuron}=[neuron, fill=red!50];
+        \tikzstyle{latent neuron musig}=[neuron, fill=black!10!yellow];
+        \tikzstyle{latent neuron}=[neuron, fill=layercolor, minimum height=0.75cm, minimum width=0.75cm];
+        \tikzstyle{layer neuron}=[neuron, fill=layercolor];
+        \tikzstyle{hidden neuron}=[neuron, fill=hscolor];
+        \tikzstyle{feature neuron}=[neuron, fill=featcolor];
+        \tikzstyle{hlv neuron}=[neuron, fill=hlvcolor];
+        \tikzstyle{annot} = [text width=4em, text centered]
+        \tikzstyle{kldash} = [rounded rectangle, draw=black!80, dashed, very thick, minimum width=1cm, minimum height=10cm, inner sep=0pt];
+    
+        % Draw the input layer nodes
+        %\foreach \name / \y in {1,...,6}
+        % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        %    \node[input neuron] (I-\name) at (0,-\y) {};
+
+
+        %INPUTS
+        \node[input neuron] (Ix) at (0, -1) {x(t)};
+        %\node[input neuron, fill=hlvcolor] (Ihlv) at (0, -5) {HLV};
+        \node[input neuron, fill=hscolor] (Ihs) at (0, -9) {h(t-1)};
+        \node[input neuron] (Oy) at (14.85, -1) {y(t)};
+        \node[input neuron, fill=hscolor] (Ohs) at (14.85, -7.25) {h(t)};
+
+        %Intermediate Layers
+        \node[layer neuron] (h1) at (1.35, -1) {};
+        \node[feature neuron] (phix) at (2.7, -1) {$\phi_{x}$};
+        \node[feature neuron] (phiz) at (10.8, -1) {$\phi_{z}$};
+
+        %Concatenated Layers
+        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixi) at (4.05, -0.375) {$\phi_{x}$};
+        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvi) at (4.05, -1) {\small HLV};
+        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsi) at (4.05, -1.625) {\small h(t-1)};
+
+        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizo) at (12.15, -0.375) {$\phi_{z}$};
+        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvo) at (12.15, -1) {\small HLV};
+        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathso) at (12.15, -1.625) {\small h(t-1)};
+
+        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizh) at (12.15, -4.25) {$\phi_{z}$};
+        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixh) at (12.15, -5.5) {$\phi_{x}$};
+        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvh) at (12.15, -6.75) {\small HLV};
+        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsh) at (12.15, -9) {\small h(t-1)};
+        
+
+        %Intermediate Layers
+        \node[layer neuron] (h2) at (5.4, -1) {};
+        \node[layer neuron] (h3) at (6.75, -1) {};
+        \node[layer neuron, fill=hscolor, rotate=90, minimum width=2.5cm, minimum height=0.75cm] (hs1) at (5.4, -7) {h(t-1)};
+        \node[layer neuron] (hs2) at (6.75, -7) {};
+        \node[layer neuron] (h4) at (13.5, -1) {};
+        
+        %Latent layers
+        \node[latent neuron] (lmuz) at (8.1, 0) {$\mu$};
+        \node[latent neuron] (lsiz) at (8.1, -2) {$\sigma$};
+        \node[latent neuron] (lmuh) at (8.1, -6) {$\mu_{t}$};
+        \node[latent neuron] (lsih) at (8.1, -8) {$\sigma_{t}$};
+        \node[latent neuron] (lz) at (9.45, -1) {$z$};
+
+
+        %GRU
+        \node[gru, fill=grucolor] (gru) at (13.5, -7.25) {GRU};
+  
+
+
+
+
+        %Arrows
+        %Hidden Layers
+        \path (Ix) edge (h1);
+        \path (h1) edge (phix);
+        \path (h2) edge (h3);
+        \path (hs1) edge (hs2);
+        \path (lz) edge (phiz);
+        \path (h4) edge (Oy);
+        \path (gru) edge (Ohs);
+        %\path (cathlvi) edge (h2);
+        %\path (cathlvo) edge (h4);
+        \path (catphixh) edge (gru);
+        \path (cathsh) edge (gru);
+      
+
+
+        %Latent Space
+        \path (h3) edge (lmuz);
+        \path (h3) edge (lsiz);
+        \path (hs2) edge (lmuh);
+        \path (hs2) edge (lsih);
+        \path (lmuz) edge (lz);
+        \path (lsiz) edge (lz);
+
+        
+
+        %Other
+        %\path (phix) edge (catphixi);
+        %\path (phiz) edge (catphizo);
+
+
+
+        %HLV Lines
+        %\draw[->, draw=hlvlinecolor, thick] (0.5, -5) -- (3.3, -5) -- (3.3, -1) -- (3.55, -1);
+        %\draw[->, draw=hlvlinecolor, thick] (3.2, -5) -- (11.4, -5) -- (11.4, -1) -- (11.65, -1);
+        %\draw[->, draw=hlvlinecolor, thick] (11.4, -5) -- (11.4, -6.75) -- (11.65, -6.75);
+
+
+        %Hidden State Lines
+        \draw[->, draw=hslinecolor, thick] (0.5, -9) -- (4.05, -9) -- (4.05, -2.25);
+        \draw[->, draw=hslinecolor, thick] (4.05, -7) -- (5.0, -7);
+        \draw[->, draw=hslinecolor, thick] (4.05, -9) -- (11.62, -9);               
+        \draw[->, draw=hslinecolor, thick] (11.1, -9) -- (11.1, -2.9375) -- (12.15, -2.9375) -- (12.15, -2.25);
+
+
+
+        %phix,z lines
+        
+		\draw[->, draw=hscolor, thick] (4.56, -1) -- (5.025, -1);       
+		\draw[->, draw=hscolor, thick] (12.66, -1) -- (13.125, -1);   
+        
+        \draw[->, draw=featurelinecolor, thick] (2.7, -2.25) -- (2.7, -4.625) -- (9.95, -4.625) -- (9.95, -5.5) -- (11.62, -5.5);
+        \draw[->, draw=featurelinecolor, thick] (3.075, -0.375) -- (3.55, -0.375);
+
+        \draw[->, draw=featurelinecolor, thick] (11.175, -0.375) -- (11.65, -0.375);
+        \draw[->, draw=featurelinecolor, thick] (10.8, -2.25) -- (10.8, -4.25) -- (11.62, -4.25);
+    
+  
+
+
+
+        %KL dashed box
+        \node[gru, minimum width=10cm, minimum height=1.25cm, dashed] (kld) at (8.1, -4) {\rotatebox{-45}{$D_{KL}$}};
+
+
+
+
+    
+
+  
+    \end{tikzpicture}
+    \caption{A Variational Recurrent Neural Network cell}
+    \label{fig:VRNN}
+  \end{center}
+\end{figure}
+
+
+
+
+\subsection{Implementation}
+
+The VRNN used in this study is directly of the same architecture of Figure \ref{fig:VRNN}. The number of neurons in each intermediate layer, including the hidden state and feature extracting layers, but not including the latent space and its $\mu$ and $\sigma$ layers, is 16. The latent space is chosen to be two-dimensional. Since four-vector constituents of jets are being modeled, the input $x(t)$ and output $y(t)$ layers represent the $p_{T}, \eta, $and $\phi$ of each constituent, and are correspondingly three-dimensional. ReLU activations are used in each layer of the network, except for $\sigma$ and $\sigma_{t}$, which have softmax activations, and $z$ and $y(t)$, which have linear activations. 
+
+The constituents of an input jet are processed sequentially, one per each time-step. 
+Each time-step contributes a loss based on the VAE loss function, $L(t) = MSE + \lambda D_{KL}$, where $\lambda$ is a factor which weights the KL-Divergence contribution relative to the MSE reconstruction loss.
+Since soft constituents contribute less to the identification of jet substructure relative to harder constituents, $\lambda$ is defined to be be a function of constituent $p_{T}$ fraction relative to the jet's total $p_{T}$. 
+Furthermore, since the distribution of constituent $p_{T}$ fractions depends directly on the number of constituents in a jet, the constituent $p_{T}$ fraction distribution for each jet is averaged over the entire input dataset to avoid correlations with jet multiplicity. The loss is therefore computed for each constituent as $\mathcal{L}(t)=MSE+0.1\overline{p_T}(t)D_{KL}$, where $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current timestep's prior distribution and the encoded posterior, and $\overline{p_T}(t)$ is the $p_T$ of the dataset-averaged jet at timestep $t$. The final loss is computed by averaging the individual timestep losses over the entire jet: $\mathcal{L} = \frac{\Sigma \mathcal{L}(t)}{N}$. The hyperparameters involved in this implementation, namely the dimensionality of intermediate layers, and the additional weight coefficient of 0.1 in the loss function were determined via a hyperparameter optimization scan. 
+
+After the network is trained, an \textit{Anomaly Score} can be determined for each jet. The KL-Divergence term has been shown to provide more performant discrimination than the reconstruction error, or the loss term as a whole. Therefore, the Anomaly Score is defined in terms of the KL-Divergence of each constituent, averaged over the whole jet, and restricted to the range of (0, 1) via exponentiation. 
+\begin{align*}
+\text{Anomaly Score} &= 1 - e^{-\overline{D_{KL}}}
+\end{align*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Pre-Processing %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Data Pre-Processing}
+
+One of the most consequential elements of this study is the choice of pre-processing. Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with non-substructure jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks (REFS). Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, via pre-processing, information about the jet's mass and $p_{T}$ can be removed before it becomes an input to the network. This process can be briefly summarized by three steps:
+
+\begin{itemize}
+	\item{Rescale each jet to the same mass}
+	\item{Boost each jet to the same energy}
+	\item{Rotate each jet to the same orientation}
+\end{itemize}
+
+This method is inspired by a study based on jet images~\cite{roy2020robust}. Algorithm \ref{alg:boost} describes in detail the implementation of the rescaling, boosting, and rotating process, or simply \textit{boosting} for short. 
+
+%Pre-Processing Algorithm
+\begin{algorithm}[H]
+\SetAlgoLined
+%\KwResult{Write here the result }
+\While{Number of constituents $>$ 20}{
+ \While{At least one constituent outside of $\Delta R = 1$ from jet axis}{
+  Boost jet in $z$ direction until $\eta_{Jet} = 0$
+ 
+  Rotate jet about $z$ axis until $\phi_{Jet} = 0$
+ 
+  Rescale jet mass to 0.25GeV
+ 
+  Boost jet along its axis until $E_{Jet} = 1GeV$
+ 
+  Rotate jet about $x$ axis until hardest constituent has $\eta_{1} = 0, \phi_{1} > 0$
+ 
+  \eIf{Any constituents have $\Delta R > 1$}{
+ 
+  Remove all constituents with $\Delta R > 1$
+ 
+  Rebuild jet with remaining constituents
+  }{
+  break
+  } 
+ }
+ \eIf{Number of constituents $>$ 20}{ 
+ 
+ Keep up-to the first 20 constituents, ordered in $p_T$
+ 
+ Rebuild jet with remaining constituents
+ }{
+ break
+ }
+}
+ 
+Reflect constituents about $\phi$ axis such that the second hardest constituent has $\eta_{2} > 0$
+ 
+\caption{Jet Boosting}
+\label{alg:boost}
+\end{algorithm}
+
+To evaluate the efficacy of this boosting procedure, Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of leading jet mass vs. anomaly score before and after boosting the input jets. The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=225pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest.png}
+		\includegraphics[width=225pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest.png}
+	\end{center}
+	\caption{Leading Jet Mass vs Anomaly Score distributions before (left) and after (right) applying our boosting method}
+	\label{fig:mass_vs_score_boost}
+\end{figure}
+
+
+In addition to this boosting method, the effect of \textit{sequence ordering} on the input constituents has been investigated. In fixed architecture models, such as VAEs or image based CNNs, the ordering of constituents in the list of inputs is seldom important. In recurrent architectures such as the VRNN, choosing a clever sequence ordering method can provide a boost to performance if that ordering is capable of highlighting some of the important features of the sequence itself. The most intuitive method of ordering jet constituents is by their $p_{T}$, in decreasing order, the idea being that harder constituents contribute more to a jet's substructure than softer constituents. The objective of this study is to build a model which can differentiate between diffuse jets resulting from soft QCD interactions, and jets with multiple hard cores resulting from the decay of boosted hadronically-decaying objects. Therefore, it is favorable to use a sequence ordering which makes the existence of multiple hard cores of a jet distinctly apparent. This is achieved by ordering the constituents in $k_{t}-distance$ order. More specifically, the $n^{th}$ constituent in the list is determined to be the constituent with the highest $k_{t}$-distance relative to the previous constituent, with the first constituent in the list being the highest $p_{T}$ constituent.
+\begin{align*}
+c_{n} &= max(p_{Tn}\Delta R_{n, n-1})
+\end{align*}
+
+The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently and consistently followed by a constituent belonging to the other core. This results in an easily predictable pattern which the VRNN has an easier time modeling compared to a diffuse jet resulting from a soft QCD interaction. The resulting performance difference between $p_{T}$ sorted and $k_{t}$ sorted inputs is shown in Figure \ref{fig:score_comp}, where 2-prong signal jets have a notably lower anomaly score when compared to background QCD jets due to the ease of modeling their 2-prong substructure. (diagram maybe?)
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=225pt]{imgs/Anom_Score_CompPt.png}
+		\includegraphics[width=225pt]{imgs/scorecomp.png}
+	\end{center}
+	\caption{Leading Jet Anomaly Score Distributions for Background and Signal event, before (left) and after (right) applying our kt sorted ordering}
+	\label{fig:score_comp}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% Results %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Results}
+
+The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal contamination. The signal events consist of a Heavy Vector Triplet process in the form of Z'$\rightarrow$ XY $\rightarrow$ JJ where X and Y are two heavy resonances each decaying to boosted jets J. The masses of the particles in the signal hypothesis is 3.5TeV, 500GeV, and 100GeV for Z', X, and Y respectively. A total of 99457 signal events were generated along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single fat-jet (R=1) trigger with a $p_T$ threshold of 1.2TeV~\cite{dataset}. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop. 
+
+The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the \textit{anti-$k_{t}$} jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amount of contamination, contaminated datasets were generated with 10 differing amounts of signal contaminations in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate our highest contamination level at 10\%. Since the model is designed to perform on the jet-level, its basic performance can be studied by using only the leading jets of each event. In addition, since a full description of each event is available, the model can be applied in an analysis context, in which a search for the Z' particle is performed using only the Anomaly Score as a discriminator.
+
+
+\subsection{Jet Level}
+
+%Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
+
+In this jet-level study, the model is trained on only the leading jets of each event. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the training set or the background-only validation set to those in the pure signal set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. Notably, the model quickly reaches optimal performance, and retains a stable performance throughout the training period. Also seen is the same trend on an independent validation set of data, which is comprised of background-only events, and shows similar stability during training. It is important to note that the feature of the ROC AUC being lower than 0.5 is expected, and is a result of the $k_{t}$-ordered sequencing, which allows the model to reconstruct jets with two-prong substructure more easily than soft QCD-like jets with more diffuse substructure.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=250pt]{imgs/auc_vs_epoch.png}
+	\end{center}
+	\caption{Area-Under-the-Curve (ROC AUC) vs training time in epochs. Due to the nature of the $k_{t}$-ordered sequencing, values closer to zero represent higher performance in separating signal jets from background jets}
+	\label{fig:auc_vs_epoch}
+\end{figure}
+
+Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
+\begin{itemize}
+	\item{The mean of the resulting distribution is at an anomaly score value of 0.5}
+	\item{Anomaly scores closer to a value of 1 correspond to more signal-like jets}
+\end{itemize}
+
+The transformation can be summarized as
+\begin{align*}
+\rho ' &= 1 - \bigg(\frac{\rho}{2\overline{\rho}}\bigg)
+\end{align*}
+
+where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the mean of the un-transformed Anomaly Score distribution of the training set. 
+
+After applying this transformation, an optimal cut on the Anomaly Score is determined by comparing the signal to background ratio at each potential value, arriving at an optimal cut on the transformed Anomaly Score at a value of 0.75.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=250pt]{imgs/Score_Opt.png}
+	\end{center}
+	\caption{Anomaly Score Cut Optimization}
+	\label{fig:aucs_vs_contam}
+\end{figure}
+
+Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet before and after requiring the Anomaly Score to exceed a value of 0.75. Notably, the presence of the 100GeV and 500GeV resonances is enhanced. Sculpting in the background distribution is observed, which is an effect due to mass-correlation mainly introduced by the $k_{t}$-ordered sequencing. The contamination amount used in Figure \ref{fig:2P_lj_mass} is 10\%, and the signal is forced to a two-pronged decay mode. The same effect is seen on three-pronged signatures in Figure \ref{fig:3P_lj_mass}, where similar improvement in the enhancement of the signal is observed. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_Multi.png}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p75_Multi.png}
+	\end{center}
+	\caption{Leading Jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
+	\label{fig:2P_lj_mass}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_Multi.png}
+		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_EventScore0p75_Multi.png}
+	\end{center}
+	\caption{Leading Jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
+	\label{fig:3P_lj_mass}
+\end{figure}
+
+
+
+
+A number of substructure variables exist which distinguish two-pronged jet substructure. Among them is the popular D2 variable. Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated mass distributions when subject to a cut on the Anomaly Score at a value of 0.75 vs a D2 cut at the same acceptance. The result shows the notable difference in the effect of the respective selections on the shape of the background distribution, where a D2 selection results in more severe sculpting when compared to a selection on the Anomaly Score. It is important to note once again that the Anomaly Score is determined only from jet constituent four-vector information, without any external high-level information being input into the model.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=250pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p75_Multi_D2Comp.png}
+	\end{center}
+	\caption{Contaminated Set shape comparison between a selection on the Anomaly Score and a selection on the D2 variable with equal acceptance}
+	\label{fig:d2_comp}
+\end{figure}
+
+Another important study involves the model's performance over a range of signal contamination levels. Figure \ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses after training on each of the contaminated sets. Notably, the performance is consistent along a wide range of contaminations, with performance decreasing for contaminations above 10\%. This is expected in the context of Anomaly Detection, where it is assumed that a high percentage of signal contamination will sufficiently dilute the training set with elements of the signal set, resulting in lower performance. However, its consistent performance among all reasonably low levels of contamination leads the Anomaly Score to be interpreted as a quantity which is capable of adequately and consistently parametrizing a range of substructure hypotheses via anomaly detection. This feature of the Anomaly Score is notably valuable in searches which allow for multiple final-state substructure hypotheses. The consistent performance can be attributed to the choice of $k_{t}$-ordered sequencing, which directly highlights non-QCD-like substructure, and to the model's ability to process and represent input jets as sequences of constituents rather than a fixed set of input values. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=250pt]{imgs/AUC_vs_Contam.png}
+	\end{center}
+	\caption{Area-Under-the-Curve vs Contamination}
+	\label{fig:aucs_vs_contam}
+\end{figure}
+
+
+\subsection{Event Level}
+
+
+It is also important that this model can be directly applicable in an analysis-like context. In this study, the goal is to reconstruct the Z' particle in each event. In this training scenario, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination. Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, where the significant feature of the 3500GeV Z' is clearly observed to be tending towards higher values of the Event Score compared to background events. 
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=250pt]{imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score.png}
+	\end{center}
+	\caption{Dijet Mass vs Event Score}
+	\label{fig:mjj_vs_evscore}
+\end{figure}
+
+The goal is to be able to observe an excess of signal events in the mass distribution of the dijet combination of the leading and sub-leading jets at the mass corresponding to the Z' particle. This is commonly referred to as a "bump hunt" search in which the signal is expected to appear as a bump upon an otherwise consistently falling distribution. Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the anomaly score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance in each bin of the corresponding histogram, where a total uncertainty of 5\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. The requirement on the Event Score dramatically increases the significance of the excess from $1\sigma$ to $6\sigma$ at a signal contamination of 0.5\% while still retaining the smoothly falling behavior of the background. No cuts other than the Event Score requirement have been applied in these scenarios besides the initial trigger requirement of $p_{T} > 1200GeV$ on the leading jet. In Figure \ref{fig:3p_dijet}, a similar result is seen in the case of three-pronged substructure on the boosted X and Y decays, where the Event Score requirement results in an increase of local significance of the signal peak from $2\sigma$ to $4\sigma$ at a signal contamination of 1\% under the same conditions. These results display the ability of the Anomaly Score to be adequately used in an analysis context, as it is capable of distinguishing potential signal objects while being robust to ambiguities in its mass, $p_{T}$, and substructure.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_0p5_JJ_Mass_Multi.png}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_0p5_JJ_Mass_EventScore0p65_Multi.png}
+	\end{center}
+	\caption{2-Prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 0.5\%}
+	\label{fig:2p_dijet}
+\end{figure}
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi.png}
+		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png}
+	\end{center}
+	\caption{3-Prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%}
+	\label{fig:3p_dijet}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Conclusion}
+
+In this study, we have presented a novel approach to performing Anomaly Detection in the context of searching for new physics by using a Variational Recurrent Neural Network trained on contaminated datasets to distinguish jets resulting from boosted hadronically decaying objects from those resulting from soft QCD processes. Through precise considerations in pre-processing, in which we boost each input jet to the same reference mass, energy, and orientation, coupled with a sequence ordering which makes the presence of signal-like substructure more easily apparent, our model produces an Anomaly Score capable of distinguishing signal jets with multiple potential substructure hypotheses. Applying our model to a jet-level study, in which we train and evaluate only on leading jets in our dataset, we see that our model adequately enhances boosted signal jets in a matter which is less mass-correlated than other traditional substructure variables such as D2. In addition, we see that the resulting Anomaly Score is equally performant across varying levels of contamination, allowing for a consistent characterization of substructure regardless of the amount of signal present in the dataset. When applied to an event-level context, our Anomaly Score greatly increases the significance of excesses due to the underlying signal process, regardless of substructure hypothesis, and while retaining the smoothly falling shape of the background's mass distribution.
+
+We view the Variational Recurrent Neural Network used in this study as a powerful tool capable of learning underlying features of physics objects presented as sequential data. It's applications to new physics searches are numerous, with one of the most attractive features being the potential for training directly on data. While our approach in this study is very general, in that we attempt to accommodate multiple substructure hypotheses in the context of boosted jet final states, our model also lends itself to a number of potential avenues for exploration into searches with pre-determined signal hypotheses outside of the contexts shown here. Since the overall structure of the model contains both elements of Variational Autoencoders and Recurrent Neural Networks, more complicated architectural iterations can be employed as natural extensions of the VRNN. Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level jet features. In addition, the model itself can be used in an entirely supervised context, allowing for a number of potential analysis applications outside of Anomaly Detection. Further study into the ordering of the input constituent sequence is also warranted, as this feature may be able to be tuned to accommodate more precisely defined analysis contexts or substructure hypotheses. We also view the VRNN as being a general tool for modeling sequential data of any type, making it compatible with event-level searches and known object tagging and identification, among others.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% Acknowledgements and References %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\clearpage
+
+\section*{Acknowledgements}
+
+This material is based upon work supported by the National Science Foundation under Grant No. PHY-2013070.
+
+
+
+%\section*{References}
+
+
+
+\bibliographystyle{abbrv}
+%\bibliography{contribution}
+\bibliography{vrnn}
+\end{document}
+
+
+%\begin{enumerate}
+%\item \label{ref:vrnn} Junyoung Chung et. al. (2015). A Recurrent Latent Variable Model for Sequential Data. \\\emph{arXiv:1506.02216 [cs.LG]}
+%\item \label{ref:aevb} Diederik P. Kingma, Max Welling. (2013). Auto-Encoding Variational Bayes. \\\emph{arXiv:1312.6114 [stat.ML]}
+%\item \label{ref:robust_study} Tuhin S. Roy, Aravind H. Vijay. (2019). A robust anomaly finder based on autoencoders. \emph{arXiv:1903.02032 [hep-ph]}
+%\item \label{ref:dataset} Gregor Kasieczka, Ben Nachman, \& David Shih. (2019). R\&D Dataset for LHC \\Olympics 2020 Anomaly Detection Challenge (Version v1) [Data set]. Zenodo. \\\emph{http://doi.org/10.5281/zenodo.2629073}
+%\item \label{ref:vae_ad} Jinwon An and S. Cho, (2015). Variational Autoencoder based Anomaly Detection using Reconstruction Probability
+%\end{enumerate}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

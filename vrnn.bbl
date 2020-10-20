@@ -1,0 +1,85 @@
+\begin{thebibliography}{10}
+
+\bibitem{An2015VariationalAB}
+J.~An and S.~Cho.
+\newblock Variational autoencoder based anomaly detection using reconstruction
+  probability.
+\newblock 2015.
+
+\bibitem{bank2020autoencoders}
+D.~Bank, N.~Koenigstein, and R.~Giryes.
+\newblock Autoencoders, 2020.
+
+\bibitem{Cacciari_2008}
+M.~Cacciari, G.~P. Salam, and G.~Soyez.
+\newblock The anti-kt jet clustering algorithm.
+\newblock {\em Journal of High Energy Physics}, 2008(04):063–063, Apr 2008.
+
+\bibitem{cho2014learning}
+K.~Cho, B.~van Merrienboer, C.~Gulcehre, D.~Bahdanau, F.~Bougares, H.~Schwenk,
+  and Y.~Bengio.
+\newblock Learning phrase representations using rnn encoder-decoder for
+  statistical machine translation, 2014.
+
+\bibitem{chung2016recurrent}
+J.~Chung, K.~Kastner, L.~Dinh, K.~Goel, A.~Courville, and Y.~Bengio.
+\newblock A recurrent latent variable model for sequential data, 2016.
+
+\bibitem{Farina_2020}
+M.~Farina, Y.~Nakai, and D.~Shih.
+\newblock Searching for new physics with deep autoencoders.
+\newblock {\em Physical Review D}, 101(7), Apr 2020.
+
+\bibitem{Goodfellow-et-al-2016}
+I.~Goodfellow, Y.~Bengio, and A.~Courville.
+\newblock {\em Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock http://www.deeplearningbook.org.
+
+\bibitem{pdg}
+P.~D. Group.
+\newblock {Review of Particle Physics}.
+\newblock {\em Progress of Theoretical and Experimental Physics}, 2020(8), 08
+  2020.
+\newblock 083C01.
+
+\bibitem{Heimel_2019}
+T.~Heimel, G.~Kasieczka, T.~Plehn, and J.~Thompson.
+\newblock Qcd or what?
+\newblock {\em SciPost Physics}, 6(3), Mar 2019.
+
+\bibitem{lstm}
+S.~Hochreiter and J.~Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural Comput.}, 9(8):1735–1780, Nov. 1997.
+
+\bibitem{dataset}
+G.~Kasieczka, B.~Nachman, and D.~Shih.
+\newblock {R\&D Dataset for LHC Olympics 2020 Anomaly Detection Challenge},
+  Apr. 2019.
+
+\bibitem{kingma2014autoencoding}
+D.~P. Kingma and M.~Welling.
+\newblock Auto-encoding variational bayes, 2014.
+
+\bibitem{CWoLa}
+E.~M. Metodiev, B.~Nachman, and J.~Thaler.
+\newblock Classification without labels: learning from mixed samples in high
+  energy physics.
+\newblock {\em Journal of High Energy Physics}, 2017(10), Oct 2017.
+
+\bibitem{moneta2011roostats}
+L.~Moneta, K.~Belasco, K.~Cranmer, S.~Kreiss, A.~Lazzaro, D.~Piparo, G.~Schott,
+  W.~Verkerke, and M.~Wolf.
+\newblock The roostats project, 2011.
+
+\bibitem{Purushotham2017VariationalRA}
+S.~Purushotham, W.~Carvalho, T.~Nilanon, and Y.~Liu.
+\newblock Variational recurrent adversarial deep domain adaptation.
+\newblock In {\em ICLR}, 2017.
+
+\bibitem{roy2020robust}
+T.~S. Roy and A.~H. Vijay.
+\newblock A robust anomaly finder based on autoencoders, 2020.
+
+\end{thebibliography}
