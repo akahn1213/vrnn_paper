@@ -25,6 +25,18 @@ K.~Cho, B.~van Merrienboer, C.~Gulcehre, D.~Bahdanau, F.~Bougares, H.~Schwenk,
 J.~Chung, K.~Kastner, L.~Dinh, K.~Goel, A.~Courville, and Y.~Bengio.
 \newblock A recurrent latent variable model for sequential data, 2016.
 
+\bibitem{atlas_higgs}
+A.~Collaboration.
+\newblock Observation of a new particle in the search for the standard model
+  higgs boson with the atlas detector at the lhc.
+\newblock {\em Physics Letters B}, 716(1):1--29, Sep 2012.
+
+\bibitem{cms_higgs}
+C.~Collaboration.
+\newblock Observation of a new boson at a mass of 125 gev with the cms
+  experiment at the lhc.
+\newblock {\em Physics Letters B}, 716(1):30–61, Sep 2012.
+
 \bibitem{Farina_2020}
 M.~Farina, Y.~Nakai, and D.~Shih.
 \newblock Searching for new physics with deep autoencoders.
