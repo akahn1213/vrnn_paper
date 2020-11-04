@@ -128,24 +128,27 @@
 
 \section{Introduction}
 
-Since the discovery of the Higgs boson in 2012 by the ATLAS~\cite{atlas_higgs} and CMS~\cite{cms_higgs} collaborations at the Large Hadron Collider, physicists at CERN have been searching for Beyond-the-Standard-Model (BSM) particles which could help explain some of the open questions on the frontier of high-energy physics. 
-Currently, no such signals of new physics have been made evident. 
-An increasing amount of time and effort is being spent on developing new analysis tools which could help researchers track down rare signals which traditional methods may be insensitive to. 
-Occupying one of the avenues of development is novel machine learning models.
+The frontier of high energy physics has many open questions, such as the nature of dark matter or the origin of matter-antimatter asymmetry, which are being explored by the ATLAS and CMS Experiments at the Large Hadron Collider (LHC). 
+Since the discovery of the Higgs boson in 2012~\cite{atlas_higgs,cms_higgs}, no signals of new beyond the Standard Model (BSM) physics have been found. 
+Sophisticated analysis tools utilizing novel machine learning models are key to detecting rare signals that may be missed by traditional methods. 
 
 Machine learning is being consistently integrated into new physics searches at the LHC. 
-While many applications focus on classifying known signatures, such as top quarks or Higgs bosons, there are a number of emerging techniques aimed at aiding the discovery of BSM particles. 
-Many of these techniques use classifier models to try search for particular model hypotheses, by training and evaluating a model using Monte Carlo simulated data of the new signal.
+While many applications focus on classifying known signatures, such as top quarks or Higgs bosons, there are a number of emerging techniques aimed at the discovery of new particles. 
+Many of these techniques use classifier models to search for particular model hypotheses, by training and evaluating a model using Monte Carlo simulation of the BSM signal.
 While these models show promising performance, they are subject to inaccuracies between simulated samples and data, which occur most severely in the non-perturbative regime of QCD processes.
-One way to circumvent these inaccuracies is to be able to develop a model that trains directly on data, without requiring the need for simulated inputs.
-Such data-driven approaches are difficult mainly due to the inability to provide training labels, and therefore any methods of supervised learning are naturally incompatible.
-However, there has been a significant amount of effort in developing methods focused on distinguishing potential new-physics objects using entirely unsupervised, data-driven methods~\cite{CWoLa}.
-In this paper, one such method is explored, in which new BSM particles are identified via anomaly detection.
+
+One way to circumvent these inaccuracies is to develop a model that trains directly on data, without requiring the need for simulated inputs.
+%(JG: I dont get this sentence) Such data-driven approaches are difficult mainly due to the inability to provide training labels, and are therefore incompatible with any method of supervised learning.
+Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a budding and promising effort~\cite{CWoLa}. 
+This paper demonstrates a way to identify BSM particles with unsupervised, data-driven anomaly detection. 
 
 Fundamentally, anomaly detection describes a process in which anomalous elements are identified within a contaminated dataset. 
-In a machine learning context, a model capable of learning an underlying distribution of data points, characterized by high-level features of the data, can identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. A popular candidate architecture for anomaly detection, which has been previously studied in particle physics contexts, is the Autoencoder (AE)~\cite{bank2020autoencoders, Farina_2020}.
+In a machine learning context, a model capable of learning an underlying distribution of data points, characterized by high-level features of the data, can identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. 
+
 
 \subsection{Autoencoders}
+
+A popular candidate architecture for anomaly detection, which has been previously studied in particle physics contexts, is the Autoencoder (AE)~\cite{bank2020autoencoders, Farina_2020}.
 
 Autoencoders are an example of a generative model in which a network is trained to reconstruct a given input. 
 Figure \ref{fig:AE} shows an example of a standard autoencoder architecture.
@@ -892,9 +895,8 @@ This material is based upon work supported by the National Science Foundation un
 %\section*{References}
 
 
-
-\bibliographystyle{abbrv}
-%\bibliography{contribution}
+% TODO: why are letters all uncaps? 
+\bibliographystyle{unsrt}
 \bibliography{vrnn}
 \end{document}
 
