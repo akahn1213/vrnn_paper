@@ -100,10 +100,16 @@
   
   \vspace{0.4cm}
 
-  We present a novel method of searching for boosted hadronically
+This paper presents a novel method of searching for boosted hadronically
   decaying objects by treating them as anomalous elements of
-  a contaminated dataset. Our method uses a \textit{Variational Recurrent Neural Network} (VRNN) to model jets as sequences of four-vector constituents. 
-  Along with a carefully considered method of pre-processing, we show that our method can produce an \textit{Anomaly Score} capable of distinguishing signal jets from background jets due to their substructure without the need for high-level variables, and while being robust against mass and $p_{T}$ correlations when compared to traditionally used substructure variables. In addition, our \textit{Anomaly Score} shows consistent performance along a wide range of signal contamination amounts, for both two and three-pronged jet substructure hypotheses. Our implementation trains the model in an entirely unsupervised setting, opening up the possibility for our model to be trained directly on data. Performance is evaluated both on the jet level as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. Our results demonstrate a direct and substantial improvement in the signal significance while being able to retain a smoothly falling background mass distribution. (Note: rewrite without "we/our"s?)
+  a contaminated dataset.  
+ A \textit{Variational Recurrent Neural Network} (VRNN) is used to model jets as sequences of four-vector constituents. 
+Coupled with a carefully considered pre-processing, the VRNN gives each jet an \textit{Anomaly Score} that distinguishes between the substructure of signal and background jets.
+This is done without high level variables, making the score more robust against mass and $p_{T}$ correlations when compared to traditional substructure-based methods. 
+The Anomaly Score shows consistent performance along a wide range of signal contamination amounts, for both two- and three-pronged jet substructure hypotheses. 
+The model is trained in an entirely unsupervised setting, opening up the possibility to train directly on data without a pre-defined signal hypothesis.
+Performance is evaluated on the jet level, as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. 
+Results demonstrate that the use of Anomaly Score as a classifier enhances signal sensitivity while retaining a smoothly falling background jet mass distribution. 
     
   
 \end{sciabstract}
@@ -143,7 +149,8 @@ Distinguishing new physics from Standard Model background at the LHC without a s
 This paper demonstrates a way to identify BSM particles with unsupervised, data-driven anomaly detection. 
 
 Fundamentally, anomaly detection describes a process in which anomalous elements are identified within a contaminated dataset. 
-In a machine learning context, a model capable of learning an underlying distribution of data points, characterized by high-level features of the data, can identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. 
+In a machine learning context, this can be done with a model that learns an underlying distribution of data points, as characterized by high-level features of the data. 
+Such a model can then identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. 
 
 
 \subsection{Autoencoders}
