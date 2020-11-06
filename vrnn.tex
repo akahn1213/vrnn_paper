@@ -168,12 +168,12 @@ In this way, the AE is considered to act as two neural networks being trained in
 which acts as the map from data to the latent space, ${\textbf z}=f({\textbf x})$, and
 a $decoder$ network $g$ which then attempts to reconstruct the original input from 
 its encoded representation, ${\textbf y}=g({\textbf z})$. 
-The loss function of the AE can be any function of the form $L({\textbf x}, {\textbf y}=g(f({\textbf x})))$, which 
+The loss function of the AE can be any function of the form $\mathcal{L}({\textbf x}, {\textbf y}=g(f({\textbf x})))$, which 
 is minimal when ${\textbf y}={\textbf x}$. 
 A common choice is the {\it Mean Squared Error} (MSE)
 between the input and output of the autoencoder:
 \begin{equation}
-L=|{\textbf y} - {\textbf x}|^2
+\mathcal{L}=|{\textbf y} - {\textbf x}|^2
 \end{equation}
 
 In the context of anomaly detection, elements which represent a small portion of a dataset will contribute less during the training process. 
@@ -309,12 +309,16 @@ By using Bayes' Theorem, and inserting the approximate posterior distribution $q
 While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. Thus the first two terms of this result can be described as a lower bound on the evidence. 
 When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
 Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
-The VAE reconstruction error is chosen to be the mean-squared-error loss as used in the ordinary AE.
-For the prior, it is common to choose a unit isotropic gaussian centered at the origin, as the KL-Divergence between a gaussian approximate posterior and a gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+The reconstruction error term is chosen to be the mean-squared-error loss as used in the ordinary AE. 
+The total loss function therefore takes the following form: 
 
 \begin{equation}
 	\mathcal{L} = - |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q(z|x)||p(z))
 \end{equation} 
+
+
+For the prior, it is common to choose a unit isotropic gaussian centered at the origin, as the KL-Divergence between a gaussian approximate posterior and a gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+
 
 
 Variational Autoencoders provide a number of improvements over standard Autoencoders, both as a generative model~\cite{kingma2014autoencoding} and as an anomaly detection tool~\cite{An2015VariationalAB}. 
@@ -448,25 +452,25 @@ The Variational Recurrent Neural Network (VRNN) used in this study is a sequence
 which replaces the encoder-decoder step of a traditional RNN with a VAE. 
 An illustration of one VRNN cell can be seen
 in Figure \ref{fig:VRNN}. 
-In this model, the VAE's input at each timestep is given as the vector $x(t)$, which is then encoded and decoded into an output vector $y(t)$ which can be compared to $x(t)$ via the reconstruction loss.
-The $\phi_{x}$ and $\phi_{z}$ layers represent \textit{feature-extracting layers} which are interpreted as learned representations of the features of the input $x(t)$ and the encoded latent space distribution $z(t)$ respectively. After each time-step, the hidden state is updated via a recurrence relation in which the current hidden state $h(t-1)$ and the current set of extracted features $\phi_{x}$ and $\phi_{z}$ produce an updated hidden state $h(t)$ via the following equation~\cite{chung2016recurrent}:
+In this model, the VAE's input at each time-step is given as the vector $x(t)$, which is then encoded and decoded into an output vector $y(t)$ which can be compared to $x(t)$ via the reconstruction loss.
+The $\phi_{x}$ and $\phi_{z}$ layers represent \textit{feature-extracting layers}, which are interpreted as learned representations of the features of the input $x(t)$ and the encoded latent space distribution $z(t)$, respectively. 
+After each time-step, the hidden state is updated via a recurrence relation, in which the current hidden state $h(t-1)$ and the current set of extracted features $\phi_{x}$ and $\phi_{z}$ produce an updated hidden state $h(t)$ via the following equation~\cite{chung2016recurrent}:
 \begin{equation}
 	h(t) = f(\phi_{x}, \phi_{z}, h(t-1))
 \end{equation} 
-Performing this particular step is the primary function of traditional RNN architectures such as LSTMs~\cite{lstm} and GRUs~\cite{cho2014learning}, and so any such architecture can be conveniently chosen to perform this task.
+Performing this particular step is the primary function of traditional RNN architectures such as \textcolor{red}{Define these acronyms} LSTMs~\cite{lstm} and GRUs~\cite{cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
+
 The VAE present in each cell of the VRNN notably differs from
 conventional VAEs in the following ways:
 \begin{enumerate}
   \item{The encoder and decoder are conditioned on the current time-step's hidden state.
-  This is represented by the concatenation operation between the hidden state $h(t-1)$ and the respective feature-extraction layers $\phi_{x}$ and $\phi_{z}$.}
-  \item{The prior from which the KL Divergence is computed is no longer a unit gaussian
+  This is represented by the concatenation operation between the hidden state $h(t-1)$ and the feature-extraction layers $\phi_{x}$ and $\phi_{z}$.}
+  \item{The prior from which the KL-Divergence is computed is no longer a unit gaussian
   at the origin, but rather a multivariate gaussian whose means and variances in each 
   dimension are determined from the current time-step's hidden state.}
 \end{enumerate}
 
-
-The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, such as what one would expect in a jet represented by a sequence of constituent four-vectors.
-
+\textcolor{red}{JG: Introduce why you're digging into the prior/approx posterior descriptions} 
 In more detail, each time-step's latent space prior distribution parameters $\mu_{t}$ and $\sigma_{t}$ are functions of the current time-step's hidden state:
 \begin{equation}
 	z_{t} \sim \mathcal{N}(\mu_{t}, \sigma_{t}), \text{ where } \mu_{t}, \sigma_{t} = f^{prior}(h_{t-1})
@@ -491,6 +495,9 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 \mathcal{L} = \frac{\mathcal{L}(t)}{N}
 \end{equation} 
 
+\textcolor{red}{JG: put some sort of wrap up/conclusion statement here before moving on?} 
+
+The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, as is expected from a jet represented by a sequence of constituent four-vectors.
 
 %VRNN Diagram
 \begin{figure}[H]
@@ -639,7 +646,7 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 
   
     \end{tikzpicture}
-    \caption{A Variational Recurrent Neural Network cell}
+    \caption{A Variational Recurrent Neural Network cell.}
     \label{fig:VRNN}
   \end{center}
 \end{figure}
@@ -647,16 +654,31 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 
 
 
-\subsection{Implementation}
+%\subsection{Implementation}
+%JG: is having only 1 subsection a thing? 
 
-The VRNN used in this study is directly of the same architecture of Figure \ref{fig:VRNN}. The number of neurons in each intermediate layer, including the hidden state and feature extracting layers, but not including the latent space and its $\mu$ and $\sigma$ layers, is 16. The latent space is chosen to be two-dimensional. Since four-vector constituents of jets are being modeled, the input $x(t)$ and output $y(t)$ layers represent the $p_{T}, \eta, $and $\phi$ of each constituent, and are correspondingly three-dimensional. ReLU activations are used in each layer of the network, except for $\sigma$ and $\sigma_{t}$, which have softmax activations, and $z$ and $y(t)$, which have linear activations. 
+The VRNN used in this study has the architecture shown in Figure \ref{fig:VRNN}. The number of neurons in each intermediate layer, including the hidden state and feature extracting layers, but not including the latent space and its $\mu$ and $\sigma$ layers, is 16. The latent space is chosen to be two-dimensional. Since four-vector constituents of jets are being modeled, the input $x(t)$ and output $y(t)$ layers are three dimensional, corresponding to the $p_{T}, \eta, $and $\phi$ of each constituent. ReLU activations are used in each layer of the network, except for $\sigma$ and $\sigma_{t}$, which have softmax activations, and $z$ and $y(t)$, which have linear activations. 
 
 The constituents of an input jet are processed sequentially, one per each time-step. 
-Each time-step contributes a loss based on the VAE loss function, $L(t) = MSE + \lambda D_{KL}$, where $\lambda$ is a factor which weights the KL-Divergence contribution relative to the MSE reconstruction loss.
+Each time-step contributes a loss based on the VAE loss function: 
+\begin{equation}
+\mathcal{L}(t) = MSE + \lambda D_{KL}
+\end{equation}
+$\lambda$ is a factor which weights the KL-Divergence contribution relative to the MSE reconstruction loss.
 Since harder constituents contribute more information toward the identification of jet substructure, $\lambda$ is defined to be be a function of constituent $p_{T}$ fraction relative to the jet's total $p_{T}$. 
-Furthermore, since the distribution of constituent $p_{T}$ fractions depends directly on the number of constituents in a jet, the constituent $p_{T}$ fraction distribution for each jet is averaged over the entire input dataset to avoid correlations with jet multiplicity. The loss is therefore computed for each constituent as $\mathcal{L}(t)=MSE+0.1\overline{p_T}(t)D_{KL}$, where $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current timestep's prior distribution and the encoded posterior, and $\overline{p_T}(t)$ is the $p_T$ of the dataset-averaged jet at timestep $t$. The final loss is computed by averaging the individual timestep losses over the entire jet: $\mathcal{L} = \frac{\Sigma \mathcal{L}(t)}{N}$. The hyperparameters involved in this implementation, namely the dimensionality of intermediate layers, and the additional weight coefficient of 0.1 in the loss function were determined via a hyperparameter optimization scan. 
+Furthermore, since the distribution of constituent $p_{T}$ fractions depends directly on the number of constituents in a jet, the constituent $p_{T}$ fraction distribution for each jet is averaged over the entire input dataset to avoid correlations with constituent multiplicity. 
 
-After the network is trained, an \textit{Anomaly Score} can be determined for each jet. The KL-Divergence term has been shown to provide more performant discrimination than the reconstruction error, or the loss term as a whole. Therefore, the Anomaly Score is defined in terms of the KL-Divergence of each constituent, averaged over the whole jet, and restricted to the range of (0, 1) via exponentiation. 
+In this result, the loss is therefore computed for each constituent as:
+\begin{equation}
+\mathcal{L}(t)=MSE+0.1\overline{p_T}(t)D_{KL}
+\end{equation}
+Here, $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current time-step's prior distribution and the encoded posterior, and $\overline{p_T}(t)$ is the $p_T$ of the dataset-averaged \textcolor{red}{constituent? jet} at time-step $t$. The final loss is computed by averaging the individual time-step losses over the entire jet: 
+\begin{equation}
+\mathcal{L} = \frac{\Sigma \mathcal{L}(t)}{N} 
+\end{equation} 
+The hyperparameters involved in this implementation, namely the dimensionality of intermediate layers, and the additional weight coefficient of 0.1 in the loss function were determined via a hyperparameter optimization scan. 
+
+After the network is trained, an \textit{Anomaly Score} can be determined for each jet. The KL-Divergence term has been shown to provide better discrimination between anomalous and standard jets than either the reconstruction error or the loss term as a whole.\textcolor{red}{JG: motivate that?} Therefore, the Anomaly Score is defined in terms of the KL-Divergence of each constituent, averaged over the whole jet, and restricted to the range of (0, 1) via exponentiation. 
 \begin{equation}
 	\text{Anomaly Score} = 1 - e^{-\overline{D_{KL}}}
 \end{equation}
@@ -667,14 +689,18 @@ After the network is trained, an \textit{Anomaly Score} can be determined for ea
 %%%%%%%%%%%%%%%%% Pre-Processing %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Data Pre-Processing}
+\section{Data Samples and Pre-Processing}
 
 
-The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal contamination. The signal events consist of a process in the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying to boosted jets $J$. The masses of the particles in the signal hypothesis is 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV~\cite{dataset}. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop. 
+The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying into a boosted jet $J$. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV~\cite{dataset}. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop\textcolor{red}{reference}. 
 
-The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the \textit{anti-$k_{t}$} jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amount of contamination, datasets were generated with 10 differing amounts of signal fractions in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate our highest contamination level at 10\%.
+The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the \textit{anti-$k_{t}$} jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amounts of contamination, datasets were produced with 10 signal event fractions in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate the highest contamination level of 10\%.
 
-One of the most consequential elements of this study is the choice of pre-processing. Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with non-substructure jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks (REFS). Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, via pre-processing, information about the jet's mass and $p_{T}$ can be removed before it becomes an input to the network. This process can be briefly summarized by three steps:
+One of the most consequential elements of this study is the choice of pre-processing. Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks (REFS). Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, via pre-processing, information about the jet's mass and $p_{T}$ can be removed before it becomes an input to the network. 
+
+\subsection{Boosting}
+
+The first process is inspired by a study based on jet images~\cite{roy2020robust}.  \textcolor{red}{JG: why boost?} It can be briefly summarized in three steps:
 
 \begin{itemize}
 	\item{Rescale each jet to the same mass}
@@ -682,7 +708,7 @@ One of the most consequential elements of this study is the choice of pre-proces
 	\item{Rotate each jet to the same orientation}
 \end{itemize}
 
-This method is inspired by a study based on jet images~\cite{roy2020robust}. Algorithm \ref{alg:boost} describes in detail the implementation of the rescaling, boosting, and rotating process, or simply \textit{boosting} for short. 
+Algorithm~\ref{alg:boost} describes in detail the implementation of the rescaling, boosting, and rotating processes, or simply \textit{boosting} for short. 
 
 %Pre-Processing Algorithm
 \begin{algorithm}[H]
@@ -729,7 +755,8 @@ Reflect constituents about $\phi$ axis such that the second hardest constituent 
 
 
 
-To evaluate the efficacy of this boosting procedure, we train the model on a dataset with 10\% signal contamination before and after applying our boosting procedure. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of leading jet mass vs. anomaly score before and after boosting the input jets. The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
+To evaluate the efficacy of this procedure, the model is trained on a dataset with 10\% signal contamination both before and after pre-processing, and the resulting correlation between Anomaly Score and jet mass is compared. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of leading jet mass vs. anomaly score before and after boosting the input jets. The results depict a significantly smaller amount of correlation between the jet's mass and its Anomaly Score, as desired.
+%The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
 
 
 \begin{figure}[H]
@@ -740,7 +767,10 @@ To evaluate the efficacy of this boosting procedure, we train the model on a dat
 	\caption{Leading Jet Mass vs Anomaly Score distributions before (left) and after (right) applying our boosting method}
 	\label{fig:mass_vs_score_boost}
 \end{figure}
+%JG: figure titles ought to say "Jet Mass"? 
 
+
+\subsection{Sequence Ordering}
 
 In addition to this boosting method, the effect of \textit{sequence ordering} on the input constituents has been investigated. In fixed architecture models, such as VAEs or image based CNNs, the ordering of constituents in the list of inputs is seldom important. In recurrent architectures such as the VRNN, choosing a clever sequence ordering method can provide a boost to performance if that ordering is capable of highlighting some of the important features of the sequence itself. The most intuitive method of ordering jet constituents is by their $p_{T}$, in decreasing order, the idea being that harder constituents contribute more to a jet's substructure than softer constituents. The objective of this study is to build a model which can differentiate between diffuse jets resulting from soft QCD interactions, and jets with multiple hard cores resulting from the decay of boosted hadronically-decaying objects. Therefore, it is favorable to use a sequence ordering which makes the existence of multiple hard cores of a jet distinctly apparent. This is achieved by ordering the constituents in $k_{t}$-distance order. More specifically, the $n^{th}$ constituent in the list is determined to be the constituent with the highest $k_{t}$-distance relative to the previous constituent, with the first constituent in the list being the highest $p_{T}$ constituent.
 \begin{equation}
