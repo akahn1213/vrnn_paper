@@ -921,14 +921,19 @@ Since the model produces one Anomaly Score per jet, a combination of Anomaly Sco
 	\label{fig:mjj_vs_evscore}
 \end{figure}
 
-The goal is to be able to observe an excess of signal events in the mass distribution of the dijet combination of the leading and sub-leading jets at the mass corresponding to the Z' particle. This is commonly referred to as a "bump hunt" search in which the signal is expected to appear as a bump upon an otherwise consistently falling distribution. Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the anomaly score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance in each bin of the corresponding histogram, where a total uncertainty of 5\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. The requirement on the Event Score dramatically increases the significance of the excess from $1\sigma$ to $6\sigma$ at a signal contamination of 0.5\% while still retaining the smoothly falling behavior of the background. No cuts other than the Event Score requirement have been applied in these scenarios besides the initial trigger requirement of $p_{T} > 1200GeV$ on the leading jet. In Figure \ref{fig:3p_dijet}, a similar result is seen in the case of three-pronged substructure on the boosted X and Y decays, where the Event Score requirement results in an increase of local significance of the signal peak from $2\sigma$ to $4\sigma$ at a signal contamination of 1\% under the same conditions. These results display the ability of the Anomaly Score to be adequately used in an analysis context, as it is capable of distinguishing potential signal objects while being robust to ambiguities in its mass, $p_{T}$, and substructure.
+The goal of this search is to observe an excess of signal events in the dijet invariant mass distribution at a mass corresponding to the Z' particle. 
+This is commonly referred to as a "bump hunt" search, in which the signal is expected to appear as a bump upon an otherwise smoothly falling background distribution. 
+
+Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets, before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the anomaly score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance $\sigma$ in each bin of the corresponding histogram, where a total uncertainty of 5\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. 
+
+The requirement on the Event Score dramatically increases the significance of the excess from $1\sigma$ to $6\sigma$ at a signal contamination of 0.5\%, while still retaining the smoothly falling behavior of the background. No selections other than the Event Score requirement have been applied in these scenarios besides the initial trigger requirement of $p_{T} > 1200 GeV$ on the leading jet. In Figure \ref{fig:3p_dijet}, a similar result is seen in the case of the three-pronged signal, where the Event Score requirement results in an increase of local significance of the signal peak from $2\sigma$ to $4\sigma$ at a signal contamination of 1\% under the same conditions. \textcolor{red}{JG: maybe name these signals specifically, what even is the 3 prong signal, is it Z'?} These results display the capability of the Anomaly Score as an analysis variable, as it can distinguish signal events while being robust against ambiguities in signal jet mass, $p_{T}$, and substructure.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_0p5_JJ_Mass_Multi.png}
 		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_0p5_JJ_Mass_EventScore0p65_Multi.png}
 	\end{center}
-	\caption{Two-Prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 0.5\%}
+	\caption{Two-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 0.5\%.}
 	\label{fig:2p_dijet}
 \end{figure}
 
@@ -938,7 +943,7 @@ The goal is to be able to observe an excess of signal events in the mass distrib
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi.png}
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png}
 	\end{center}
-	\caption{Three-Prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%}
+	\caption{Three-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%.}
 	\label{fig:3p_dijet}
 \end{figure}
 
@@ -950,9 +955,24 @@ The goal is to be able to observe an excess of signal events in the mass distrib
 
 \section*{Conclusion}
 
-In this study, we have presented a novel approach to performing Anomaly Detection in the context of searching for new physics by using a Variational Recurrent Neural Network trained on contaminated datasets to distinguish jets resulting from boosted hadronically decaying objects from those resulting from soft QCD processes. Through precise considerations in pre-processing, in which we boost each input jet to the same reference mass, energy, and orientation, coupled with a sequence ordering which makes the presence of signal-like substructure more easily apparent, our model produces an Anomaly Score capable of distinguishing signal jets with multiple potential substructure hypotheses. Applying our model to a jet-level study, in which we train and evaluate only on leading jets in our dataset, we see that our model adequately enhances boosted signal jets in a matter which is less mass-correlated than other traditional substructure variables such as D2. In addition, we see that the resulting Anomaly Score is equally performant across varying levels of contamination, allowing for a consistent characterization of substructure regardless of the amount of signal present in the dataset. When applied to an event-level context, our Anomaly Score greatly increases the significance of excesses due to the underlying signal process, regardless of substructure hypothesis, and while retaining the smoothly falling shape of the background's mass distribution.
+A novel approach for anomaly detection in the context of new physics searches is presented. 
+The technique utilizes a Variational Recurrent Neural Network trained on contaminated datasets to distinguish jets resulting from boosted hadronically decaying objects from those resulting from soft QCD processes. 
+A precise pre-processing procedure is developed, in which each input jet is boosted to the same reference mass, energy, and orientation, coupled with a sequence ordering which makes the presence of signal-like substructure more apparent. 
+The resulting training produces an Anomaly Score per jet that is sensitive to multiple substructure hypotheses. 
+In a jet-level study that only uses leading jets in the dataset, the model enhances signal with less jet mass correlation than other traditional substructure variables such as $D_2$. 
+In addition, the resulting Anomaly Score is equally performant across varying levels of contamination, allowing for a consistent characterization of substructure regardless of the amount of signal present in the dataset. 
+When applied to an event-level context, the Anomaly Score greatly increases the significance of signal excesses regardless of substructure hypothesis, while retaining the smoothly falling shape of the background's mass distribution.
 
-We view the Variational Recurrent Neural Network used in this study as a powerful tool capable of learning underlying features of physics objects presented as sequential data. It's applications to new physics searches are numerous, with one of the most attractive features being the potential for training directly on data. While our approach in this study is very general, in that we attempt to accommodate multiple substructure hypotheses in the context of boosted jet final states, our model also lends itself to a number of potential avenues for exploration into searches with pre-determined signal hypotheses outside of the contexts shown here. Since the overall structure of the model contains both elements of Variational Autoencoders and Recurrent Neural Networks, more complicated architectural iterations can be employed as natural extensions of the VRNN. Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level jet features. In addition, the model itself can be used in an entirely supervised context, allowing for a number of potential analysis applications outside of Anomaly Detection. Further study into the ordering of the input constituent sequence is also warranted, as this feature may be able to be tuned to accommodate more precisely defined analysis contexts or substructure hypotheses. We also view the VRNN as being a general tool for modeling sequential data of any type, making it compatible with event-level searches and known object tagging and identification, among others.
+The Variational Recurrent Neural Network used in this study is a powerful tool capable of learning underlying features of physics objects presented as sequential data. 
+Its applications to new physics searches are numerous, with one of the most attractive features being the potential for training directly on data without a pre-defined signal substructure hypothesis. 
+It is also a general tool for modeling sequential data of any type, making it compatible with common high energy physics tasks such as event-level searches or known object tagging and identification.
+
+The approach in this study is somewhat model-independent, in that it accommodates multiple substructure hypotheses.
+However, the model lends itself to a number of potential avenues for exploration into traditional supervised contexts as well, expanding its utility beyond the context of anomaly detection.
+Since the overall structure of the model contains both elements of Variational Autoencoders and Recurrent Neural Networks, more complicated architectural iterations can be employed as natural extensions of the VRNN. 
+Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level jet features. 
+Further study into the ordering of the input constituent sequence is also warranted, as this feature may be able to be tuned to accommodate more precisely defined analysis contexts or substructure hypotheses. 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
