@@ -803,7 +803,7 @@ The effect on performance due to this choice of constituent ordering can be easi
 Since the model is designed to discriminate between signal and background at the jet level, its basic performance can be studied by using only the leading jet of each event. In addition, since a full description of each event is available in the generated dataset, the score can be applied to jets and used to discriminate between signal and background in an event-level analysis context. The Anomaly Score discrimination performance is thus given for distinguishing between signal and background jets, and as the sole event discriminator in a search for the $Z'$ particle.
 
 
-\subsection{Jet Level}
+\subsection{Jet Level Performance}
 
 %Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
 
@@ -886,38 +886,38 @@ Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated je
 
 Another important study involves the model's performance over a range of signal contamination
 levels. Figure~\ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses
-after training on each of the contaminated sets. Notably, the performance is consistent along
-all contaminations. This leads the Anomaly Score to be interpreted as a quantity which is
-capable of adequately and consistently parametrizing a range of substructure hypotheses. This
-feature of the Anomaly Score is notably valuable in searches which allow for multiple final-state substructure hypotheses. The ability for the Anomaly Score to be consistently performant along
-a large range of contaminations is unexpected in the context of Anomaly Detection, where it
-is assumed that a high percentage of signal contamination will sufficiently dilute the training
-set with elements of the signal set, resulting in lower performance. However, the consistent
-performance can be attributed to the choice of kt-ordered sequencing, which directly highlights
-non-QCD-like substructure, and to the modelâ€™s ability to process and represent input jets as
-sequences of constituents rather than a fixed set of input values.
+after training on each of the contaminated sets. 
+Notably, the performance is consistent along all contaminations, and effective on two different prong multiplicities without any prior substructure hypothesis. 
+The Anomaly Score can thus be interpreted as a quantity which is capable of adequately and consistently parametrizing multiple distinct substructure scenarios. 
+This feature is valuable in model-independent searches, or those without a pre-defined signal substructure hypothesis. 
+
+The ability of the Anomaly Score to be consistently performant along a large range of contaminations is unexpected in the context of anomaly detection, where the dilution of the training set with a high number of signal elements results in lower performance.
+Here, the consistent performance can be attributed to the choice of $k_t$-ordered sequencing and the representation of jets as variable-length sequences of constituents. 
+\textcolor{red}{JG: I don't think we can just say that these are the reasons... without some further proof.} 
+%which directly highlights non-QCD-like substructure.  model'€™s ability to process and represent input jets as sequences of constituents rather than a fixed set of input values.
 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/AUC_vs_Contam.png}
 	\end{center}
-	\caption{Area-Under-the-Curve vs Contamination}
+	\caption{ROC AUC vs. signal contamination in training dataset, given as a percentage of the total events.}
 	\label{fig:aucs_vs_contam}
 \end{figure}
 
 
-\subsection{Event Level}
+\subsection{Event Level Performance}
 
 
-It is also important that this model can be directly applicable in an analysis-like context. In this study, the goal is to reconstruct the Z' particle in each event. In this training scenario, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination. Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, where the significant feature of the 3500GeV Z' is clearly observed to be tending towards higher values of the Event Score compared to background events. 
+A natural extension of the Anomaly Score's ability to distinguish anomalous jets is to apply the score in an analysis-like context. In this study, the goal is to reconstruct the Z' particle in the invariant mass spectrum $M_{JJ}$ of the two jets in each signal event. To do this, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination\textcolor{red}{JG: explain what contaminations you train on?}. 
 
+Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. This constructs an event-level discriminant which uses the most anomalous jet in the event to discriminate. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, showing the correlations between the dijet invariant mass and the assigned Event Score \textcolor{red}{in a contaminated dataset.} The significant feature of the 3500 GeV Z' occupies high values of the Event Score, validating the Event Score as a discriminant of anomalous events from background.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score.png}
 	\end{center}
-	\caption{Dijet Mass vs Event Score}
+	\caption{Dijet invariant mass vs. Event Score.}
 	\label{fig:mjj_vs_evscore}
 \end{figure}
 
