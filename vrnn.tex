@@ -146,38 +146,42 @@ While these models show promising performance, they are subject to inaccuracies 
 One way to circumvent these inaccuracies is to develop a model that trains directly on data, without requiring the need for simulated inputs.
 %(JG: I dont get this sentence) Such data-driven approaches are difficult mainly due to the inability to provide training labels, and are therefore incompatible with any method of supervised learning.
 Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a budding and promising effort~\cite{CWoLa}. 
-This paper demonstrates a way to identify BSM particles with unsupervised, data-driven anomaly detection. 
+This paper demonstrates a way to identify BSM signals that present as anomalous substructure in jets using unsupervised, data-driven anomaly detection. 
 
-Fundamentally, anomaly detection describes a process in which anomalous elements are identified within a contaminated dataset. 
+Anomaly detection refers to a process in which anomalous elements are identified within a dataset that is mostly homogenous, but contaminated with outliers. 
 In a machine learning context, this can be done with a model that learns an underlying distribution of data points, as characterized by high-level features of the data. 
 Such a model can then identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. 
+Several candidate architectures have been developed for this purpose. 
+The examination of their features is instructive in choosing an architecture for the specific task presented here. 
 
 
 \subsection{Autoencoders}
 
-A popular candidate architecture for anomaly detection, which has been previously studied in particle physics contexts, is the Autoencoder (AE)~\cite{bank2020autoencoders, Farina_2020}.
-
+A popular candidate architecture for anomaly detection is the \textit{autoencoder} (AE)~\cite{bank2020autoencoders, Farina_2020}, which has been previously studied in a particle physics context \textcolor{red}{refs?}.
 Autoencoders are an example of a generative model in which a network is trained to reconstruct a given input. 
-Figure \ref{fig:AE} shows an example of a standard autoencoder architecture.
+Figure \ref{fig:AE} shows an example of a standard AE architecture.
+
 A key feature of autoencoders is a latent layer in the center of the architecture which is often of a lower dimensionality than the input, directly restricting the network's ability to perfectly reconstruct its input. 
 In such a case, the network achieves its training goal best when it can represent high-level features of the input as vectors, or $codes$, in its latent space. 
-The accuracy at which each code represents the input can be verified by decoding it, and comparing
-its result with the original input. In this way, the autoencoder is considered
-to act as two neural networks being trained in parallel: An $encoder$ network $f$
+The accuracy with which each code represents the input can be verified by decoding it, and comparing its result with the original input. 
+In this way, the AE is considered to act as two neural networks being trained in parallel: an $encoder$ network $f$
 which acts as the map from data to the latent space, ${\textbf z}=f({\textbf x})$, and
 a $decoder$ network $g$ which then attempts to reconstruct the original input from 
-its encoded representation, ${\textbf y}=g({\textbf z})$. The loss function of the
-autoencoder can be any function of the form $L({\textbf x}, {\textbf y}=g(f({\textbf x})))$ which 
-is minimal when ${\textbf y}={\textbf x}$. A common such function is the {\it Mean Squared Error} (MSE)
+its encoded representation, ${\textbf y}=g({\textbf z})$. 
+The loss function of the AE can be any function of the form $L({\textbf x}, {\textbf y}=g(f({\textbf x})))$, which 
+is minimal when ${\textbf y}={\textbf x}$. 
+A common choice is the {\it Mean Squared Error} (MSE)
 between the input and output of the autoencoder:
-\[L=|{\textbf y} - {\textbf x}|^2\]
-In the context of anomaly detection, elements which represent a small portion of
-a dataset will contribute relatively less during the training process, and will
-be more poorly represented by the learned codes when compared to elements belonging to the majority class of data. One
-can therefore expect the reconstruction of anomalous elements to be worse, placing them in the
-tails of the loss function's distribution after training. Such methods have been 
-explored in anomalous jet tagging, by representing the jets as images~\cite{Farina_2020}, and lists 
-of constituents~\cite{Heimel_2019}, among others. 
+\begin{equation}
+L=|{\textbf y} - {\textbf x}|^2
+\end{equation}
+
+In the context of anomaly detection, elements which represent a small portion of a dataset will contribute less during the training process. 
+As a result, they will be less represented by the learned codes when compared to elements belonging to the majority class of data. 
+One can therefore expect the reconstruction of anomalous elements to be worse, placing them in the
+tails of the loss function's distribution after training. 
+This principle has been explored in anomalous jet tagging, for instance by representing the jets as images~\cite{Farina_2020}, or as lists 
+of constituents~\cite{Heimel_2019}.
 
 %Autoencoder Diagram
 \begin{figure}[H]
@@ -241,11 +245,11 @@ of constituents~\cite{Heimel_2019}, among others.
                 \path (H2-\source) edge (O-\dest);
     
         % Annotate the layers
-        \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer 1};
-        \node[annot,left of=hl] {Input layer};
-        \node[annot,right of=hl] (hla) {Latent layer};
-        \node[annot,right of=hla] (hl2) {Hidden layer 2};
-        \node[annot,right of=hl2] {Output layer};
+        \node[annot,above of=H-1, node distance=2cm] (hl) {\textbf{Hidden layer 1}};
+        \node[annot,left of=hl] {\textbf{Input layer}};
+        \node[annot,right of=hl] (hla) {\textbf{Latent layer}};
+        \node[annot,right of=hla] (hl2) {\textbf{Hidden layer 2}};
+        \node[annot,right of=hl2] {\textbf{Output layer}};
 
         \draw [decorate,decoration={brace,amplitude=10pt, mirror},xshift=-4pt,yshift=0pt] (-0.25cm,-0.75cm) -- (-0.25cm,-6.25cm) node [black,midway,xshift=-0.6cm] {\footnotesize $x$}; 
         \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (10.5cm,-0.75cm) -- (10.5cm,-6.25cm) node [black,midway,xshift=0.6cm] {\footnotesize $y$}; 
@@ -253,36 +257,44 @@ of constituents~\cite{Heimel_2019}, among others.
     \end{tikzpicture}
   
   \end{center}
-  \caption{A standard autoencoder}
+  \caption{A standard autoencoder.}
   \label{fig:AE}
 \end{figure}
 
+%------------------------------------------------------------------------------%
 \subsection{Variational Autoencoders}
 
-Variational Autoencoders, built upon the idea of standard autoencoders, are designed to be able to perform
-Bayesian inference, in which it is assumed that observed data $\textbf x$ is generated by some
+\textit{Variational Autoencoders} (VAEs) are built on the idea of standard AEs, with the extension that they are designed to perform
+Bayesian inference. 
+This assumes that observed data $\textbf x$ is generated by some
 hidden random variable $\textbf z$ whose posterior distribution $p(\textbf{z}|\textbf{x})$ 
-is intractable. The goal of a VAE is to learn an approximate posterior distribution, $q(\textbf{z}|\textbf{x})$, through training.
+is intractable. 
+The goal of a VAE is to learn an approximate posterior distribution, $q(\textbf{z}|\textbf{x})$, through training.
+\textcolor{red}{In this way, the latent space of the VAE then represents the approximate posterior distribution.}
 
-The architecture of a VAE is very close to that of a standard autoencoder, with the main difference
-being that the latent space is designed to accomodate an encoder which maps data to a distribution 
-rather than a single vector in the latent space. A common choice for the form of the approximate 
-posterior distribution is a multivariate gaussian of diagonal covariance. In this case, the encoder can be designed to map a given input to two independent layers, each with the same 
-dimensionality as the latent space, representing the means and standard deviations of the encoded gaussian distribution for each dimension respectively. 
+The architecture of a VAE is very close to that of a standard autoencoder. 
+The main difference is a latent space that can accommodate an encoder, which maps data to a distribution in the latent space rather than a single vector. 
+A common choice for the form of the latent space is a multivariate gaussian of diagonal covariance. 
+In this case, the encoder can map a given input to two independent layers, 
+each with the same dimensionality as the latent space, 
+which together represent the means and standard deviations of the encoded gaussian distribution \textcolor{red}{for each dimension respectively}. 
 Decoding then requires sampling from this resulting distribution. 
 This can be easily performed in the case of a gaussian approximate posterior by use of the \textit{reparametrization trick}.
 Instead of sampling the distribution directly, a particular value of $z$ can be represented in the following way:
-\[z=\mu + \sigma \epsilon\]
-where $\epsilon$ is sampled from a unit isotropic normal distribution $\epsilon \sim \mathcal{N}(0, 1)$~\cite{kingma2014autoencoding}.
+\begin{equation}
+z=\mu + \sigma \epsilon
+\end{equation}
+Here, $\epsilon$ is sampled from a unit isotropic normal distribution $\epsilon \sim \mathcal{N}(0, 1)$~\cite{kingma2014autoencoding}.
 
 
-The objective function of a VAE is designed to perform \textit{Bayesian Inference}, by determining the marginal likelihood which is the result of an often intractable calculation:
+The VAE performs Bayesian inference by determining the marginal likelihood, which is the result of an often intractable calculation:
 
-\begin{align*}
-p(x) &= \int p(z)p(x|z)dz
-\end{align*}
+\begin{equation}
+p(x) = \int p(z)p(x|z)dz
+\end{equation}
 
-By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL) Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. 
+By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL)-Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. 
+% JG: explain role of KL divergence? 
 
 \begin{equation}
 	\begin{split}
@@ -294,7 +306,11 @@ By using Bayes' Theorem, and inserting the approximate posterior distribution $q
   \end{split}
 \end{equation} 
 
-Since the true posterior distribution is still intractable, but knowing that the KL-Divergence is by definition non-negative, the first two terms of this result can be described as a \textit{lower bound on the evidence}. When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. Therefore, the negative of this lower bound is chosen as the loss function of the Variational Autoencoder, and is minimized through training. The mean-squared-error loss used in the ordinary Autoencoder is still chosen for the VAE reconstruction error, and for the prior, it is common to choose a unit isotropic gaussian centered at the origin, as the KL-Divergence between a gaussian approximate posterior and a gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. Thus the first two terms of this result can be described as a lower bound on the evidence. 
+When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
+Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
+The VAE reconstruction error is chosen to be the mean-squared-error loss as used in the ordinary AE.
+For the prior, it is common to choose a unit isotropic gaussian centered at the origin, as the KL-Divergence between a gaussian approximate posterior and a gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
 
 \begin{equation}
 	\mathcal{L} = - |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q(z|x)||p(z))
@@ -386,11 +402,11 @@ Variational Autoencoders provide a number of improvements over standard Autoenco
                 \path (H2-\source) edge (O-\dest);
     
         % Annotate the layers
-        \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer 1};
-        \node[annot,above of=I-1, node distance=1cm] {Input layer};
-        \node[annot] (hla) at (5cm, 0cm) {Latent layer};
-        \node[annot,above of=H2-1, node distance=2cm] (hl2) {Hidden layer 2};
-        \node[annot,above of=O-1, node distance=1cm] {Output layer};
+        \node[annot,above of=H-1, node distance=2cm] (hl) {\textbf{Hidden layer 1}};
+        \node[annot,above of=I-1, node distance=1cm] {\textbf{Input layer}};
+        \node[annot] (hla) at (5cm, 0cm) {\textbf{Latent layer}};
+        \node[annot,above of=H2-1, node distance=2cm] (hl2) {\textbf{Hidden layer 2}};
+        \node[annot,above of=O-1, node distance=1cm] {\textbf{Output layer}};
         \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=$\mu$] (r1) at (4cm, -2.5cm) {};
         \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:$\sigma$] (r1) at (4cm, -4.5cm) {};
         \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:{$z=\mu + \sigma \epsilon$}] (r1) at (6cm, -3.5cm) {};
@@ -405,9 +421,22 @@ Variational Autoencoders provide a number of improvements over standard Autoenco
   \end{center}
 \end{figure}
 
-While VAEs have shown promise in the task of jet-level anomaly detection, there are a number of drawbacks due to VAEs being a fixed-length architecture. In particular, since fixed length architectures cannot accommodate a variable number of inputs, as is the case when trying to model jets via their constituent four-vectors, it is common to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. In classifier models, this is common and benign, as the loss function depends only on the output of the network and the ground-truth that it is trying to reproduce. In a VAE however, since the input layer's neuron values are a part of its loss function due to the MSE loss between the input and output layers, the zero padded elements directly correlate with the value of the loss function. In practice, this introduces a direct correlation between the VAE loss and the number of constituents in the input jet which can be difficult to remove. 
+While VAEs have shown promise in the task of jet-level anomaly detection, they have a number of drawbacks. 
+Most notably, VAEs are a fixed-length architecture, and cannot accommodate a variable number of inputs. 
+When modeling jets via their constituent four-vectors, it thus becomes necessary to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. 
+In classifier models, this is common and benign, as the loss function depends only on the output of the network and the \textcolor{red}{ground-truth} that it is trying to reproduce. 
+However, in a VAE, the input layer's neuron values are a part of its loss function (due to the MSE loss between the input and output layers).
+Therefore, the zero padded elements directly correlate with the value of the loss function. 
+This introduces a direct correlation between the VAE loss and the number of constituents in the input jet which can be difficult to remove. 
 
-A recurrent architecture naturally circumvents this drawback since it is designed to accommodate inputs of varying length. In a \textit{Recurrent Neural Network} (RNN), data is input as a sequence of features, where each feature has the same fixed dimensionality, yet the sequence itself can vary in length. The RNN is comprised of a small fixed architecture, or \textit{cell}, which expects as an input the fixed-length feature at each element, or \textit{time-step} in the sequence. While processing the sequence, the RNN updates a \textit{hidden state} at each time-step, which is carried over and accessed by the cell during the following time-step. The hidden state stores a long-term representation of information within the sequence, and is the key feature allowing RNNs to process sequential data of varying length. The RNN cell then acts as an encoder-decoder architecture which inputs the current time-step's feature and hidden state, and outputs an updated hidden state, and output feature if desired. In the interest of performing anomaly detection using a recurrent architecture, the model in this study has been chosen to be one which combines the recurrent property of RNNs with the VAE's ability to perform variational inference. 
+A recurrent architecture naturally circumvents this drawback since it is designed to accommodate inputs of varying length. 
+In a \textit{Recurrent Neural Network} (RNN), data is input as a sequence of features. Each feature has the same fixed dimensionality, yet the sequence itself can vary in length. 
+The RNN is comprised of \textcolor{red}{a small fixed architecture (JG there are multiple?)}, or \textit{cell}, which expects as an input the fixed-length feature at each element, or \textit{time-step}, in the sequence. 
+While processing the sequence, the RNN updates a \textit{hidden state} at each time-step, which is carried over and accessed by the cell during the following time-step. 
+The hidden state stores a long-term representation of information within the sequence, and is the key feature allowing RNNs to process sequential data of varying length. 
+The RNN cell then acts as an encoder-decoder architecture which inputs the current time-step's feature and hidden state, and outputs an updated hidden state, along with an output feature if desired. 
+In the interest of performing anomaly detection using a recurrent architecture, the model in this study has been chosen to be one which combines the recurrent property of RNNs with the VAE's ability to perform variational inference. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% VRNN %%%%%%%%%%%%%%%%%%%%%%
@@ -416,8 +445,8 @@ A recurrent architecture naturally circumvents this drawback since it is designe
 \section{Variational Recurrent Neural Network}
 
 The Variational Recurrent Neural Network (VRNN) used in this study is a sequence modeling architecture
-which replaces the encoder-decoder step of a traditional RNN with a Variational
-Autoencoder (VAE). An illustration of one cell of a VRNN can be seen
+which replaces the encoder-decoder step of a traditional RNN with a VAE. 
+An illustration of one VRNN cell can be seen
 in Figure \ref{fig:VRNN}. 
 In this model, the VAE's input at each timestep is given as the vector $x(t)$, which is then encoded and decoded into an output vector $y(t)$ which can be compared to $x(t)$ via the reconstruction loss.
 The $\phi_{x}$ and $\phi_{z}$ layers represent \textit{feature-extracting layers} which are interpreted as learned representations of the features of the input $x(t)$ and the encoded latent space distribution $z(t)$ respectively. After each time-step, the hidden state is updated via a recurrence relation in which the current hidden state $h(t-1)$ and the current set of extracted features $\phi_{x}$ and $\phi_{z}$ produce an updated hidden state $h(t)$ via the following equation~\cite{chung2016recurrent}:
