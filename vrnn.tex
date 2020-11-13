@@ -145,7 +145,7 @@ While these models show promising performance, they are subject to inaccuracies 
 
 One way to circumvent these inaccuracies is to develop a model that trains directly on data, without requiring the need for simulated inputs.
 %(JG: I dont get this sentence) Such data-driven approaches are difficult mainly due to the inability to provide training labels, and are therefore incompatible with any method of supervised learning.
-Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a budding and promising effort~\cite{CWoLa}. 
+Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{CWoLa}. 
 This paper demonstrates a way to identify BSM signals that present as anomalous substructure in jets using unsupervised, data-driven anomaly detection. 
 
 Anomaly detection refers to a process in which anomalous elements are identified within a dataset that is mostly homogenous, but contaminated with outliers. 
@@ -157,7 +157,8 @@ The examination of their features is instructive in choosing an architecture for
 
 \subsection{Autoencoders}
 
-A popular candidate architecture for anomaly detection is the \textit{autoencoder} (AE)~\cite{bank2020autoencoders, Farina_2020}, which has been previously studied in a particle physics context \textcolor{red}{refs?}.
+A popular candidate architecture for anomaly detection is the \textit{autoencoder} 
+(AE)~\cite{bank2020autoencoders}, which has been previously studied in a particle physics context~\cite{Farina_2020, Heimel_2019}.
 Autoencoders are an example of a generative model in which a network is trained to reconstruct a given input. 
 Figure \ref{fig:AE} shows an example of a standard AE architecture.
 
@@ -321,7 +322,7 @@ For the prior, it is common to choose a unit isotropic gaussian centered at the 
 
 
 
-Variational Autoencoders provide a number of improvements over standard Autoencoders, both as a generative model~\cite{kingma2014autoencoding} and as an anomaly detection tool~\cite{An2015VariationalAB}. 
+Variational Autoencoders provide a number of improvements over standard Autoencoders, both as a generative model~\cite{kingma2014autoencoding} and as an anomaly detection tool~\cite{An2015VariationalAB}. \textcolor{blue}{The inclusion of a KL-Divergence term in the loss function, in addition to motivating the architecture to more appropriately model unique classes of data, exists as another discriminatory metric used to differentiate nominal and anomalous elements of the dataset. Anomalous elements are expected to have both a large reconstruction error and a large KL-Divergence when compared to nominal elements.}
 
 
 %Variational Autoencoder Diagram
@@ -458,7 +459,7 @@ After each time-step, the hidden state is updated via a recurrence relation, in 
 \begin{equation}
 	h(t) = f(\phi_{x}, \phi_{z}, h(t-1))
 \end{equation} 
-Performing this particular step is the primary function of traditional RNN architectures such as \textcolor{red}{Define these acronyms} LSTMs~\cite{lstm} and GRUs~\cite{cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
+Performing this particular step is the primary function of traditional RNN architectures such as Long Short-Term Memory Networks (LSTMs)~\cite{lstm} and Gated Recurrent Units (GRUs)~\cite{cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
 
 The VAE present in each cell of the VRNN notably differs from
 conventional VAEs in the following ways:
@@ -495,7 +496,9 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 \mathcal{L} = \frac{\mathcal{L}(t)}{N}
 \end{equation} 
 
-\textcolor{red}{JG: put some sort of wrap up/conclusion statement here before moving on?} 
+%\textcolor{red}{JG: put some sort of wrap up/conclusion statement here before moving on?} 
+
+\textcolor{blue}{This loss function takes the same role as the VAE's loss function, acting both as an appropriate means of optimizing the architecture as well as a discriminatory quantity between nominal and anomalous elements of the dataset.}
 
 The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, as is expected from a jet represented by a sequence of constituent four-vectors.
 
@@ -692,17 +695,20 @@ After the network is trained, an \textit{Anomaly Score} can be determined for ea
 \section{Data Samples and Pre-Processing}
 
 
-The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying into a boosted jet $J$. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV~\cite{dataset}. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop\textcolor{red}{reference}. 
+The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying into a boosted jet $J$. Independent signal events were generated with the X and Y objects both decaying to either two or three-pronged substructure. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated for each substructure hypothesis, along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV~\cite{dataset}. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop\textcolor{red}{reference}. 
 
 \textcolor{red}{JG: introduce 3 prong signals}
 
+
+
+
 The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amounts of contamination, datasets were produced with 10 signal event fractions in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate the highest contamination level of 10\%.
 
-One of the most consequential elements of this study is the choice of pre-processing. Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks (REFS). Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, via pre-processing, information about the jet's mass and $p_{T}$ can be removed before it becomes an input to the network. 
+One of the most consequential elements of this study is the choice of pre-processing. Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks (REFS). Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. 
 
 \subsection{Boosting}
 
-The first process is inspired by a study based on jet images~\cite{roy2020robust}.  \textcolor{red}{JG: why boost?} It can be briefly summarized in three steps:
+\textcolor{blue}{The primary goal of pre-processing in this study is to ensure that each jet input into the VRNN is transformed in a way which removes information about differences in mass and $p_{T}$ so that the VRNN is unable to directly learn and correlate its anomaly score with these features. The resulting pre-processed jets should therefore be superficially identical, with the only differences appearing in the arrangement of their constituents due do varying substructure. This procedure is inspired by a study based on jet images, where a pre-processing method which boosts each jet to the same reference frame allows for a model trained on the pre-processed jets to be robust against variations in mass and $p_{T}$~\cite{roy2020robust}. The process can be briefly summarized in three steps:}
 
 \begin{itemize}
 	\item{Rescale each jet to the same mass}
@@ -774,7 +780,7 @@ To evaluate the efficacy of this procedure, the model is trained on a dataset wi
 
 \subsection{Sequence Ordering}
 
-In addition to this boosting method, the effect of \textit{sequence ordering} on the input constituents has been investigated. In fixed architecture models, such as VAEs or image based CNNs\textcolor{red}{no acronyms without defs}, the ordering of constituents in the list of training inputs is seldom important. However, in recurrent architectures such as the VRNN, choosing a clever sequence ordering method that highlights important sequence features can boost performance.
+In addition to this boosting method, the effect of \textit{sequence ordering} on the input constituents has been investigated. In fixed architecture models, such as VAEs or image based Convolutional Neural Networks (CNNs), the ordering of constituents in the list of training inputs is seldom important. However, in recurrent architectures such as the VRNN, choosing a clever sequence ordering method that highlights important sequence features can boost performance.
  
 The most intuitive method of ordering jet constituents is by their $p_{T}$ in decreasing order, as harder constituents contribute more to a jet's substructure than softer constituents. The objective of this study is to build a model which can differentiate between diffuse jets resulting from soft QCD interactions, and jets with multiple cores resulting from the hadronic decay of boosted objects. Therefore, it is favorable to use a sequence ordering which makes the existence of multiple hard cores of a jet distinctly apparent. This is achieved by ordering the constituents in $k_{t}$-distance order. More specifically, the $n^{th}$ constituent in the list is determined to be the constituent with the highest $k_{t}$-distance relative to the previous constituent, with the first constituent in the list being the highest $p_{T}$ constituent.
 \begin{equation}
