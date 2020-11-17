@@ -100,10 +100,17 @@
   
   \vspace{0.4cm}
 
-  We present a novel method of searching for boosted hadronically
+This paper presents a novel method of searching for boosted hadronically
   decaying objects by treating them as anomalous elements of
-  a contaminated dataset. Our method uses a \textit{Variational Recurrent Neural Network} (VRNN) to model jets as sequences of four-vector constituents. 
-  Along with a carefully considered method of pre-processing, we show that our method can produce an \textit{Anomaly Score} capable of distinguishing signal jets from background jets due to their substructure without the need for high-level variables, and while being robust against mass and $p_{T}$ correlations when compared to traditionally used substructure variables. In addition, our \textit{Anomaly Score} shows consistent performance along a wide range of signal contamination amounts, for both two and three-pronged jet substructure hypotheses. Our implementation trains the model in an entirely unsupervised setting, opening up the possibility for our model to be trained directly on data. Performance is evaluated both on the jet level as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. Our results demonstrate a direct and substantial improvement in the signal significance while being able to retain a smoothly falling background mass distribution. (Note: rewrite without "we/our"s?)
+  a contaminated dataset.  
+ A \textit{Variational Recurrent Neural Network} (VRNN) is used to model jets as sequences of constituent four-vectors. 
+Coupled with a carefully considered pre-processing, the VRNN gives each jet an \textit{Anomaly Score} that distinguishes between the substructure of signal and background jets.
+The model is trained in an entirely unsupervised setting and without high level variables, making the score more robust against mass and $p_{T}$ correlations when compared to traditional substructure-based methods. 
+Performance is evaluated on the jet level, as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. 
+The Anomaly Score shows consistent performance along a wide range of signal contamination amounts, for both two- and three-pronged jet substructure hypotheses. 
+Analysis results demonstrate that the use of Anomaly Score as a classifier enhances signal sensitivity while retaining a smoothly falling background jet mass distribution. 
+The model's discriminatory performance resulting from an unsupervised training scenario opens up the possibility to train directly on data without a pre-defined signal hypothesis.
+
     
   
 \end{sciabstract}
@@ -128,46 +135,55 @@
 
 \section{Introduction}
 
-Since the discovery of the Higgs boson in 2012 by the ATLAS~\cite{atlas_higgs} and CMS~\cite{cms_higgs} collaborations at the Large Hadron Collider, physicists at CERN have been searching for Beyond-the-Standard-Model (BSM) particles which could help explain some of the open questions on the frontier of high-energy physics. 
-Currently, no such signals of new physics have been made evident. 
-An increasing amount of time and effort is being spent on developing new analysis tools which could help researchers track down rare signals which traditional methods may be insensitive to. 
-Occupying one of the avenues of development is novel machine learning models.
+The frontier of high energy physics has many open questions, such as the nature of dark matter or the origin of matter-antimatter asymmetry, which are being explored by the ATLAS and CMS Experiments at the Large Hadron Collider (LHC). 
+Since the discovery of the Higgs boson in 2012~\cite{atlas_higgs,cms_higgs}, no signals of new beyond the Standard Model (BSM) physics have been found. 
+Sophisticated analysis tools utilizing novel machine learning models are key to detecting rare signals that may be missed by traditional methods. 
 
 Machine learning is being consistently integrated into new physics searches at the LHC. 
-While many applications focus on classifying known signatures, such as top quarks or Higgs bosons, there are a number of emerging techniques aimed at aiding the discovery of BSM particles. 
-Many of these techniques use classifier models to try search for particular model hypotheses, by training and evaluating a model using Monte Carlo simulated data of the new signal.
+While many applications focus on classifying known signatures, such as top quarks or Higgs bosons, there are a number of emerging techniques aimed at the discovery of new particles. 
+Many of these techniques use classifier models to search for particular model hypotheses, by training and evaluating a model using Monte Carlo simulation of the BSM signal.
 While these models show promising performance, they are subject to inaccuracies between simulated samples and data, which occur most severely in the non-perturbative regime of QCD processes.
-One way to circumvent these inaccuracies is to be able to develop a model that trains directly on data, without requiring the need for simulated inputs.
-Such data-driven approaches are difficult mainly due to the inability to provide training labels, and therefore any methods of supervised learning are naturally incompatible.
-However, there has been a significant amount of effort in developing methods focused on distinguishing potential new-physics objects using entirely unsupervised, data-driven methods~\cite{CWoLa}.
-In this paper, one such method is explored, in which new BSM particles are identified via anomaly detection.
 
-Fundamentally, anomaly detection describes a process in which anomalous elements are identified within a contaminated dataset. 
-In a machine learning context, a model capable of learning an underlying distribution of data points, characterized by high-level features of the data, can identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. A popular candidate architecture for anomaly detection, which has been previously studied in particle physics contexts, is the Autoencoder (AE)~\cite{bank2020autoencoders, Farina_2020}.
+One way to circumvent these inaccuracies is to develop a model that trains directly on data, without requiring the need for simulated inputs.
+%(JG: I dont get this sentence) Such data-driven approaches are difficult mainly due to the inability to provide training labels, and are therefore incompatible with any method of supervised learning.
+Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{CWoLa}. 
+This paper demonstrates a way to identify BSM signals that present as anomalous substructure in jets using unsupervised, data-driven anomaly detection. 
+
+Anomaly detection refers to a process in which anomalous elements are identified within a dataset that is mostly homogenous, but contaminated with outliers. 
+In a machine learning context, this can be done with a model that learns an underlying distribution of data points, as characterized by high-level features of the data. 
+Such a model can then identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. 
+Several candidate architectures have been developed for this purpose. 
+The examination of their features is instructive in choosing an architecture for the specific task presented here. 
+
 
 \subsection{Autoencoders}
 
+A popular candidate architecture for anomaly detection is the \textit{autoencoder} 
+(AE)~\cite{bank2020autoencoders}, which has been previously studied in a particle physics context.
 Autoencoders are an example of a generative model in which a network is trained to reconstruct a given input. 
-Figure \ref{fig:AE} shows an example of a standard autoencoder architecture.
+Figure \ref{fig:AE} shows an example of a standard AE architecture.
+
 A key feature of autoencoders is a latent layer in the center of the architecture which is often of a lower dimensionality than the input, directly restricting the network's ability to perfectly reconstruct its input. 
 In such a case, the network achieves its training goal best when it can represent high-level features of the input as vectors, or $codes$, in its latent space. 
-The accuracy at which each code represents the input can be verified by decoding it, and comparing
-its result with the original input. In this way, the autoencoder is considered
-to act as two neural networks being trained in parallel: An $encoder$ network $f$
+The accuracy with which each code represents the input can be verified by decoding it, and comparing its result with the original input. 
+In this way, the AE is considered to act as two neural networks being trained in parallel: an $encoder$ network $f$
 which acts as the map from data to the latent space, ${\textbf z}=f({\textbf x})$, and
 a $decoder$ network $g$ which then attempts to reconstruct the original input from 
-its encoded representation, ${\textbf y}=g({\textbf z})$. The loss function of the
-autoencoder can be any function of the form $L({\textbf x}, {\textbf y}=g(f({\textbf x})))$ which 
-is minimal when ${\textbf y}={\textbf x}$. A common such function is the {\it Mean Squared Error} (MSE)
+its encoded representation, ${\textbf y}=g({\textbf z})$. 
+The loss function of the AE can be any function of the form $\mathcal{L}({\textbf x}, {\textbf y}=g(f({\textbf x})))$, which 
+is minimal when ${\textbf y}={\textbf x}$. 
+A common choice is the {\it Mean Squared Error} (MSE)
 between the input and output of the autoencoder:
-\[L=|{\textbf y} - {\textbf x}|^2\]
-In the context of anomaly detection, elements which represent a small portion of
-a dataset will contribute relatively less during the training process, and will
-be more poorly represented by the learned codes when compared to elements belonging to the majority class of data. One
-can therefore expect the reconstruction of anomalous elements to be worse, placing them in the
-tails of the loss function's distribution after training. Such methods have been 
-explored in anomalous jet tagging, by representing the jets as images~\cite{Farina_2020}, and lists 
-of constituents~\cite{Heimel_2019}, among others. 
+\begin{equation}
+\mathcal{L}=|{\textbf y} - {\textbf x}|^2
+\end{equation}
+
+In the context of anomaly detection, elements which represent a small portion of a dataset will contribute less during the training process. 
+As a result, they will be less represented by the learned codes when compared to elements belonging to the majority class of data. 
+One can therefore expect the reconstruction of anomalous elements to be worse, placing them in the
+tails of the loss function's distribution after training. 
+This principle has been explored in anomalous jet tagging, for instance by representing the jets as images~\cite{Farina_2020}, or as lists 
+of constituents~\cite{Heimel_2019}.
 
 %Autoencoder Diagram
 \begin{figure}[H]
@@ -231,11 +247,11 @@ of constituents~\cite{Heimel_2019}, among others.
                 \path (H2-\source) edge (O-\dest);
     
         % Annotate the layers
-        \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer 1};
-        \node[annot,left of=hl] {Input layer};
-        \node[annot,right of=hl] (hla) {Latent layer};
-        \node[annot,right of=hla] (hl2) {Hidden layer 2};
-        \node[annot,right of=hl2] {Output layer};
+        \node[annot,above of=H-1, node distance=2cm] (hl) {\textbf{Hidden layer 1}};
+        \node[annot,left of=hl] {\textbf{Input layer}};
+        \node[annot,right of=hl] (hla) {\textbf{Latent layer}};
+        \node[annot,right of=hla] (hl2) {\textbf{Hidden layer 2}};
+        \node[annot,right of=hl2] {\textbf{Output layer}};
 
         \draw [decorate,decoration={brace,amplitude=10pt, mirror},xshift=-4pt,yshift=0pt] (-0.25cm,-0.75cm) -- (-0.25cm,-6.25cm) node [black,midway,xshift=-0.6cm] {\footnotesize $x$}; 
         \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (10.5cm,-0.75cm) -- (10.5cm,-6.25cm) node [black,midway,xshift=0.6cm] {\footnotesize $y$}; 
@@ -243,36 +259,43 @@ of constituents~\cite{Heimel_2019}, among others.
     \end{tikzpicture}
   
   \end{center}
-  \caption{A standard autoencoder}
+  \caption{A standard autoencoder.}
   \label{fig:AE}
 \end{figure}
 
+%------------------------------------------------------------------------------%
 \subsection{Variational Autoencoders}
 
-Variational Autoencoders, built upon the idea of standard autoencoders, are designed to be able to perform
-Bayesian inference, in which it is assumed that observed data $\textbf x$ is generated by some
+\textit{Variational Autoencoders} (VAEs) are built on the idea of standard AEs, with the extension that they are designed to perform
+Bayesian inference. 
+This assumes that observed data $\textbf x$ is generated by some
 hidden random variable $\textbf z$ whose posterior distribution $p(\textbf{z}|\textbf{x})$ 
-is intractable. The goal of a VAE is to learn an approximate posterior distribution, $q(\textbf{z}|\textbf{x})$, through training.
+is intractable. 
+The goal of a VAE is to learn an approximate posterior distribution, $q(\textbf{z}|\textbf{x})$, through training.
 
-The architecture of a VAE is very close to that of a standard autoencoder, with the main difference
-being that the latent space is designed to accomodate an encoder which maps data to a distribution 
-rather than a single vector in the latent space. A common choice for the form of the approximate 
-posterior distribution is a multivariate gaussian of diagonal covariance. In this case, the encoder can be designed to map a given input to two independent layers, each with the same 
-dimensionality as the latent space, representing the means and standard deviations of the encoded gaussian distribution for each dimension respectively. 
+The architecture of a VAE is very close to that of a standard autoencoder. 
+The main difference is a latent space that can accommodate an encoder, which maps data to a distribution in the latent space rather than a single vector. 
+A common choice for the form of the latent space is a multivariate Gaussian of diagonal covariance. 
+In this case, the encoder can map a given input to two independent layers, 
+each with the same dimensionality as the latent space.
+One of these layers represents the means of the encoded Gaussian distribution while the other represents the respective standard deviations.
 Decoding then requires sampling from this resulting distribution. 
-This can be easily performed in the case of a gaussian approximate posterior by use of the \textit{reparametrization trick}.
+This can be easily performed in the case of a Gaussian approximate posterior by use of the \textit{reparametrization trick}.
 Instead of sampling the distribution directly, a particular value of $z$ can be represented in the following way:
-\[z=\mu + \sigma \epsilon\]
+\begin{equation}
+z=\mu + \sigma \epsilon
+\end{equation}
 where $\epsilon$ is sampled from a unit isotropic normal distribution $\epsilon \sim \mathcal{N}(0, 1)$~\cite{kingma2014autoencoding}.
 
 
-The objective function of a VAE is designed to perform \textit{Bayesian Inference}, by determining the marginal likelihood which is the result of an often intractable calculation:
+The VAE performs Bayesian inference by determining the marginal likelihood, which is the result of an often intractable calculation:
 
-\begin{align*}
-p(x) &= \int p(z)p(x|z)dz
-\end{align*}
+\begin{equation}
+p(x) = \int p(z)p(x|z)dz
+\end{equation}
 
-By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL) Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. 
+By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL)-Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. 
+% JG: explain role of KL divergence? 
 
 \begin{equation}
 	\begin{split}
@@ -284,14 +307,22 @@ By using Bayes' Theorem, and inserting the approximate posterior distribution $q
   \end{split}
 \end{equation} 
 
-Since the true posterior distribution is still intractable, but knowing that the KL-Divergence is by definition non-negative, the first two terms of this result can be described as a \textit{lower bound on the evidence}. When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. Therefore, the negative of this lower bound is chosen as the loss function of the Variational Autoencoder, and is minimized through training. The mean-squared-error loss used in the ordinary Autoencoder is still chosen for the VAE reconstruction error, and for the prior, it is common to choose a unit isotropic gaussian centered at the origin, as the KL-Divergence between a gaussian approximate posterior and a gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. The first two terms of this result can therefore be described as a lower bound on the evidence. 
+When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
+Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
+The reconstruction error term is chosen to be the mean-squared-error loss as used in the ordinary AE. 
+The total loss function therefore takes the following form: 
 
 \begin{equation}
-	\mathcal{L} = - |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q(z|x)||p(z))
+	\mathcal{L} = |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q(z|x)||p(z))
 \end{equation} 
 
 
-Variational Autoencoders provide a number of improvements over standard Autoencoders, both as a generative model~\cite{kingma2014autoencoding} and as an anomaly detection tool~\cite{An2015VariationalAB}. 
+For the prior, it is common to choose a unit isotropic Gaussian centered at the origin, as the KL-Divergence between a Gaussian approximate posterior and a Gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+
+
+
+Variational Autoencoders provide a number of improvements over standard Autoencoders, both as a generative model~\cite{kingma2014autoencoding} and as an anomaly detection tool~\cite{An2015VariationalAB}. The inclusion of a KL-Divergence term in the loss function motivates the architecture to more appropriately model unique classes of data. It also acts as another discriminatory metric, as anomalous elements are expected to have both a large reconstruction error and a large KL-Divergence when compared to nominal elements.
 
 
 %Variational Autoencoder Diagram
@@ -376,11 +407,11 @@ Variational Autoencoders provide a number of improvements over standard Autoenco
                 \path (H2-\source) edge (O-\dest);
     
         % Annotate the layers
-        \node[annot,above of=H-1, node distance=2cm] (hl) {Hidden layer 1};
-        \node[annot,above of=I-1, node distance=1cm] {Input layer};
-        \node[annot] (hla) at (5cm, 0cm) {Latent layer};
-        \node[annot,above of=H2-1, node distance=2cm] (hl2) {Hidden layer 2};
-        \node[annot,above of=O-1, node distance=1cm] {Output layer};
+        \node[annot,above of=H-1, node distance=2cm] (hl) {\textbf{Hidden layer 1}};
+        \node[annot,above of=I-1, node distance=1cm] {\textbf{Input layer}};
+        \node[annot] (hla) at (5cm, 0cm) {\textbf{Latent layer}};
+        \node[annot,above of=H2-1, node distance=2cm] (hl2) {\textbf{Hidden layer 2}};
+        \node[annot,above of=O-1, node distance=1cm] {\textbf{Output layer}};
         \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=$\mu$] (r1) at (4cm, -2.5cm) {};
         \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:$\sigma$] (r1) at (4cm, -4.5cm) {};
         \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:{$z=\mu + \sigma \epsilon$}] (r1) at (6cm, -3.5cm) {};
@@ -390,14 +421,27 @@ Variational Autoencoders provide a number of improvements over standard Autoenco
 
   
     \end{tikzpicture}
-    \caption{A Variational Autoencoder with a gaussian latent space parametrization.}
+    \caption{A Variational Autoencoder with a Gaussian latent space parametrization.}
     \label{fig:VAE}
   \end{center}
 \end{figure}
 
-While VAEs have shown promise in the task of jet-level anomaly detection, there are a number of drawbacks due to VAEs being a fixed-length architecture. In particular, since fixed length architectures cannot accommodate a variable number of inputs, as is the case when trying to model jets via their constituent four-vectors, it is common to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. In classifier models, this is common and benign, as the loss function depends only on the output of the network and the ground-truth that it is trying to reproduce. In a VAE however, since the input layer's neuron values are a part of its loss function due to the MSE loss between the input and output layers, the zero padded elements directly correlate with the value of the loss function. In practice, this introduces a direct correlation between the VAE loss and the number of constituents in the input jet which can be difficult to remove. 
+While VAEs have shown promise in the task of jet-level anomaly detection, they have a number of drawbacks. 
+Most notably, VAEs are a fixed-length architecture, and cannot accommodate a variable number of inputs. 
+When modeling jets via their constituent four-vectors, it becomes necessary to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. 
+In classifier models, this is common and benign, as the loss function depends only on the output of the network and the ground truth that it is trying to reproduce. 
+However, in a VAE, the input layer's neuron values are a part of its loss function (due to the MSE loss between the input and output layers).
+Therefore, the zero padded elements directly correlate with the value of the loss function. 
+This introduces a direct correlation between the VAE loss and the number of constituents in the input jet which can be difficult to remove. 
 
-A recurrent architecture naturally circumvents this drawback since it is designed to accommodate inputs of varying length. In a \textit{Recurrent Neural Network} (RNN), data is input as a sequence of features, where each feature has the same fixed dimensionality, yet the sequence itself can vary in length. The RNN is comprised of a small fixed architecture, or \textit{cell}, which expects as an input the fixed-length feature at each element, or \textit{time-step} in the sequence. While processing the sequence, the RNN updates a \textit{hidden state} at each time-step, which is carried over and accessed by the cell during the following time-step. The hidden state stores a long-term representation of information within the sequence, and is the key feature allowing RNNs to process sequential data of varying length. The RNN cell then acts as an encoder-decoder architecture which inputs the current time-step's feature and hidden state, and outputs an updated hidden state, and output feature if desired. In the interest of performing anomaly detection using a recurrent architecture, the model in this study has been chosen to be one which combines the recurrent property of RNNs with the VAE's ability to perform variational inference. 
+A recurrent architecture naturally circumvents this drawback since it is designed to accommodate inputs of varying length. 
+In a \textit{Recurrent Neural Network} (RNN), data is input as a sequence of features. Each feature has the same fixed dimensionality, yet the sequence itself can vary in length. 
+The RNN is comprised of a chain of small fixed architectures, or \textit{cells}, which expect as inputs the fixed-length feature at each element, or \textit{time-step}, in the sequence. 
+While processing the sequence, the RNN updates a \textit{hidden state} at each time-step, which is carried over and accessed by the cell during the following time-step. 
+The hidden state stores a long-term representation of information within the sequence, and is the key feature allowing RNNs to process sequential data of varying length. 
+The RNN cell then acts as an encoder-decoder architecture which inputs the current time-step's feature and hidden state, and outputs an updated hidden state, along with an output feature if desired. 
+In the interest of performing anomaly detection using a recurrent architecture, the model in this study has been chosen to be one which combines the recurrent property of RNNs with the VAE's ability to perform variational inference. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% VRNN %%%%%%%%%%%%%%%%%%%%%%
@@ -406,28 +450,28 @@ A recurrent architecture naturally circumvents this drawback since it is designe
 \section{Variational Recurrent Neural Network}
 
 The Variational Recurrent Neural Network (VRNN) used in this study is a sequence modeling architecture
-which replaces the encoder-decoder step of a traditional RNN with a Variational
-Autoencoder (VAE). An illustration of one cell of a VRNN can be seen
+which replaces the encoder-decoder step of a traditional RNN with a VAE. 
+An illustration of one VRNN cell can be seen
 in Figure \ref{fig:VRNN}. 
-In this model, the VAE's input at each timestep is given as the vector $x(t)$, which is then encoded and decoded into an output vector $y(t)$ which can be compared to $x(t)$ via the reconstruction loss.
-The $\phi_{x}$ and $\phi_{z}$ layers represent \textit{feature-extracting layers} which are interpreted as learned representations of the features of the input $x(t)$ and the encoded latent space distribution $z(t)$ respectively. After each time-step, the hidden state is updated via a recurrence relation in which the current hidden state $h(t-1)$ and the current set of extracted features $\phi_{x}$ and $\phi_{z}$ produce an updated hidden state $h(t)$ via the following equation~\cite{chung2016recurrent}:
+In this model, the VAE's input at each time-step is given as the vector $x(t)$, which is then encoded and decoded into an output vector $y(t)$ which can be compared to $x(t)$ via the reconstruction loss.
+The $\phi_{x}$ and $\phi_{z}$ layers represent \textit{feature-extracting layers}, which are interpreted as learned representations of the features of the input $x(t)$ and the encoded latent space distribution $z(t)$, respectively. 
+After each time-step, the hidden state is updated via a recurrence relation, in which the current hidden state $h(t-1)$ and the current set of extracted features $\phi_{x}$ and $\phi_{z}$ produce an updated hidden state $h(t)$ via the following equation~\cite{chung2016recurrent}:
 \begin{equation}
 	h(t) = f(\phi_{x}, \phi_{z}, h(t-1))
 \end{equation} 
-Performing this particular step is the primary function of traditional RNN architectures such as LSTMs~\cite{lstm} and GRUs~\cite{cho2014learning}, and so any such architecture can be conveniently chosen to perform this task.
+Performing this particular step is the primary function of traditional RNN architectures such as Long Short-Term Memory Networks (LSTMs)~\cite{lstm} and Gated Recurrent Units (GRUs)~\cite{cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
+
 The VAE present in each cell of the VRNN notably differs from
 conventional VAEs in the following ways:
 \begin{enumerate}
   \item{The encoder and decoder are conditioned on the current time-step's hidden state.
-  This is represented by the concatenation operation between the hidden state $h(t-1)$ and the respective feature-extraction layers $\phi_{x}$ and $\phi_{z}$.}
-  \item{The prior from which the KL Divergence is computed is no longer a unit gaussian
-  at the origin, but rather a multivariate gaussian whose means and variances in each 
+  This is represented by the concatenation operation between the hidden state $h(t-1)$ and the feature-extraction layers $\phi_{x}$ and $\phi_{z}$.}
+  \item{The prior from which the KL-Divergence is computed is no longer a unit Gaussian
+  at the origin, but rather a multivariate Gaussian whose means and variances in each 
   dimension are determined from the current time-step's hidden state.}
 \end{enumerate}
 
-
-The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, such as what one would expect in a jet represented by a sequence of constituent four-vectors.
-
+The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, as is expected from a jet represented by a sequence of constituent four-vectors.
 In more detail, each time-step's latent space prior distribution parameters $\mu_{t}$ and $\sigma_{t}$ are functions of the current time-step's hidden state:
 \begin{equation}
 	z_{t} \sim \mathcal{N}(\mu_{t}, \sigma_{t}), \text{ where } \mu_{t}, \sigma_{t} = f^{prior}(h_{t-1})
@@ -451,6 +495,11 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 \begin{equation}
 \mathcal{L} = \frac{\mathcal{L}(t)}{N}
 \end{equation} 
+
+%\textcolor{red}{JG: put some sort of wrap up/conclusion statement here before moving on?} 
+
+This loss function performs the same role as the VAE's loss function, acting both as an appropriate means of optimizing the architecture as well as a discriminatory quantity between nominal and anomalous elements of the dataset.
+
 
 
 %VRNN Diagram
@@ -600,7 +649,7 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 
   
     \end{tikzpicture}
-    \caption{A Variational Recurrent Neural Network cell}
+    \caption{A Variational Recurrent Neural Network cell.}
     \label{fig:VRNN}
   \end{center}
 \end{figure}
@@ -608,16 +657,31 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 
 
 
-\subsection{Implementation}
+%\subsection{Implementation}
+%JG: is having only 1 subsection a thing? 
 
-The VRNN used in this study is directly of the same architecture of Figure \ref{fig:VRNN}. The number of neurons in each intermediate layer, including the hidden state and feature extracting layers, but not including the latent space and its $\mu$ and $\sigma$ layers, is 16. The latent space is chosen to be two-dimensional. Since four-vector constituents of jets are being modeled, the input $x(t)$ and output $y(t)$ layers represent the $p_{T}, \eta, $and $\phi$ of each constituent, and are correspondingly three-dimensional. ReLU activations are used in each layer of the network, except for $\sigma$ and $\sigma_{t}$, which have softmax activations, and $z$ and $y(t)$, which have linear activations. 
+The details of the VRNN architecture used in this study are as follows: The number of neurons in each intermediate layer, including the hidden state and feature extracting layers, but not including the latent space and its $\mu$ and $\sigma$ layers, is 16. The latent space is chosen to be two-dimensional. Since constituent four-vectors of jets are being modeled, the input $x(t)$ and output $y(t)$ layers are three dimensional, corresponding to the $p_{T}, \eta, $and $\phi$ of each constituent. ReLU activations are used in each layer of the network, except for $\sigma$ and $\sigma_{t}$, which have softmax activations, and $z$ and $y(t)$, which have linear activations. 
 
 The constituents of an input jet are processed sequentially, one per each time-step. 
-Each time-step contributes a loss based on the VAE loss function, $L(t) = MSE + \lambda D_{KL}$, where $\lambda$ is a factor which weights the KL-Divergence contribution relative to the MSE reconstruction loss.
-Since harder constituents contribute more information toward the identification of jet substructure, $\lambda$ is defined to be be a function of constituent $p_{T}$ fraction relative to the jet's total $p_{T}$. 
-Furthermore, since the distribution of constituent $p_{T}$ fractions depends directly on the number of constituents in a jet, the constituent $p_{T}$ fraction distribution for each jet is averaged over the entire input dataset to avoid correlations with jet multiplicity. The loss is therefore computed for each constituent as $\mathcal{L}(t)=MSE+0.1\overline{p_T}(t)D_{KL}$, where $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current timestep's prior distribution and the encoded posterior, and $\overline{p_T}(t)$ is the $p_T$ of the dataset-averaged jet at timestep $t$. The final loss is computed by averaging the individual timestep losses over the entire jet: $\mathcal{L} = \frac{\Sigma \mathcal{L}(t)}{N}$. The hyperparameters involved in this implementation, namely the dimensionality of intermediate layers, and the additional weight coefficient of 0.1 in the loss function were determined via a hyperparameter optimization scan. 
+Each time-step contributes a loss based on the VAE loss function: 
+\begin{equation}
+\mathcal{L}(t) = MSE + \lambda D_{KL}
+\end{equation}
+where $\lambda$ is a factor which weights the KL-Divergence contribution relative to the MSE reconstruction loss.
+Since harder constituents contribute more information toward the identification of jet substructure, $\lambda$ is defined to be be a function of constituent $p_{T}$ fraction such that lower $p_{T}$ constituents obtain a lower weight in the loss function. 
+\textcolor{blue}{Furthermore, since a constituent's $p_{T}$ fraction depends directly on the number of constituents in the jet, the distribution of $p_{T}$ fractions for each constituent in the jet is averaged over all respective constituents in the entire input dataset to avoid correlations with constituent multiplicity.} 
 
-After the network is trained, an \textit{Anomaly Score} can be determined for each jet. The KL-Divergence term has been shown to provide more performant discrimination than the reconstruction error, or the loss term as a whole. Therefore, the Anomaly Score is defined in terms of the KL-Divergence of each constituent, averaged over the whole jet, and restricted to the range of (0, 1) via exponentiation. 
+In this result, the loss is therefore computed for each constituent as:
+\begin{equation}
+\mathcal{L}(t)=MSE+0.1\overline{p_T}(t)D_{KL}
+\end{equation}
+where $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current time-step's prior distribution and the encoded posterior, and $\overline{p_T}(t)$ is the $p_T$ of the dataset-averaged constituent at time-step $t$. The final loss is computed by averaging the individual time-step losses over the entire jet: 
+\begin{equation}
+\mathcal{L} = \frac{\Sigma \mathcal{L}(t)}{N} 
+\end{equation} 
+The hyperparameters involved in this implementation, namely the dimensionality of intermediate layers, and the additional weight coefficient of 0.1 in the loss function were determined via a hyperparameter optimization scan. 
+
+After the network is trained, an \textit{Anomaly Score} can be determined for each jet. The KL-Divergence term has been shown to provide better discrimination between anomalous and standard jets than either the reconstruction error or the loss term as a whole. Therefore, the Anomaly Score is defined in terms of the KL-Divergence of each constituent, averaged over the whole jet, and restricted to the range of (0, 1) via exponentiation. 
 \begin{equation}
 	\text{Anomaly Score} = 1 - e^{-\overline{D_{KL}}}
 \end{equation}
@@ -628,14 +692,18 @@ After the network is trained, an \textit{Anomaly Score} can be determined for ea
 %%%%%%%%%%%%%%%%% Pre-Processing %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Data Pre-Processing}
+\section{Data Samples and Pre-Processing}
 
 
-The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal contamination. The signal events consist of a process in the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying to boosted jets $J$. The masses of the particles in the signal hypothesis is 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV~\cite{dataset}. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop. 
+The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying into a boosted jet $J$. Two types of signal events are generated. One type is comprised of events where the X and Y both decay to two quarks, resulting in boosted jets with two-pronged substructure. The other type differs in that the X and Y both decay to three quarks, resulting in boosted jets with three-pronged substructure. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated for each substructure hypothesis, along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop~\cite{dataset}. 
 
-The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the \textit{anti-$k_{t}$} jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amount of contamination, datasets were generated with 10 differing amounts of signal fractions in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate our highest contamination level at 10\%.
+The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amounts of contamination, datasets were produced with 10 signal event fractions in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate the highest contamination level of 10\%.
 
-One of the most consequential elements of this study is the choice of pre-processing. Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with non-substructure jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks (REFS). Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, via pre-processing, information about the jet's mass and $p_{T}$ can be removed before it becomes an input to the network. This process can be briefly summarized by three steps:
+Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks \textcolor{red}{(REFS)}. Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, this is achieved through a carefully considered pre-processing procedure,  which can be divided into two steps: one which directly removes mass and $p_{T}$ information from the input jets, and another which orders constituents in a way that improves the VRNN's discriminatory performance.
+
+\subsection{Boosting}
+
+The pre-processing method is developed to produce jets which are superficially identical, with the only differences appearing in the arrangement of their constituents due do varying substructure. This procedure is inspired by a study based on jet images, where a pre-processing method which boosts each jet to the same reference frame allows for a model trained on the pre-processed jets to be robust against variations in mass and $p_{T}$~\cite{roy2020robust}. The process can be briefly summarized in three steps:
 
 \begin{itemize}
 	\item{Rescale each jet to the same mass}
@@ -643,7 +711,7 @@ One of the most consequential elements of this study is the choice of pre-proces
 	\item{Rotate each jet to the same orientation}
 \end{itemize}
 
-This method is inspired by a study based on jet images~\cite{roy2020robust}. Algorithm \ref{alg:boost} describes in detail the implementation of the rescaling, boosting, and rotating process, or simply \textit{boosting} for short. 
+Algorithm~\ref{alg:boost} describes in detail the implementation of the rescaling, boosting, and rotating processes, or simply \textit{boosting} for short. 
 
 %Pre-Processing Algorithm
 \begin{algorithm}[H]
@@ -690,7 +758,8 @@ Reflect constituents about $\phi$ axis such that the second hardest constituent 
 
 
 
-To evaluate the efficacy of this boosting procedure, we train the model on a dataset with 10\% signal contamination before and after applying our boosting procedure. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of leading jet mass vs. anomaly score before and after boosting the input jets. The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
+To evaluate the efficacy of this procedure, the model is trained on a dataset with 10\% signal contamination both before and after pre-processing, and the resulting correlation between Anomaly Score and jet mass is compared. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of leading jet mass vs. anomaly score before and after boosting the input jets. The results depict a significantly smaller amount of correlation between the jet's mass and its Anomaly Score, as desired.
+%The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
 
 
 \begin{figure}[H]
@@ -701,21 +770,26 @@ To evaluate the efficacy of this boosting procedure, we train the model on a dat
 	\caption{Leading Jet Mass vs Anomaly Score distributions before (left) and after (right) applying our boosting method}
 	\label{fig:mass_vs_score_boost}
 \end{figure}
+%JG: figure titles ought to say "Jet Mass"? 
 
 
-In addition to this boosting method, the effect of \textit{sequence ordering} on the input constituents has been investigated. In fixed architecture models, such as VAEs or image based CNNs, the ordering of constituents in the list of inputs is seldom important. In recurrent architectures such as the VRNN, choosing a clever sequence ordering method can provide a boost to performance if that ordering is capable of highlighting some of the important features of the sequence itself. The most intuitive method of ordering jet constituents is by their $p_{T}$, in decreasing order, the idea being that harder constituents contribute more to a jet's substructure than softer constituents. The objective of this study is to build a model which can differentiate between diffuse jets resulting from soft QCD interactions, and jets with multiple hard cores resulting from the decay of boosted hadronically-decaying objects. Therefore, it is favorable to use a sequence ordering which makes the existence of multiple hard cores of a jet distinctly apparent. This is achieved by ordering the constituents in $k_{t}$-distance order. More specifically, the $n^{th}$ constituent in the list is determined to be the constituent with the highest $k_{t}$-distance relative to the previous constituent, with the first constituent in the list being the highest $p_{T}$ constituent.
+\subsection{Sequence Ordering}
+
+In addition to this boosting method, the effect of \textit{sequence ordering} on the input constituents has been investigated. In fixed architecture models, such as VAEs or image based Convolutional Neural Networks (CNNs), the ordering of constituents in the list of training inputs is seldom important. However, in recurrent architectures such as the VRNN, choosing a clever sequence ordering method that highlights important sequence features can boost performance.
+ 
+The most intuitive method of ordering jet constituents is by their $p_{T}$ in decreasing order, as harder constituents contribute more to a jet's substructure than softer constituents. The objective of this study is to build a model which can differentiate between diffuse jets resulting from soft QCD interactions, and jets with multiple cores resulting from the hadronic decay of boosted objects. Therefore, it is favorable to use a sequence ordering which makes the existence of multiple hard cores of a jet distinctly apparent. This is achieved by ordering the constituents in $k_{t}$-distance order. More specifically, the $n^{th}$ constituent in the list is determined to be the constituent with the highest $k_{t}$-distance relative to the previous constituent, with the first constituent in the list being the highest $p_{T}$ constituent.
 \begin{equation}
 	c_{n} = max(p_{Tn}\Delta R_{n, n-1})
 \end{equation}
 
-The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently and consistently followed by a constituent belonging to the other core. This results in an easily predictable pattern which the VRNN has an easier time modeling compared to a diffuse jet resulting from a soft QCD interaction. The resulting performance difference between $p_{T}$ sorted and $k_{t}$ sorted inputs is shown in Figure \ref{fig:score_comp}, where, using the same 10\% contaminated dataset, two-prong signal jets have a notably lower anomaly score when compared to background QCD jets due to the ease of modeling their substructure. (diagram maybe?)
+The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently and consistently followed by a constituent belonging to the other core. This results in an easily predictable pattern which the VRNN is more able to model, particularly compared to a homogenous QCD jet. The resulting performance difference between $p_{T}$ sorted and $k_{t}$ sorted inputs is shown in Figure \ref{fig:score_comp}. Using the same 10\% contaminated dataset, two-prong signal jets have a notably lower anomaly score when compared to background QCD jets due to the ease of modeling their substructure. \textcolor{red}{(diagram maybe?)}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=225pt]{imgs/Anom_Score_CompPt.png}
 		\includegraphics[width=225pt]{imgs/score_comp.png}
 	\end{center}
-	\caption{Leading Jet Anomaly Score Distributions for Background and Signal event, before (left) and after (right) applying our kt sorted ordering}
+	\caption{Leading jet Anomaly Score distributions for background and signal events, before (left) and after (right) applying $k_{t}$-sorted ordering on constituents for training input jets.}
 	\label{fig:score_comp}
 \end{figure}
 
@@ -726,27 +800,27 @@ The effect on performance due to this choice of constituent ordering can be easi
 
 \section{Results}
 
- Since the model is designed to perform on the jet-level, its basic performance can be studied by using only the leading jets of each event. In addition, since a full description of each event is available, the model can be applied in an analysis context, in which a search for the $Z'$ particle is performed using only the Anomaly Score as a discriminator.
+One way the VRNN's performance can be studied is by assessing signal acceptance and background rejection at the jet level by using only the leading jet of each event. In addition, the Anomaly Score can be applied to both the X and Y jets in an event and used to discriminate between signal and background in an event-level analysis context. Results of the VRNN's performance are provided for both use cases in the following sections.
 
 
-\subsection{Jet Level}
+\subsection{Jet Level Performance}
 
 %Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
 
-In this jet-level study, the model is trained on only the leading jets of each event. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the training set or the background-only validation set to those in the pure signal set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. Notably, the model quickly reaches optimal performance, and retains a stable performance throughout the training period. Also seen is the same trend on an independent validation set of data, which is comprised of background-only events, and shows similar stability during training. It is important to note that the feature of the ROC AUC being lower than 0.5 is expected, and is a result of the $k_{t}$-ordered sequencing, which allows the model to reconstruct jets with two-prong substructure more easily than soft QCD-like jets with more diffuse substructure.
+In the jet-level assessment, the model is trained on the leading jets of each event for 500 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the training set or the background-only validation set to those in the pure signal set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. Notably, the VRNN quickly reaches optimal performance, and retains a stable performance throughout the training period. 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/auc_vs_epoch.png}
 	\end{center}
-	\caption{Area-Under-the-Curve (ROC AUC) vs training time in epochs. Due to the nature of the $k_{t}$-ordered sequencing, values closer to zero represent higher performance in separating signal jets from background jets. (NOTE:Waiting on new plot}
+	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the training set by definition containing elements of the signal set that it is being compared to.}
 	\label{fig:auc_vs_epoch}
 \end{figure}
 
 Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
 \begin{itemize}
-	\item{The mean of the resulting distribution is at an anomaly score value of 0.5}
-	\item{Anomaly scores closer to a value of 1 correspond to more signal-like jets}
+	\item{The mean of the resulting distribution is at an anomaly score value of 0.5.}
+	\item{Anomaly scores closer to a value of 1 correspond to more signal-like jets.}
 \end{itemize}
 
 The transformation can be summarized as
@@ -756,46 +830,40 @@ The transformation can be summarized as
 
 where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the mean of the un-transformed Anomaly Score distribution of the training set. 
 
-After applying this transformation, an optimal cut on the Anomaly Score is determined by comparing the signal to background ratio at each potential value, arriving at an optimal cut on the transformed Anomaly Score at a value of 0.75.
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=250pt]{imgs/Score_Opt.png}
-	\end{center}
-	\caption{Anomaly Score Cut Optimization}
-	\label{fig:aucs_vs_contam}
-\end{figure}
-
-Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet before and after requiring the Anomaly Score to exceed a value of 0.75. Notably, the presence of the 100GeV and 500GeV resonances is enhanced. Sculpting in the background distribution is observed, which is an effect due to mass-correlation mainly introduced by the $k_{t}$-ordered sequencing. The contamination amount used in Figure \ref{fig:2P_lj_mass} is 10\%, and the signal is forced to a two-pronged decay mode. The same effect is seen on three-pronged signatures in Figure \ref{fig:3P_lj_mass}, where similar improvement in the enhancement of the signal is observed. 
+Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet before and after a jet-level selection requiring the Anomaly Score to exceed a value of 0.65. This value is chosen in the interest of displaying the discriminating power of the Anomaly Score while maintaining a high enough number of statistics to observe the variable's effect on the shape of the background. Notably, the presence of the known resonances at 100 GeV and 500 GeV is enhanced. Sculpting in the background distribution is observed, which is an effect of mass correlation mainly introduced by the $k_{t}$-ordered sequencing, as there is a non-trivial correlation between the number of hard cores in a jet and its mass. Both the signal enhancement and background sculpting are similarly observed on three-pronged signatures in Figure \ref{fig:3P_lj_mass}, also shown in a 10\% contaminated dataset. 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_Multi.png}
-		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p75_Multi.png}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi.png}
 	\end{center}
-	\caption{Leading Jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
+	\caption{Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
 	\label{fig:2P_lj_mass}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_Multi.png}
-		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_EventScore0p75_Multi.png}
+		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi.png}
 	\end{center}
-	\caption{Leading Jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
+	\caption{Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
 	\label{fig:3P_lj_mass}
 \end{figure}
 
 
 
 
-A number of substructure variables exist which distinguish two-pronged jet substructure. Among them is the popular D2 variable. Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated mass distributions when subject to a cut on the Anomaly Score at a value of 0.75 vs a D2 cut at the same acceptance. The result shows the notable difference in the effect of the respective selections on the shape of the background distribution, where a D2 selection results in more severe sculpting when compared to a selection on the Anomaly Score. It is important to note once again that the Anomaly Score is determined only from jet constituent four-vector information, without any external high-level information being input into the model.
+%A number of substructure variables exist which distinguish two-pronged jet substructure. Among them is the popular D2 variable. 
+As the Anomaly Score in this context distinguishes two-pronged substructure from homogenous jets, it is apt to compare to a commonly used high-level variable sensitive to two-pronged signals. The energy correlation function ratio $D_2$ is selected and used a benchmark to contextualize the Anomaly Score in both signal discrimination and jet mass correlation. 
+
+Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated jet mass distributions when subject to a cut on Anomaly Score and $D_2$. The Anomaly Score is again selected to exceed a value of 0.65, and the $D_2$ selection is chosen to provide an equivalent event acceptance. The shape of the jet mass distribution is more significantly sculpted after the $D_2$ selection than the Anomaly Score selection, indicating more significant correlation of $D_2$ with jet mass while the Anomaly Score selection retains more of the smoothly falling characteristics of the background jet mass distribution. Such a result can be attributed to the Anomaly Score being determined only from jet constituent four-vector information, without any high-level information being input into the model. 
+%The result shows the notable difference in the effect of the respective selections on the shape of the background distribution, where a $D_2$ selection results in more severe sculpting when compared to a selection on the Anomaly Score. It is important to note once again that the Anomaly Score is determined only from jet constituent four-vector information, without any external high-level information being input into the model.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p75_Multi_D2Comp.png}
+		\includegraphics[width=250pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Darker.png}
 	\end{center}
-	\caption{Contaminated Set shape comparison between a selection on the Anomaly Score and a selection on the D2 variable with equal acceptance}
+	\caption{Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable with equal acceptance. Notably, the $D_2$ variable causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}
 	\label{fig:d2_comp}
 \end{figure}
 
@@ -803,51 +871,61 @@ A number of substructure variables exist which distinguish two-pronged jet subst
 
 
 
-Another important study involves the model’s performance over a range of signal contamination
-levels. Figure 10 shows the ROC AUC values of both two and three-pronged signal hypotheses
-after training on each of the contaminated sets. Notably, the performance is consistent along
-all contaminations. This leads the Anomaly Score to be interpreted as a quantity which is
-capable of adequately and consistently parametrizing a range of substructure hypotheses. This
-feature of the Anomaly Score is notably valuable in searches which allow for multiple final-state substructure hypotheses. The ability for the Anomaly Score to be consistently performant along
-a large range of contaminations is unexpected in the context of Anomaly Detection, where it
-is assumed that a high percentage of signal contamination will sufficiently dilute the training
-set with elements of the signal set, resulting in lower performance. However, the consistent
-performance can be attributed to the choice of kt-ordered sequencing, which directly highlights
-non-QCD-like substructure, and to the model’s ability to process and represent input jets as
-sequences of constituents rather than a fixed set of input values.
-
+Another important study involves the model's performance over a range of signal contamination
+levels. Figure~\ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses
+after training on each of the contaminated datasets. 
+The levels of contamination present in this study include ten values from 0.01\% to 10\% along a log scale, as well as three higher levels of contamination at 25\%, 50\%, and 75\%. 
+At each level of contamination, the VRNN is trained on both the respective two-prong signal and three-prong signal contaminated datasets for 500 epochs. 
+The resulting trained network is then used to assign an Anomaly Score to each jet in the dataset. 
+AUC values for each level of contamination are determined from a ROC curve built from 1000 randomly selected jets from both the background and signal sets after training.
+Error bars are computed by repeating this process 100 times and determining the standard deviation of the resulting distribution of AUC values.
+Notably, the performance is consistent along all contaminations, and effective on both two and three-pronged signals without any prior substructure hypothesis. 
+The Anomaly Score can therefore be interpreted as a quantity which is capable of adequately and consistently parametrizing multiple distinct substructure scenarios. 
+This feature is valuable in model-independent searches, or those without a pre-defined signal substructure hypothesis. 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/AUC_vs_Contam.png}
 	\end{center}
-	\caption{Area-Under-the-Curve vs Contamination}
+	\caption{ROC AUC vs. signal contamination in training dataset, given as a percentage of the total events. The performance of the Anomaly Score is consistent across a wide range of contamination levels, indicating that the pre-processing method used is capable of providing a sequence of jet constituent four-vectors with salient substructure information. Data points for contamination levels up to and including 10\% were determined from contaminated datasets all containing the same 895113 background events while varying the number of signal events. The three highest contamination amounts, corresponding to 25\%, 50\%, and 75\%, were determined from contaminated datasets all containing the same 99547 signal events while varying the number of background events.}
 	\label{fig:aucs_vs_contam}
 \end{figure}
 
 
-\subsection{Event Level}
+The ability of the Anomaly Score to be consistently performant along a large range of contaminations is unexpected in the context of anomaly detection, where the dilution of the training set with a high number of signal elements is expected to result in lower performance.
+The consistent performance observed can be attributed to the choice of $k_t$-ordered sequencing and the representation of jets as variable-length sequences of constituents. Since the choice of $k_t$-ordered sequencing highlights the presence of multiple hard cores within a jet, the VRNN's Anomaly Score is predisposed to correlate with signal jets due to their anomalous substructure regardless of the level of contamination.
 
 
-It is also important that this model can be directly applicable in an analysis-like context. In this study, the goal is to reconstruct the Z' particle in each event. In this training scenario, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination. Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, where the significant feature of the 3500GeV Z' is clearly observed to be tending towards higher values of the Event Score compared to background events. 
 
+
+\subsection{Event Level Performance}
+
+
+A natural extension of the Anomaly Score's ability to distinguish anomalous jets is to apply the score in an analysis-like context. In this study, the goal is to reconstruct the Z' particle in the invariant mass spectrum $M_{JJ}$ of the two jets in each signal event. To do this, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination. 
+
+Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. This constructs an event-level discriminant which uses the most anomalous jet in the event to discriminate. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, showing the correlations between the dijet invariant mass and the assigned Event Score in a dataset with 10\% signal contamination. The significant feature of the 3500 GeV Z' occupies high values of the Event Score, validating the Event Score as a discriminant of anomalous events from background.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score.png}
 	\end{center}
-	\caption{Dijet Mass vs Event Score}
+	\caption{Dijet invariant mass vs. Event Score.}
 	\label{fig:mjj_vs_evscore}
 \end{figure}
 
-The goal is to be able to observe an excess of signal events in the mass distribution of the dijet combination of the leading and sub-leading jets at the mass corresponding to the Z' particle. This is commonly referred to as a "bump hunt" search in which the signal is expected to appear as a bump upon an otherwise consistently falling distribution. Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the anomaly score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance in each bin of the corresponding histogram, where a total uncertainty of 5\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. The requirement on the Event Score dramatically increases the significance of the excess from $1\sigma$ to $6\sigma$ at a signal contamination of 0.5\% while still retaining the smoothly falling behavior of the background. No cuts other than the Event Score requirement have been applied in these scenarios besides the initial trigger requirement of $p_{T} > 1200GeV$ on the leading jet. In Figure \ref{fig:3p_dijet}, a similar result is seen in the case of three-pronged substructure on the boosted X and Y decays, where the Event Score requirement results in an increase of local significance of the signal peak from $2\sigma$ to $4\sigma$ at a signal contamination of 1\% under the same conditions. These results display the ability of the Anomaly Score to be adequately used in an analysis context, as it is capable of distinguishing potential signal objects while being robust to ambiguities in its mass, $p_{T}$, and substructure.
+The goal of this search is to observe an excess of signal events in the dijet invariant mass distribution at a mass corresponding to the Z' particle. 
+This is commonly referred to as a "bump hunt" search, in which the signal is expected to appear as a bump upon an otherwise smoothly falling background distribution. 
+
+Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets, before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the anomaly score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance $\sigma$ in each bin of the corresponding histogram, where a total uncertainty of 15\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. 
+
+The requirement on the Event Score dramatically increases the significance of the excess from $0.5\sigma$ to $4\sigma$ at a signal contamination of 1.0\%, while still retaining the smoothly falling behavior of the background. No selections other than the Event Score requirement have been applied in these scenarios besides the initial trigger requirement of $p_{T} > 1200 GeV$ on the leading jet. In Figure \ref{fig:3p_dijet}, a similar result is seen in the case of the three-pronged signal, where the Event Score requirement results in an increase of local significance of the signal peak from $0.5\sigma$ to $1.5\sigma$ at a signal contamination of 1\% under the same conditions. These results display the capability of the Anomaly Score as an analysis variable, as it can distinguish signal events with multiple substructure hypotheses while being robust against ambiguities in signal jet mass and $p_{T}$.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_0p5_JJ_Mass_Multi.png}
-		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_0p5_JJ_Mass_EventScore0p65_Multi.png}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi.png}
+		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png}
 	\end{center}
-	\caption{Two-Prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 0.5\%}
+	\caption{Two-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides a significant improvement in signal sensitivity from $0.5\sigma$ to $4\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:2p_dijet}
 \end{figure}
 
@@ -857,7 +935,7 @@ The goal is to be able to observe an excess of signal events in the mass distrib
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi.png}
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png}
 	\end{center}
-	\caption{Three-Prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%}
+	\caption{Three-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma$ to $1.5\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:3p_dijet}
 \end{figure}
 
@@ -867,11 +945,28 @@ The goal is to be able to observe an excess of signal events in the mass distrib
 %%%%%%%%%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\clearpage
+
 \section*{Conclusion}
 
-In this study, we have presented a novel approach to performing Anomaly Detection in the context of searching for new physics by using a Variational Recurrent Neural Network trained on contaminated datasets to distinguish jets resulting from boosted hadronically decaying objects from those resulting from soft QCD processes. Through precise considerations in pre-processing, in which we boost each input jet to the same reference mass, energy, and orientation, coupled with a sequence ordering which makes the presence of signal-like substructure more easily apparent, our model produces an Anomaly Score capable of distinguishing signal jets with multiple potential substructure hypotheses. Applying our model to a jet-level study, in which we train and evaluate only on leading jets in our dataset, we see that our model adequately enhances boosted signal jets in a matter which is less mass-correlated than other traditional substructure variables such as D2. In addition, we see that the resulting Anomaly Score is equally performant across varying levels of contamination, allowing for a consistent characterization of substructure regardless of the amount of signal present in the dataset. When applied to an event-level context, our Anomaly Score greatly increases the significance of excesses due to the underlying signal process, regardless of substructure hypothesis, and while retaining the smoothly falling shape of the background's mass distribution.
+A novel approach for unsupervised signal identification in the context of new physics searches is presented. 
+The technique utilizes a Variational Recurrent Neural Network trained on contaminated datasets to distinguish jets resulting from boosted hadronically decaying objects from those resulting from soft QCD processes. 
+A precise pre-processing procedure is developed, in which each input jet is boosted to the same reference mass, energy, and orientation, coupled with a sequence ordering which makes the presence of signal-like substructure more apparent. 
+The resulting training produces an Anomaly Score per jet that is sensitive to multiple substructure hypotheses. 
+In a jet-level study that only uses leading jets in the dataset, the model enhances signal with less jet mass correlation than other traditional substructure variables such as $D_2$. 
+In addition, the resulting Anomaly Score is equally performant across varying levels of contamination, allowing for a consistent characterization of substructure regardless of the amount of signal present in the dataset. 
+When applied to an event-level context, the Anomaly Score greatly increases the significance of signal excesses regardless of substructure hypothesis, while mostly retaining the smoothly falling shape of the background's mass distribution.
 
-We view the Variational Recurrent Neural Network used in this study as a powerful tool capable of learning underlying features of physics objects presented as sequential data. It's applications to new physics searches are numerous, with one of the most attractive features being the potential for training directly on data. While our approach in this study is very general, in that we attempt to accommodate multiple substructure hypotheses in the context of boosted jet final states, our model also lends itself to a number of potential avenues for exploration into searches with pre-determined signal hypotheses outside of the contexts shown here. Since the overall structure of the model contains both elements of Variational Autoencoders and Recurrent Neural Networks, more complicated architectural iterations can be employed as natural extensions of the VRNN. Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level jet features. In addition, the model itself can be used in an entirely supervised context, allowing for a number of potential analysis applications outside of Anomaly Detection. Further study into the ordering of the input constituent sequence is also warranted, as this feature may be able to be tuned to accommodate more precisely defined analysis contexts or substructure hypotheses. We also view the VRNN as being a general tool for modeling sequential data of any type, making it compatible with event-level searches and known object tagging and identification, among others.
+The Variational Recurrent Neural Network used in this study is a powerful tool capable of learning underlying features of physics objects presented as sequential data. 
+Its applications to new physics searches are numerous, with one of the most attractive features being the potential for training directly on data without a pre-defined signal substructure hypothesis. 
+It is also a general tool for modeling sequential data of any type, making it compatible with common high energy physics tasks such as event-level searches or known object tagging and identification.
+
+The approach in this study is somewhat model-independent, in that it accommodates multiple substructure hypotheses.
+However, the model lends itself to a number of potential avenues for exploration into traditional supervised contexts as well, expanding its utility beyond the context of anomaly detection.
+Since the overall structure of the model contains both elements of Variational Autoencoders and Recurrent Neural Networks, more complicated architectural iterations can be employed as natural extensions of the VRNN. 
+Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level jet features. 
+Further study into the ordering of the input constituent sequence is also warranted, as this feature may be able to be tuned to accommodate more precisely defined analysis contexts or substructure hypotheses. 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -881,20 +976,20 @@ We view the Variational Recurrent Neural Network used in this study as a powerfu
 
 
 
-\clearpage
-
 \section*{Acknowledgements}
+
+The authors would like to thank Gregor Kasieczka, Ben Nachman, and David Shih, the organizers of the LHC Olympics 2020 Anomaly Detection Challenge, for providing the datasets used in this study and for the opportunity to develop and test the VRNN architecture.
 
 This material is based upon work supported by the National Science Foundation under Grant No. PHY-2013070.
 
 
+\clearpage
 
 %\section*{References}
 
 
-
-\bibliographystyle{abbrv}
-%\bibliography{contribution}
+% TODO: why are letters all uncaps? Fix Initials
+\bibliographystyle{unsrt}
 \bibliography{vrnn}
 \end{document}
 
