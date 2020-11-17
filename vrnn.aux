@@ -4,79 +4,74 @@
 \citation{cms_higgs}
 \citation{CWoLa}
 \citation{bank2020autoencoders}
-\citation{Farina_2020}
-\citation{Heimel_2019}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Autoencoders}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Autoencoders}{1}\protected@file@percent }
 \citation{Farina_2020}
 \citation{Heimel_2019}
 \citation{kingma2014autoencoding}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A standard autoencoder.}}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A standard autoencoder.}}{2}\protected@file@percent }
 \newlabel{fig:AE}{{1}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Variational Autoencoders}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Variational Autoencoders}{2}\protected@file@percent }
 \citation{Goodfellow-et-al-2016}
 \citation{kingma2014autoencoding}
 \citation{An2015VariationalAB}
 \citation{chung2016recurrent}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A Variational Autoencoder with a gaussian latent space parametrization.}}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A Variational Autoencoder with a Gaussian latent space parametrization.}}{4}\protected@file@percent }
 \newlabel{fig:VAE}{{2}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Variational Recurrent Neural Network}{4}\protected@file@percent }
 \citation{lstm}
 \citation{cho2014learning}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Variational Recurrent Neural Network}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A Variational Recurrent Neural Network cell.}}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A Variational Recurrent Neural Network cell.}}{6}\protected@file@percent }
 \newlabel{fig:VRNN}{{3}{6}}
 \citation{dataset}
 \citation{Cacciari_2008}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Data Samples and Pre-Processing}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Data Samples and Pre-Processing}{7}\protected@file@percent }
 \citation{Purushotham2017VariationalRA}
 \citation{roy2020robust}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Boosting}{8}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Jet Boosting}}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Boosting}{8}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Jet Boosting}}{9}\protected@file@percent }
 \newlabel{alg:boost}{{1}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Leading Jet Mass vs Anomaly Score distributions before (left) and after (right) applying our boosting method}}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Leading Jet Mass vs Anomaly Score distributions before (left) and after (right) applying our boosting method}}{9}\protected@file@percent }
 \newlabel{fig:mass_vs_score_boost}{{4}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequence Ordering}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Leading jet Anomaly Score distributions for background and signal events, before (left) and after (right) applying $k_{t}$-sorted ordering on constituents for training input jets.}}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequence Ordering}{10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Leading jet Anomaly Score distributions for background and signal events, before (left) and after (right) applying $k_{t}$-sorted ordering on constituents for training input jets.}}{10}\protected@file@percent }
 \newlabel{fig:score_comp}{{5}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Jet Level Performance}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Area Under the Curve (ROC AUC) vs. training time in epochs. Due to the nature of the $k_{t}$-ordered sequencing, values closer to zero represent higher performance in separating signal jets from background jets. \leavevmode {\color  {red}(NOTE:Waiting on new plot}}}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Jet Level Performance}{11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the training set by definition containing elements of the signal set that it is being compared to.}}{11}\protected@file@percent }
 \newlabel{fig:auc_vs_epoch}{{6}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Anomaly Score cut value optimization, where the peak signal to background ratio corresponds to the analysis cut value of 0.75.}}{12}}
-\newlabel{fig:cutopt}{{7}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}}{13}}
-\newlabel{fig:2P_lj_mass}{{8}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}}{13}}
-\newlabel{fig:3P_lj_mass}{{9}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable with equal acceptance.}}{14}}
-\newlabel{fig:d2_comp}{{10}{14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces ROC AUC vs. signal contamination in training dataset, given as a percentage of the total events.}}{15}}
-\newlabel{fig:aucs_vs_contam}{{11}{15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Event Level Performance}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}}{12}\protected@file@percent }
+\newlabel{fig:2P_lj_mass}{{7}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}}{12}\protected@file@percent }
+\newlabel{fig:3P_lj_mass}{{8}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable with equal acceptance. Notably, the $D_2$ variable causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}}{13}\protected@file@percent }
+\newlabel{fig:d2_comp}{{9}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces ROC AUC vs. signal contamination in training dataset, given as a percentage of the total events. The performance of the Anomaly Score is consistent across a wide range of contamination levels, indicating that the pre-processing method used is capable of providing a sequence of jet constituent four-vectors with salient substructure information. Data points for contamination levels up to and including 10\% were determined from contaminated datasets all containing the same 895113 background events while varying the number of signal events. The three highest contamination amounts, corresponding to 25\%, 50\%, and 75\%, were determined from contaminated datasets all containing the same 99547 signal events while varying the number of background events.}}{14}\protected@file@percent }
+\newlabel{fig:aucs_vs_contam}{{10}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Event Level Performance}{14}\protected@file@percent }
 \citation{moneta2011roostats}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Dijet invariant mass vs. Event Score.}}{16}}
-\newlabel{fig:mjj_vs_evscore}{{12}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Two-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 0.5\%.}}{17}}
-\newlabel{fig:2p_dijet}{{13}{17}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Three-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%.}}{17}}
-\newlabel{fig:3p_dijet}{{14}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Dijet invariant mass vs. Event Score.}}{15}\protected@file@percent }
+\newlabel{fig:mjj_vs_evscore}{{11}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Two-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides a significant improvement in signal sensitivity from $0.5\sigma $ to $4\sigma $ while retaining the smoothly falling background distribution.}}{16}\protected@file@percent }
+\newlabel{fig:2p_dijet}{{12}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Three-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma $ to $1.5\sigma $ while retaining the smoothly falling background distribution.}}{16}\protected@file@percent }
+\newlabel{fig:3p_dijet}{{13}{16}}
 \bibstyle{unsrt}
 \bibdata{vrnn}
-\bibcite{An2015VariationalAB}{1}
-\bibcite{bank2020autoencoders}{2}
-\bibcite{Cacciari_2008}{3}
-\bibcite{cho2014learning}{4}
-\bibcite{chung2016recurrent}{5}
-\bibcite{atlas_higgs}{6}
-\bibcite{cms_higgs}{7}
-\bibcite{Farina_2020}{8}
-\bibcite{Goodfellow-et-al-2016}{9}
-\bibcite{pdg}{10}
-\bibcite{Heimel_2019}{11}
-\bibcite{lstm}{12}
+\bibcite{atlas_higgs}{1}
+\bibcite{cms_higgs}{2}
+\bibcite{CWoLa}{3}
+\bibcite{bank2020autoencoders}{4}
+\bibcite{Farina_2020}{5}
+\bibcite{Heimel_2019}{6}
+\bibcite{kingma2014autoencoding}{7}
+\bibcite{Goodfellow-et-al-2016}{8}
+\bibcite{An2015VariationalAB}{9}
+\bibcite{chung2016recurrent}{10}
+\bibcite{lstm}{11}
+\bibcite{cho2014learning}{12}
 \bibcite{dataset}{13}
-\bibcite{kingma2014autoencoding}{14}
-\bibcite{CWoLa}{15}
-\bibcite{moneta2011roostats}{16}
-\bibcite{Purushotham2017VariationalRA}{17}
-\bibcite{roy2020robust}{18}
+\bibcite{Cacciari_2008}{14}
+\bibcite{Purushotham2017VariationalRA}{15}
+\bibcite{roy2020robust}{16}
+\bibcite{moneta2011roostats}{17}
