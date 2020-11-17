@@ -307,7 +307,7 @@ By using Bayes' Theorem, and inserting the approximate posterior distribution $q
   \end{split}
 \end{equation} 
 
-While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. Thus the first two terms of this result can be described as a lower bound on the evidence. 
+While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. The first two terms of this result can therefore be described as a lower bound on the evidence. 
 When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
 Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
 The reconstruction error term is chosen to be the mean-squared-error loss as used in the ordinary AE. 
@@ -428,7 +428,7 @@ Variational Autoencoders provide a number of improvements over standard Autoenco
 
 While VAEs have shown promise in the task of jet-level anomaly detection, they have a number of drawbacks. 
 Most notably, VAEs are a fixed-length architecture, and cannot accommodate a variable number of inputs. 
-When modeling jets via their constituent four-vectors, it thus becomes necessary to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. 
+When modeling jets via their constituent four-vectors, it becomes necessary to only process at most $N$ constituents, and \textit{zero-pad} the input layer when processing a jet with a number of constituents less than $N$. 
 In classifier models, this is common and benign, as the loss function depends only on the output of the network and the ground truth that it is trying to reproduce. 
 However, in a VAE, the input layer's neuron values are a part of its loss function (due to the MSE loss between the input and output layers).
 Therefore, the zero padded elements directly correlate with the value of the loss function. 
@@ -498,7 +498,7 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 
 %\textcolor{red}{JG: put some sort of wrap up/conclusion statement here before moving on?} 
 
-This loss function takes the same role as the VAE's loss function, acting both as an appropriate means of optimizing the architecture as well as a discriminatory quantity between nominal and anomalous elements of the dataset.
+This loss function performs the same role as the VAE's loss function, acting both as an appropriate means of optimizing the architecture as well as a discriminatory quantity between nominal and anomalous elements of the dataset.
 
 
 
@@ -880,7 +880,7 @@ The resulting trained network is then used to assign an Anomaly Score to each je
 AUC values for each level of contamination are determined from a ROC curve built from 1000 randomly selected jets from both the background and signal sets after training.
 Error bars are computed by repeating this process 100 times and determining the standard deviation of the resulting distribution of AUC values.
 Notably, the performance is consistent along all contaminations, and effective on both two and three-pronged signals without any prior substructure hypothesis. 
-The Anomaly Score can thus be interpreted as a quantity which is capable of adequately and consistently parametrizing multiple distinct substructure scenarios. 
+The Anomaly Score can therefore be interpreted as a quantity which is capable of adequately and consistently parametrizing multiple distinct substructure scenarios. 
 This feature is valuable in model-independent searches, or those without a pre-defined signal substructure hypothesis. 
 
 \begin{figure}[H]
