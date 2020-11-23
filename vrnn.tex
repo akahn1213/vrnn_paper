@@ -695,20 +695,20 @@ After the network is trained, an \textit{Anomaly Score} can be determined for ea
 \section{Data Samples and Pre-Processing}
 
 
-The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying into a boosted jet $J$. Two types of signal events are generated. One type is comprised of events where the X and Y both decay to two quarks, resulting in boosted jets with two-pronged substructure. The other type differs in that the X and Y both decay to three quarks, resulting in boosted jets with three-pronged substructure. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated for each substructure hypothesis, along with 995,453 background events. The events were generated using {\sc Pythia8} and {\sc Delphes 3.4.1} with no pileup or MPI included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop~\cite{dataset}. 
+The performance of the model is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying into a boosted jet $J$. Two types of signal events are generated. One type is comprised of events where the X and Y both decay to two quarks, resulting in boosted jets with two-pronged substructure. The other type differs in that the X and Y both decay to three quarks, resulting in boosted jets with three-pronged substructure. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated for each substructure hypothesis, along with 995,453 background events. The events were generated using {\sc Pythia8} and the detector response was simulated using {\sc Delphes 3.4.1} with no pile-up or multiple parton interactions included, and selected using a single large-radius (R=1) jet trigger with a $p_T$ threshold of 1.2 TeV. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop~\cite{dataset}. 
 
-The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. To test the model's performance with varying amounts of contamination, datasets were produced with 10 signal event fractions in the range of 0.01\% to 10.0\% along a logarithmic scale. To retain as many similarities as possible between tests at different contamination levels, the same set of background events are used for each test while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate the highest contamination level of 10\%.
+The data is provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. In this study, only the highest $p_{T}$ (leading) and second-highest $p_{T}$ (sub-leading) jets are included in each event. To test the model's performance with varying amounts of signal contamination, contaminated datasets were produced with 13 different signal event fractions, 10 of which were generated in the range of 0.01\% to 10.0\% along a logarithmic scale, with three higher signal event fractions of 25\%, 50\%, and 75\%. For contamination levels up to and including 10\%, contaminated datasets were created using the same set of background events while only the amount of signal is varied to match the desired contamination. This corresponds to a total of 895113 background events to accommodate the highest contamination level of 10\%. For the three higher contamination levels, contaminated datasets were created using the same 99457 signal events while the number of background events are limited to 298641, 99457, and 33152 for 25\%, 50\%, and 75\% contamination respectively. Three datasets are generated at each level of contamination: a contaminated dataset containing both signal and background events, a background-only validation set, and a signal-only signal set. Independent datasets are generated for both two-prong and three-prong signal substructure hypotheses at each level of contamination.
 
-Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks \textcolor{red}{(REFS)}. Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, this is achieved through a carefully considered pre-processing procedure,  which can be divided into two steps: one which directly removes mass and $p_{T}$ information from the input jets, and another which orders constituents in a way that improves the VRNN's discriminatory performance.
+Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks~\cite{adversarial}. Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, this is achieved through a carefully considered pre-processing procedure,  which can be divided into two steps: one which directly removes mass and $p_{T}$ information from the input jets, and another which orders constituents in a way that improves the VRNN's discriminatory performance.
 
 \subsection{Boosting}
 
 The pre-processing method is developed to produce jets which are superficially identical, with the only differences appearing in the arrangement of their constituents due do varying substructure. This procedure is inspired by a study based on jet images, where a pre-processing method which boosts each jet to the same reference frame allows for a model trained on the pre-processed jets to be robust against variations in mass and $p_{T}$~\cite{roy2020robust}. The process can be briefly summarized in three steps:
 
 \begin{itemize}
-	\item{Rescale each jet to the same mass}
-	\item{Boost each jet to the same energy}
-	\item{Rotate each jet to the same orientation}
+	\item{Rescale each jet to the same mass,}
+	\item{Boost each jet to the same energy,}
+	\item{Rotate each jet to the same orientation in $\eta$, $\phi$.}
 \end{itemize}
 
 Algorithm~\ref{alg:boost} describes in detail the implementation of the rescaling, boosting, and rotating processes, or simply \textit{boosting} for short. 
@@ -758,7 +758,7 @@ Reflect constituents about $\phi$ axis such that the second hardest constituent 
 
 
 
-To evaluate the efficacy of this procedure, the model is trained on a dataset with 10\% signal contamination both before and after pre-processing, and the resulting correlation between Anomaly Score and jet mass is compared. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of leading jet mass vs. anomaly score before and after boosting the input jets. The results depict a significantly smaller amount of correlation between the jet's mass and its Anomaly Score, as desired.
+To evaluate the efficacy of this procedure, the model is trained on a dataset with 10\% signal contamination both before and after pre-processing, and the resulting correlation between Anomaly Score and jet mass is compared. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of the mass of the highest $p_T$ (leading) jet in each event vs. its Anomaly Score before and after boosting the input jets. The results depict a significantly smaller amount of correlation between the jet's mass and its Anomaly Score, as desired.
 %The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
 
 
@@ -782,14 +782,14 @@ The most intuitive method of ordering jet constituents is by their $p_{T}$ in de
 	c_{n} = max(p_{Tn}\Delta R_{n, n-1})
 \end{equation}
 
-The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently and consistently followed by a constituent belonging to the other core. This results in an easily predictable pattern which the VRNN is more able to model, particularly compared to a homogenous QCD jet. The resulting performance difference between $p_{T}$ sorted and $k_{t}$ sorted inputs is shown in Figure \ref{fig:score_comp}. Using the same 10\% contaminated dataset, two-prong signal jets have a notably lower anomaly score when compared to background QCD jets due to the ease of modeling their substructure. \textcolor{red}{(diagram maybe?)}
+The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently and consistently followed by a constituent belonging to the other core. This results in an easily predictable pattern which the VRNN is more able to model, particularly compared to a homogenous QCD jet. The resulting performance difference between $p_{T}$-sorted and $k_{t}$-sorted inputs is shown in Figure \ref{fig:score_comp}. Using the same 10\% contaminated dataset, two-prong signal jets have a notably lower Anomaly Score when compared to background QCD jets due to the ease of modeling their substructure. \textcolor{red}{(diagram maybe?)}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=225pt]{imgs/Anom_Score_CompPt.png}
 		\includegraphics[width=225pt]{imgs/score_comp.png}
 	\end{center}
-	\caption{Leading jet Anomaly Score distributions for background and signal events, before (left) and after (right) applying $k_{t}$-sorted ordering on constituents for training input jets.}
+	\caption{Leading jet Anomaly Score distributions for background and two-prong signal events, with $p_T$-sorted (left) and $k_{t}$-sorted (right) ordering of constituents for input jets.}
 	\label{fig:score_comp}
 \end{figure}
 
@@ -807,23 +807,23 @@ One way the VRNN's performance can be studied is by assessing signal acceptance 
 
 %Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
 
-In the jet-level assessment, the model is trained on the leading jets of each event for 500 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the training set or the background-only validation set to those in the pure signal set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. Notably, the VRNN quickly reaches optimal performance, and retains a stable performance throughout the training period. 
+In the jet-level assessment, the model is trained on the leading jets of each event for 500 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the contaminated training set or the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. Notably, the VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/auc_vs_epoch.png}
 	\end{center}
-	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the training set by definition containing elements of the signal set that it is being compared to.}
+	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}
 	\label{fig:auc_vs_epoch}
 \end{figure}
 
 Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
 \begin{itemize}
-	\item{The mean of the resulting distribution is at an anomaly score value of 0.5.}
+	\item{The mean of the resulting distribution is at an Anomaly Score value of 0.5.}
 	\item{Anomaly scores closer to a value of 1 correspond to more signal-like jets.}
 \end{itemize}
 
-The transformation can be summarized as
+The transformation per jet can be summarized as
 \begin{equation}
 	\rho ' = 1 - \bigg(\frac{\rho}{2\overline{\rho}}\bigg)
 \end{equation}
@@ -837,7 +837,7 @@ Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet befo
 		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_Multi.png}
 		\includegraphics[width=225pt]{imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi.png}
 	\end{center}
-	\caption{Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
+	\caption{Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}
 	\label{fig:2P_lj_mass}
 \end{figure}
 
@@ -846,7 +846,7 @@ Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet befo
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_Multi.png}
 		\includegraphics[width=225pt]{imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi.png}
 	\end{center}
-	\caption{Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}
+	\caption{Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}
 	\label{fig:3P_lj_mass}
 \end{figure}
 
@@ -854,16 +854,16 @@ Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet befo
 
 
 %A number of substructure variables exist which distinguish two-pronged jet substructure. Among them is the popular D2 variable. 
-As the Anomaly Score in this context distinguishes two-pronged substructure from homogenous jets, it is apt to compare to a commonly used high-level variable sensitive to two-pronged signals. The energy correlation function ratio $D_2$ is selected and used a benchmark to contextualize the Anomaly Score in both signal discrimination and jet mass correlation. 
+As the Anomaly Score in this context distinguishes two-pronged substructure from homogenous jets, it is apt to compare to a commonly used high-level variable sensitive to two-pronged signals. The energy correlation function ratio $D_2$~\cite{d2} is selected and used a benchmark to contextualize the Anomaly Score in both signal discrimination and jet mass correlation. 
 
-Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated jet mass distributions when subject to a cut on Anomaly Score and $D_2$. The Anomaly Score is again selected to exceed a value of 0.65, and the $D_2$ selection is chosen to provide an equivalent event acceptance. The shape of the jet mass distribution is more significantly sculpted after the $D_2$ selection than the Anomaly Score selection, indicating more significant correlation of $D_2$ with jet mass while the Anomaly Score selection retains more of the smoothly falling characteristics of the background jet mass distribution. Such a result can be attributed to the Anomaly Score being determined only from jet constituent four-vector information, without any high-level information being input into the model. 
+Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated jet mass distributions when subject to a cut on Anomaly Score and $D_2$. The Anomaly Score is again selected to exceed a value of 0.65, and the $D_2$ selection is chosen to provide an equivalent background acceptance. The shape of the jet mass distribution is more significantly sculpted after the $D_2$ selection than the Anomaly Score selection, indicating more significant correlation of $D_2$ with jet mass while the Anomaly Score selection retains more of the smoothly falling characteristics of the background jet mass distribution. Such a result can be attributed largely to the boosting method used during pre-processing, as well as to the Anomaly Score being determined only from jet constituent four-vector information, without any high-level information being input into the model. 
 %The result shows the notable difference in the effect of the respective selections on the shape of the background distribution, where a $D_2$ selection results in more severe sculpting when compared to a selection on the Anomaly Score. It is important to note once again that the Anomaly Score is determined only from jet constituent four-vector information, without any external high-level information being input into the model.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Darker.png}
 	\end{center}
-	\caption{Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable with equal acceptance. Notably, the $D_2$ variable causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}
+	\caption{Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable which provides an equivalent background acceptance. Notably, the $D_2$ variable causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}
 	\label{fig:d2_comp}
 \end{figure}
 
@@ -873,8 +873,7 @@ Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated je
 
 Another important study involves the model's performance over a range of signal contamination
 levels. Figure~\ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses
-after training on each of the contaminated datasets. 
-The levels of contamination present in this study include ten values from 0.01\% to 10\% along a log scale, as well as three higher levels of contamination at 25\%, 50\%, and 75\%. 
+after training on each of the contaminated datasets as described in Section 3. 
 At each level of contamination, the VRNN is trained on both the respective two-prong signal and three-prong signal contaminated datasets for 500 epochs. 
 The resulting trained network is then used to assign an Anomaly Score to each jet in the dataset. 
 AUC values for each level of contamination are determined from a ROC curve built from 1000 randomly selected jets from both the background and signal sets after training.
@@ -901,9 +900,9 @@ The consistent performance observed can be attributed to the choice of $k_t$-ord
 \subsection{Event Level Performance}
 
 
-A natural extension of the Anomaly Score's ability to distinguish anomalous jets is to apply the score in an analysis-like context. In this study, the goal is to reconstruct the Z' particle in the invariant mass spectrum $M_{JJ}$ of the two jets in each signal event. To do this, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination. 
+A natural benchmark of Anomaly Score's ability to distinguish anomalous jets is to apply the score in an analysis-like context. In this study, the goal is to reconstruct the $Z'$ particle in the invariant mass spectrum $M_{JJ}$ of the two jets in each signal event. To do this, the network is trained on both the leading and sub-leading jets of the event, with one set of network weights saved for each amount of contamination. 
 
-Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. This constructs an event-level discriminant which uses the most anomalous jet in the event to discriminate. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, showing the correlations between the dijet invariant mass and the assigned Event Score in a dataset with 10\% signal contamination. The significant feature of the 3500 GeV Z' occupies high values of the Event Score, validating the Event Score as a discriminant of anomalous events from background.
+Since the model produces one Anomaly Score per jet, a combination of Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. This constructs an event-level discriminant which uses the most anomalous jet in the event to discriminate. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, showing the correlations between the dijet invariant mass and the assigned Event Score in a dataset with 10\% signal contamination. The significant feature of the $3500$ $GeV$ $Z'$ occupies high values of the Event Score, validating the Event Score as a discriminant of anomalous events from background.
 
 \begin{figure}[H]
 	\begin{center}
@@ -916,7 +915,7 @@ Since the model produces one Anomaly Score per jet, a combination of Anomaly Sco
 The goal of this search is to observe an excess of signal events in the dijet invariant mass distribution at a mass corresponding to the Z' particle. 
 This is commonly referred to as a "bump hunt" search, in which the signal is expected to appear as a bump upon an otherwise smoothly falling background distribution. 
 
-Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets, before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the anomaly score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance $\sigma$ in each bin of the corresponding histogram, where a total uncertainty of 15\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. 
+Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets, before and after applying a selection on the Event Score at a value of 0.65. This cut value was chosen such that the performance of the Anomaly Score is demonstrated while still retaining enough statistics to preserve the shape of the falling background distribution. Also plotted is the local significance $\sigma$ in each bin of the corresponding histogram, where a total uncertainty of 15\% on the number of background events is assumed. The local significance was computed using the {\sc BinomalExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. 
 
 The requirement on the Event Score dramatically increases the significance of the excess from $0.5\sigma$ to $4\sigma$ at a signal contamination of 1.0\%, while still retaining the smoothly falling behavior of the background. No selections other than the Event Score requirement have been applied in these scenarios besides the initial trigger requirement of $p_{T} > 1200 GeV$ on the leading jet. In Figure \ref{fig:3p_dijet}, a similar result is seen in the case of the three-pronged signal, where the Event Score requirement results in an increase of local significance of the signal peak from $0.5\sigma$ to $1.5\sigma$ at a signal contamination of 1\% under the same conditions. These results display the capability of the Anomaly Score as an analysis variable, as it can distinguish signal events with multiple substructure hypotheses while being robust against ambiguities in signal jet mass and $p_{T}$.
 
@@ -959,13 +958,13 @@ When applied to an event-level context, the Anomaly Score greatly increases the 
 
 The Variational Recurrent Neural Network used in this study is a powerful tool capable of learning underlying features of physics objects presented as sequential data. 
 Its applications to new physics searches are numerous, with one of the most attractive features being the potential for training directly on data without a pre-defined signal substructure hypothesis. 
-It is also a general tool for modeling sequential data of any type, making it compatible with common high energy physics tasks such as event-level searches or known object tagging and identification.
+It is also a general tool for modeling sequential data of any type, making it compatible with common high energy physics tasks such as supervised event-level searches or object-level classification.
 
-The approach in this study is somewhat model-independent, in that it accommodates multiple substructure hypotheses.
+The approach in this study is model-independent, in that it accommodates multiple substructure hypotheses.
 However, the model lends itself to a number of potential avenues for exploration into traditional supervised contexts as well, expanding its utility beyond the context of anomaly detection.
 Since the overall structure of the model contains both elements of Variational Autoencoders and Recurrent Neural Networks, more complicated architectural iterations can be employed as natural extensions of the VRNN. 
-Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level jet features. 
-Further study into the ordering of the input constituent sequence is also warranted, as this feature may be able to be tuned to accommodate more precisely defined analysis contexts or substructure hypotheses. 
+Examples of possible additions include adversarial mass de-correlation networks, and conditional architectures which can supplement the VRNN's input by a fixed length vector of high-level features. 
+This study shows promising results for the application of the VRNN in unsupervised, model-independent object identification. However, exploration into additional avenues of study is warranted. Potential studies include further investigation of the ordering of the input constituent sequence, which may be tuned to accommodate better defined model hypotheses, or a study of multi-class identification in which two or more types of anomalies are identified within the same dataset.
 
 
 

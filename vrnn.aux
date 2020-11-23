@@ -26,6 +26,7 @@
 \citation{dataset}
 \citation{Cacciari_2008}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Data Samples and Pre-Processing}{7}\protected@file@percent }
+\citation{adversarial}
 \citation{Purushotham2017VariationalRA}
 \citation{roy2020robust}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Boosting}{8}\protected@file@percent }
@@ -34,17 +35,18 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Leading Jet Mass vs Anomaly Score distributions before (left) and after (right) applying our boosting method}}{9}\protected@file@percent }
 \newlabel{fig:mass_vs_score_boost}{{4}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequence Ordering}{10}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Leading jet Anomaly Score distributions for background and signal events, before (left) and after (right) applying $k_{t}$-sorted ordering on constituents for training input jets.}}{10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Leading jet Anomaly Score distributions for background and two-prong signal events, with $p_T$-sorted (left) and $k_{t}$-sorted (right) ordering of constituents for input jets.}}{10}\protected@file@percent }
 \newlabel{fig:score_comp}{{5}{10}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Jet Level Performance}{11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the training set by definition containing elements of the signal set that it is being compared to.}}{11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}}{11}\protected@file@percent }
 \newlabel{fig:auc_vs_epoch}{{6}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}}{12}\protected@file@percent }
+\citation{d2}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}}{12}\protected@file@percent }
 \newlabel{fig:2P_lj_mass}{{7}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score}}{12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}}{12}\protected@file@percent }
 \newlabel{fig:3P_lj_mass}{{8}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable with equal acceptance. Notably, the $D_2$ variable causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}}{13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Contaminated set shape comparison between a selection on the Anomaly Score and a selection on the $D_2$ variable which provides an equivalent background acceptance. Notably, the $D_2$ variable causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}}{13}\protected@file@percent }
 \newlabel{fig:d2_comp}{{9}{13}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces ROC AUC vs. signal contamination in training dataset, given as a percentage of the total events. The performance of the Anomaly Score is consistent across a wide range of contamination levels, indicating that the pre-processing method used is capable of providing a sequence of jet constituent four-vectors with salient substructure information. Data points for contamination levels up to and including 10\% were determined from contaminated datasets all containing the same 895113 background events while varying the number of signal events. The three highest contamination amounts, corresponding to 25\%, 50\%, and 75\%, were determined from contaminated datasets all containing the same 99547 signal events while varying the number of background events.}}{14}\protected@file@percent }
 \newlabel{fig:aucs_vs_contam}{{10}{14}}
@@ -72,6 +74,8 @@
 \bibcite{cho2014learning}{12}
 \bibcite{dataset}{13}
 \bibcite{Cacciari_2008}{14}
-\bibcite{Purushotham2017VariationalRA}{15}
-\bibcite{roy2020robust}{16}
-\bibcite{moneta2011roostats}{17}
+\bibcite{adversarial}{15}
+\bibcite{Purushotham2017VariationalRA}{16}
+\bibcite{roy2020robust}{17}
+\bibcite{d2}{18}
+\bibcite{moneta2011roostats}{19}

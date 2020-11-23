@@ -74,6 +74,11 @@ Matteo Cacciari, Gavin~P Salam, and Gregory Soyez.
 \newblock The anti-kt jet clustering algorithm.
 \newblock {\em Journal of High Energy Physics}, 2008(04):063–063, Apr 2008.
 
+\bibitem{adversarial}
+{Performance of mass-decorrelated jet substructure observables for hadronic
+  two-body decay tagging in ATLAS}.
+\newblock Technical Report ATL-PHYS-PUB-2018-014, CERN, Geneva, Jul 2018.
+
 \bibitem{Purushotham2017VariationalRA}
 S.~Purushotham, Wilka Carvalho, Tanachat Nilanon, and Y.~Liu.
 \newblock Variational recurrent adversarial deep domain adaptation.
@@ -82,6 +87,11 @@ S.~Purushotham, Wilka Carvalho, Tanachat Nilanon, and Y.~Liu.
 \bibitem{roy2020robust}
 Tuhin~S. Roy and Aravind~H. Vijay.
 \newblock A robust anomaly finder based on autoencoders, 2020.
+
+\bibitem{d2}
+Simone Marzani, Gregory Soyez, and Michael Spannowsky.
+\newblock Looking inside jets.
+\newblock {\em Lecture Notes in Physics}, 2019.
 
 \bibitem{moneta2011roostats}
 Lorenzo Moneta, Kevin Belasco, Kyle Cranmer, Sven Kreiss, Alfio Lazzaro, Danilo

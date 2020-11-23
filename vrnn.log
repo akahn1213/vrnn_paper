@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  17 NOV 2020 10:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  23 NOV 2020 17:30
 entering extended mode
 **./vrnn.tex
 (vrnn.tex
@@ -786,7 +786,7 @@ lti_D2Comp_Darker.png  used on input line 864.
 <imgs/AUC_vs_Contam.png, id=85, 462.528pt x 346.896pt>
 File: imgs/AUC_vs_Contam.png Graphic file (type png)
 <use imgs/AUC_vs_Contam.png>
-Package pdftex.def Info: imgs/AUC_vs_Contam.png  used on input line 888.
+Package pdftex.def Info: imgs/AUC_vs_Contam.png  used on input line 887.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
  [14 <./imgs/AUC_vs_Contam.png>]
 <imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_Con
@@ -797,10 +797,10 @@ t_ConstOnly_Avg_JJ_M_vs_Event_Score.png Graphic file (type png)
 _ConstOnly_Avg_JJ_M_vs_Event_Score.png>
 Package pdftex.def Info: imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminate
 d_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score.png  used on input line 
-910.
+909.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
 
-Overfull \hbox (6.4393pt too wide) in paragraph at lines 919--920
+Overfull \hbox (6.4393pt too wide) in paragraph at lines 918--919
 []\OT1/ptm/m/n/12 Figure 12[] shows the di-jet mass dis-tri-bu-tions of the sig
 -nal, back-ground, and con-tam-i-nated datasets,
  []
@@ -809,7 +809,7 @@ Overfull \hbox (6.4393pt too wide) in paragraph at lines 919--920
 File: imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi.png Graphic file (type png)
 <use imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi.png>
 Package pdftex.def Info: imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi.png  used o
-n input line 925.
+n input line 924.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
 <imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png, id=92, 462.528p
 t x 520.344pt>
@@ -817,7 +817,7 @@ File: imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png Graphic fil
 e (type png)
 <use imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png>
 Package pdftex.def Info: imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Mu
-lti.png  used on input line 926.
+lti.png  used on input line 925.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
 [15 <./imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Eve
 nt_ConstOnly_Avg_JJ_M_vs_Event_Score.png>]
@@ -825,7 +825,7 @@ nt_ConstOnly_Avg_JJ_M_vs_Event_Score.png>]
 File: imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi.png Graphic file (type png)
 <use imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi.png>
 Package pdftex.def Info: imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi.png  used o
-n input line 935.
+n input line 934.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
 <imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png, id=98, 462.528p
 t x 520.344pt>
@@ -833,41 +833,42 @@ File: imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png Graphic fil
 e (type png)
 <use imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png>
 Package pdftex.def Info: imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Mu
-lti.png  used on input line 936.
+lti.png  used on input line 935.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
  [16 <./imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi.png> <./imgs/2Prong_Contamin
 ated_1p0_JJ_Mass_EventScore0p65_Multi.png> <./imgs/3Prong_Contaminated_1p0_JJ_M
 ass_Multi.png> <./imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi.png
 >] [17
 
-] (vrnn.bbl) [18
+] (vrnn.bbl [18
 
-] (vrnn.aux) ) 
+]) [19]
+(vrnn.aux) ) 
 Here is how much of TeX's memory you used:
- 16404 strings out of 481556
- 335559 string characters out of 2923634
- 605555 words of memory out of 3000000
- 31302 multiletter control sequences out of 15000+200000
+ 16406 strings out of 481556
+ 335576 string characters out of 2923634
+ 605563 words of memory out of 3000000
+ 31304 multiletter control sequences out of 15000+200000
  563886 words of font info for 91 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,22n,68p,1300b,1050s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/time
-s/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on vrnn.pdf (19 pages, 604098 bytes).
+ 60i,22n,68p,1549b,1050s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/
+utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on vrnn.pdf (20 pages, 606134 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
+ 164 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  93 words of extra memory for PDF output out of 10000 (max. 10000000)
 
