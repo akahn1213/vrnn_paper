@@ -64,6 +64,11 @@ Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi
 \newblock Learning phrase representations using rnn encoder-decoder for
   statistical machine translation, 2014.
 
+\bibitem{activations}
+Chigozie Nwankpa, Winifred Ijomah, Anthony Gachagan, and Stephen Marshall.
+\newblock Activation functions: Comparison of trends in practice and research
+  for deep learning, 2018.
+
 \bibitem{dataset}
 Gregor Kasieczka, Ben Nachman, and David Shih.
 \newblock {R\&D Dataset for LHC Olympics 2020 Anomaly Detection Challenge},
