@@ -7,6 +7,7 @@
 \usepackage{tikz}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{rotating}
 \usepackage{xfrac}
@@ -669,14 +670,22 @@ Each time-step contributes a loss based on the VAE loss function:
 \mathcal{L}(t) = MSE + \lambda D_{KL}
 \end{equation}
 where $\lambda$ is a factor which weights the KL-Divergence contribution relative to the MSE reconstruction loss.
-Since harder constituents contribute more information toward the identification of jet substructure, $\lambda$ is defined to be be a function of constituent $p_{T}$ fraction such that lower $p_{T}$ constituents obtain a lower weight in the loss function. 
-\textcolor{blue}{Furthermore, since a constituent's $p_{T}$ fraction depends directly on the number of constituents in the jet, the distribution of $p_{T}$ fractions for each constituent in the jet is averaged over all respective constituents in the entire input dataset to avoid correlations with constituent multiplicity.} 
 
-In this result, the loss is therefore computed for each constituent as:
+Since harder constituents contribute more information toward the identification of jet substructure, $\lambda$ is defined to be be a function of constituent $p_{T}$ fraction such that lower $p_{T}$ constituents obtain a lower weight in the loss function. 
+Furthermore, since a constituent's $p_{T}$ fraction depends directly on the number of constituents in the jet, a unique $p_{T}$ fraction distribution is generated for all possible constituent multiplicities by averaging the $p_{T}$ fractions of each constituent across the entire dataset. In more detail, the dataset-averaged $p_{T}$ fraction, $\overline{p_{T}}_{N}(t)$ of the $t^{th}$ constituent in a jet, $j_{N}$, with $N \geq t$ constituents is expressed as:
+
+
 \begin{equation}
-\mathcal{L}(t)=MSE+0.1\overline{p_T}(t)D_{KL}
+\overline{p_{T}}_{N}(t)=\frac{1}{D_{N}}\displaystyle\sum_{j_{N} = 1}^{D_{N}} p_{T,j_{N}}(t)
 \end{equation}
-where $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current time-step's prior distribution and the encoded posterior, and $\overline{p_T}(t)$ is the $p_T$ of the dataset-averaged constituent at time-step $t$. The final loss is computed by averaging the individual time-step losses over the entire jet: 
+
+where $D_{N}$ is the number of jets in the dataset which have $N$ constituents.
+
+The loss is therefore computed for each constituent as:
+\begin{equation}
+\mathcal{L}(t)=MSE+0.1\overline{p_{T}}_{N}(t)D_{KL}
+\end{equation}
+where $MSE$ is the mean-squared-error between $x(t)$ and $y(t)$, $D_{KL}$ is the KL-Divergence from the current time-step's prior distribution and the encoded posterior, and $\overline{p_T}_{N}(t)$ is the dataset-averaged $p_T$ fraction of the constituent at time-step $t$. The final loss is computed by averaging the individual time-step losses over the entire jet: 
 \begin{equation}
 \mathcal{L} = \frac{\Sigma \mathcal{L}(t)}{N} 
 \end{equation} 
@@ -717,9 +726,10 @@ Algorithm~\ref{alg:boost} describes in detail the implementation of the rescalin
 %Pre-Processing Algorithm
 \begin{algorithm}[H]
 \SetAlgoLined
+\SetKw{Beginning}{Start}
 %\KwResult{Write here the result }
-\While{Number of constituents $>$ 20}{
- \While{At least one constituent outside of $\Delta R = 1$ from jet axis}{
+  \Beginning{}
+
   Boost jet in $z$ direction until $\eta_{Jet} = 0$
  
   Rotate jet about $z$ axis until $\phi_{Jet} = 0$
@@ -735,23 +745,28 @@ Algorithm~\ref{alg:boost} describes in detail the implementation of the rescalin
   Remove all constituents with $\Delta R > 1$
  
   Rebuild jet with remaining constituents
+
+  Repeat from start  
+  
   }{
-  break
+  continue
   } 
- }
+ 
  \eIf{Number of constituents $>$ 20}{ 
  
  Keep up-to the first 20 constituents, ordered in $p_T$
  
  Rebuild jet with remaining constituents
+ 
+ Repeat from start
  }{
- break
+ continue
  }
-}
+
  
 Reflect constituents about $\phi$ axis such that the second hardest constituent has $\eta_{2} > 0$
  
-\caption{Jet Boosting Algorithm. All \textit{while} loops are run at least once, regardless of if its conditions are met.}
+\caption{Jet Boosting}
 \label{alg:boost}
 \end{algorithm}
 
@@ -783,7 +798,7 @@ The objective of this study is to build a model which can differentiate between 
 	c_{n} = max(p_{Tn}\Delta R_{n, n-1})
 \end{equation}
 
-The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently followed by a constituent belonging to the other core and so on. This results in an easily predictable pattern which the VRNN is better able to identify, particularly compared to a homogenous QCD jet. The resulting performance difference between $p_{T}$-sorted and $k_{t}$-sorted inputs is shown in Figure \ref{fig:score_comp}. Using the same 10\% contaminated dataset, the discrimination between two-prong signal jets and background QCD jets is notable better when the VRNN input sequence allows for detection of multi-prong substructure early on. \textcolor{red}{(diagram maybe?)}
+The effect on performance due to this choice of constituent ordering can be easily illustrated in the case of a two-prong jet. In such a case, the sequence will start with a constituent in one of the two cores of the jet, and be subsequently followed by a constituent belonging to the other core and so on. This results in an easily predictable pattern which the VRNN is better able to identify, particularly compared to a homogenous QCD jet. The resulting performance difference between $p_{T}$-sorted and $k_{t}$-sorted inputs is shown in Figure \ref{fig:score_comp}. Using the same 10\% contaminated dataset, the discrimination between two-prong signal jets and background QCD jets is notably better when the VRNN input sequence allows for detection of multi-prong substructure early on. It is also important to note that the signal jets are assigned a lower Anomaly Score than the background QCD-like jets. This can be attributed to the same reason why signal and background jets are distinguishable after applying $k_{t}$-sorted sequencing: jets with multi-prong substructure are more easily modeled by the VRNN, and therefore result in an overall lower loss value when compared to diffuse, QCD-like jets. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -795,6 +810,8 @@ The effect on performance due to this choice of constituent ordering can be easi
 \end{figure}
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% Results %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -802,6 +819,19 @@ The effect on performance due to this choice of constituent ordering can be easi
 \section{Results}
 
 One way the VRNN's performance can be studied is by assessing signal acceptance and background rejection at the jet level by using only the leading jet of each event. In addition, the Anomaly Score can be applied to both the X and Y jets in an event and used to discriminate between signal and background in an event-level analysis context. Results of the VRNN's performance are provided for both approaches below.
+
+Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
+\begin{itemize}
+	\item{The mean of the resulting distribution is at an Anomaly Score value of 0.5.}
+	\item{Anomaly Scores closer to a value of 1 correspond to more signal-like jets. Note that this reverses the previously observed feature which results in more signal-like jets being assigned a lower Anomaly Score.}
+\end{itemize}
+
+The transformation can be summarized as
+\begin{equation}
+	\rho ' = 1 - \bigg(\frac{\rho}{2\overline{\rho}}\bigg)
+\end{equation}
+
+where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the mean of the un-transformed Anomaly Score distribution of the training set.
 
 
 \subsection{Jet Level Performance}
@@ -817,19 +847,6 @@ In the jet-level assessment, the model is trained on the leading jet of each eve
 	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}
 	\label{fig:auc_vs_epoch}
 \end{figure}
-
-Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
-\begin{itemize}
-	\item{The mean of the resulting distribution is at an Anomaly Score value of 0.5.}
-	\item{Anomaly scores closer to a value of 1 correspond to more signal-like jets.}
-\end{itemize}
-
-The transformation can be summarized as
-\begin{equation}
-	\rho ' = 1 - \bigg(\frac{\rho}{2\overline{\rho}}\bigg)
-\end{equation}
-
-where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the mean of the un-transformed Anomaly Score distribution of the training set. 
 
 Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet before and after a jet-level selection requiring the Anomaly Score to exceed a value of 0.65. This value is chosen in the interest of displaying the discriminating power of the Anomaly Score while retaining enough background statistics to observe the background shape sculpting. The presence of the known resonances at 100 GeV and 500 GeV is enhanced. Sculpting in the background distribution is observed, which is an effect of mass correlation mainly introduced by the $k_{t}$-ordered sequencing, as there is a non-trivial correlation between the number of hard cores in a jet and its mass. However, the observed sculpting is mainly a suppression of low mass events, and does not result in the generation of peaks in the mass distribution. Both the signal enhancement and background sculpting are similarly observed on three-pronged signatures in Figure \ref{fig:3P_lj_mass}, also shown for a 10\% contaminated dataset. 
 
@@ -855,9 +872,9 @@ Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet befo
 
 
 %A number of substructure variables exist which distinguish two-pronged jet substructure. Among them is the popular D2 variable. 
-As the Anomaly Score in this context distinguishes multi-pronged substructure from homogenous jets, it is useful to compare it to a commonly used high-level variable sensitive to two-pronged signals. The energy correlation function ratio $D_2$~\cite{d2} is selected and used as a benchmark to contextualize the Anomaly Score in both signal discrimination and jet mass correlation. 
+As the Anomaly Score in this context distinguishes multi-pronged substructure from homogenous jets, it is useful to compare it to a commonly used high-level variable sensitive to two-pronged signals. The energy correlation function ratio $D_2$~\cite{d2} is selected and used as a benchmark to contextualize the Anomaly Score in both signal discrimination and jet mass correlation. The $D_2$ variable is developed such that values closer to zero correlate with two-prong jet substructure. 
 
-Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated jet mass distributions when subject to a cut on Anomaly Score and $D_2$. The Anomaly Score is again selected to exceed a value of 0.65, and the $D_2$ selection is chosen to provide an equivalent background acceptance. The shape of the jet mass distribution is more significantly sculpted after the $D_2$ selection than the Anomaly Score selection, indicating more significant correlation of $D_2$ with jet mass while the Anomaly Score selection retains more of the smoothly falling characteristics of the background jet mass distribution. Such a result can be attributed largely to the boosting method used during pre-processing, as well as to the Anomaly Score being determined only from jet constituent four-vector information, without any high-level information being input into the model. 
+Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated jet mass distributions with a two-prong signal hypothesis when subject to a cut on Anomaly Score and $D_2$. The Anomaly Score is again selected to exceed a value of 0.65, and the $D_2$ selection is chosen to be less than 1.4 to provide an equivalent background acceptance of 16.5\%. The shape of the jet mass distribution is more significantly sculpted after the $D_2$ selection than the Anomaly Score selection, indicating more significant correlation of $D_2$ with jet mass while the Anomaly Score selection retains more of the smoothly falling characteristics of the background jet mass distribution. Such a result can be attributed largely to the boosting method used during pre-processing, as well as to the Anomaly Score being determined only from jet constituent four-vector information, without any high-level information being input into the model. 
 %The result shows the notable difference in the effect of the respective selections on the shape of the background distribution, where a $D_2$ selection results in more severe sculpting when compared to a selection on the Anomaly Score. It is important to note once again that the Anomaly Score is determined only from jet constituent four-vector information, without any external high-level information being input into the model.
 
 \begin{figure}[H]

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  1 DEC 2020 10:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  1 DEC 2020 19:18
 entering extended mode
 **./vrnn.tex
 (vrnn.tex
@@ -426,6 +426,41 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
 LaTeX Info: Redefining \[ on input line 2859.
 LaTeX Info: Redefining \] on input line 2860.
 )
+("C:\Program Files\MiKTeX 2.9\tex/latex/mathtools\mathtools.sty"
+Package: mathtools 2020/03/24 v1.24 mathematical typesetting tools
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/tools\calc.sty"
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count275
+\calc@Bcount=\count276
+\calc@Adimen=\dimen257
+\calc@Bdimen=\dimen258
+\calc@Askip=\skip54
+\calc@Bskip=\skip55
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count277
+\calc@Cskip=\skip56
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/mathtools\mhsetup.sty"
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
+\g_MT_multlinerow_int=\count278
+\l_MT_multwidth_dim=\dimen259
+\origjot=\skip57
+\l_MT_shortvdotswithinadjustabove_dim=\dimen260
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen261
+\l_MT_above_intertext_sep=\dimen262
+\l_MT_below_intertext_sep=\dimen263
+\l_MT_above_shortintertext_sep=\dimen264
+\l_MT_below_shortintertext_sep=\dimen265
+\xmathstrut@box=\box61
+\xmathstrut@dim=\dimen266
+)
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
@@ -440,10 +475,10 @@ Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
 ("C:\Program Files\MiKTeX 2.9\tex/latex/base\ifthen.sty"
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@r@tfl@t=\count275
-\rotFPtop=\skip54
-\rotFPbot=\skip55
-\rot@float@box=\box61
+\c@r@tfl@t=\count279
+\rotFPtop=\skip58
+\rotFPbot=\skip59
+\rot@float@box=\box62
 \rot@mess@toks=\toks35
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/l3packages/xfrac\xfrac.sty"
@@ -452,8 +487,8 @@ Package: expl3 2020-02-14 L3 programming layer (loader)
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/l3backend\l3backend-pdfmode.def"
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count276
-\l__pdf_internal_box=\box62
+\l__kernel_color_stack_int=\count280
+\l__pdf_internal_box=\box63
 ))
 ("C:\Program Files\MiKTeX 2.9\tex/latex/l3packages/l3keys2e\l3keys2e.sty"
 Package: l3keys2e 2020-02-14 LaTeX2e option processing using LaTeX3 keys
@@ -463,26 +498,26 @@ Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/l3packages/xparse\xparse.sty"
 Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count277
-\g__xparse_grabber_int=\count278
-\l__xparse_m_args_int=\count279
-\l__xparse_v_nesting_int=\count280
+\l__xparse_current_arg_int=\count281
+\g__xparse_grabber_int=\count282
+\l__xparse_m_args_int=\count283
+\l__xparse_v_nesting_int=\count284
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/l3packages/xtemplate\xtemplate.sty"
 Package: xtemplate 2020-02-14 L3 Experimental prototype document functions
-\l__xtemplate_tmp_dim=\dimen257
-\l__xtemplate_tmp_int=\count281
+\l__xtemplate_tmp_dim=\dimen267
+\l__xtemplate_tmp_int=\count285
 \l__xtemplate_tmp_muskip=\muskip17
-\l__xtemplate_tmp_skip=\skip56
+\l__xtemplate_tmp_skip=\skip60
 )
 Package: xfrac 2020-02-14 L3 Experimental split-level fractions
-\l__xfrac_slash_box=\box63
-\l__xfrac_tmp_box=\box64
-\l__xfrac_denominator_bot_sep_dim=\dimen258
-\l__xfrac_numerator_bot_sep_dim=\dimen259
-\l__xfrac_numerator_top_sep_dim=\dimen260
-\l__xfrac_slash_left_sep_dim=\dimen261
-\l__xfrac_slash_right_sep_dim=\dimen262
+\l__xfrac_slash_box=\box64
+\l__xfrac_tmp_box=\box65
+\l__xfrac_denominator_bot_sep_dim=\dimen268
+\l__xfrac_numerator_bot_sep_dim=\dimen269
+\l__xfrac_numerator_top_sep_dim=\dimen270
+\l__xfrac_slash_left_sep_dim=\dimen271
+\l__xfrac_slash_right_sep_dim=\dimen272
 \l__xfrac_slash_left_muskip=\muskip18
 \l__xfrac_slash_right_muskip=\muskip19
 
@@ -497,37 +532,37 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@cmds=\toks38
 \SOUL@buffer=\toks39
 \SOUL@token=\toks40
-\SOUL@spaceskip=\skip57
-\SOUL@ttwidth=\dimen263
-\SOUL@uldp=\dimen264
-\SOUL@ulht=\dimen265
+\SOUL@spaceskip=\skip61
+\SOUL@ttwidth=\dimen273
+\SOUL@uldp=\dimen274
+\SOUL@ulht=\dimen275
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lineno\lineno.sty"
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count282
+\linenopenalty=\count286
 \output=\toks41
-\linenoprevgraf=\count283
-\linenumbersep=\dimen266
-\linenumberwidth=\dimen267
-\c@linenumber=\count284
-\c@pagewiselinenumber=\count285
-\c@LN@truepage=\count286
-\c@internallinenumber=\count287
-\c@internallinenumbers=\count288
-\quotelinenumbersep=\dimen268
-\bframerule=\dimen269
-\bframesep=\dimen270
-\bframebox=\box65
+\linenoprevgraf=\count287
+\linenumbersep=\dimen276
+\linenumberwidth=\dimen277
+\c@linenumber=\count288
+\c@pagewiselinenumber=\count289
+\c@LN@truepage=\count290
+\c@internallinenumber=\count291
+\c@internallinenumbers=\count292
+\quotelinenumbersep=\dimen278
+\bframerule=\dimen279
+\bframesep=\dimen280
+\bframebox=\box66
 LaTeX Info: Redefining \\ on input line 3056.
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/algorithm2e\algorithm2e.sty"
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count289
-\algocf@hangindent=\skip58
+\c@AlgoLine=\count293
+\algocf@hangindent=\skip62
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/ifoddpage\ifoddpage.sty"
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count290
+\c@checkoddpage=\count294
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/tools\xspace.sty"
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
@@ -535,41 +570,41 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ("C:\Program Files\MiKTeX 2.9\tex/latex/relsize\relsize.sty"
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip59
-\skiplinenumber=\skip60
-\skiprule=\skip61
-\skiphlne=\skip62
-\skiptext=\skip63
-\skiplength=\skip64
-\algomargin=\skip65
-\skipalgocfslide=\skip66
-\algowidth=\dimen271
-\inoutsize=\dimen272
-\inoutindent=\dimen273
-\interspacetitleruled=\dimen274
-\interspacealgoruled=\dimen275
-\interspacetitleboxruled=\dimen276
-\algocf@ruledwidth=\skip67
-\algocf@inoutbox=\box66
-\algocf@inputbox=\box67
-\AlCapSkip=\skip68
-\AlCapHSkip=\skip69
-\algoskipindent=\skip70
-\algocf@nlbox=\box68
-\algocf@hangingbox=\box69
-\algocf@untilbox=\box70
-\algocf@skipuntil=\skip71
-\algocf@capbox=\box71
-\algocf@lcaptionbox=\skip72
-\algoheightruledefault=\skip73
-\algoheightrule=\skip74
-\algotitleheightruledefault=\skip75
-\algotitleheightrule=\skip76
-\c@algocfline=\count291
-\c@algocfproc=\count292
-\c@algocf=\count293
-\algocf@algoframe=\box72
-\algocf@algobox=\box73
+\skiptotal=\skip63
+\skiplinenumber=\skip64
+\skiprule=\skip65
+\skiphlne=\skip66
+\skiptext=\skip67
+\skiplength=\skip68
+\algomargin=\skip69
+\skipalgocfslide=\skip70
+\algowidth=\dimen281
+\inoutsize=\dimen282
+\inoutindent=\dimen283
+\interspacetitleruled=\dimen284
+\interspacealgoruled=\dimen285
+\interspacetitleboxruled=\dimen286
+\algocf@ruledwidth=\skip71
+\algocf@inoutbox=\box67
+\algocf@inputbox=\box68
+\AlCapSkip=\skip72
+\AlCapHSkip=\skip73
+\algoskipindent=\skip74
+\algocf@nlbox=\box69
+\algocf@hangingbox=\box70
+\algocf@untilbox=\box71
+\algocf@skipuntil=\skip75
+\algocf@capbox=\box72
+\algocf@lcaptionbox=\skip76
+\algoheightruledefault=\skip77
+\algoheightrule=\skip78
+\algotitleheightruledefault=\skip79
+\algotitleheightrule=\skip80
+\c@algocfline=\count295
+\c@algocfproc=\count296
+\c@algocf=\count297
+\algocf@algoframe=\box73
+\algocf@algobox=\box74
 )
 ("C:\Program Files\MiKTeX 2.9\tex/generic/pgf/frontendlayer/tikz/libraries\tikz
 librarydecorations.pathreplacing.code.tex"
@@ -577,16 +612,16 @@ librarydecorations.pathreplacing.code.tex"
 librarydecorations.code.tex"
 ("C:\Program Files\MiKTeX 2.9\tex/generic/pgf/modules\pgfmoduledecorations.code
 .tex"
-\pgfdecoratedcompleteddistance=\dimen277
-\pgfdecoratedremainingdistance=\dimen278
-\pgfdecoratedinputsegmentcompleteddistance=\dimen279
-\pgfdecoratedinputsegmentremainingdistance=\dimen280
-\pgf@decorate@distancetomove=\dimen281
-\pgf@decorate@repeatstate=\count294
-\pgfdecorationsegmentamplitude=\dimen282
-\pgfdecorationsegmentlength=\dimen283
+\pgfdecoratedcompleteddistance=\dimen287
+\pgfdecoratedremainingdistance=\dimen288
+\pgfdecoratedinputsegmentcompleteddistance=\dimen289
+\pgfdecoratedinputsegmentremainingdistance=\dimen290
+\pgf@decorate@distancetomove=\dimen291
+\pgf@decorate@repeatstate=\count298
+\pgfdecorationsegmentamplitude=\dimen292
+\pgfdecorationsegmentlength=\dimen293
 )
-\tikz@lib@dec@box=\box74
+\tikz@lib@dec@box=\box75
 )
 ("C:\Program Files\MiKTeX 2.9\tex/generic/pgf/libraries/decorations\pgflibraryd
 ecorations.pathreplacing.code.tex"))
@@ -602,26 +637,26 @@ File: pgflibraryshapes.misc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 librarypositioning.code.tex"
 File: tikzlibrarypositioning.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-\c@lastnote=\count295
+\c@lastnote=\count299
  (vrnn.aux)
 \openout1 = `vrnn.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 7
-9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 8
+0.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -629,16 +664,16 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ABD: EveryShipout initializing macros
 ("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count296
-\scratchdimen=\dimen284
-\scratchbox=\box75
-\nofMPsegments=\count297
-\nofMParguments=\count298
+\scratchcounter=\count300
+\scratchdimen=\dimen294
+\scratchbox=\box76
+\nofMPsegments=\count301
+\nofMParguments=\count302
 \everyMPshowfont=\toks42
-\MPscratchCnt=\count299
-\MPscratchDim=\dimen285
-\MPnumerator=\count300
-\makeMPintoPDFobject=\count301
+\MPscratchCnt=\count303
+\MPscratchDim=\dimen295
+\MPnumerator=\count304
+\makeMPintoPDFobject=\count305
 \everyMPtoPDFconversion=\toks43
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstopdf-base.sty"
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -646,24 +681,24 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 8
-6.
+7.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1phv.fd"
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (20.44278pt too wide) in paragraph at lines 86--86
+Overfull \hbox (20.44278pt too wide) in paragraph at lines 87--87
  [][] 
  []
 
@@ -697,7 +732,7 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
  [6] [7]
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 7
-10.
+19.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [8]
@@ -709,7 +744,7 @@ nstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png Graphic file (type png)
 stOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png>
 Package pdftex.def Info: imgs/ProcNoBoostPt_Background_July20_Background_July20
 _Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png  used on in
-put line 768.
+put line 783.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
 <imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly
 _Avg_M_vs_Score_ProcTest_SaveForPaper.png, id=50, 462.528pt x 346.896pt>
@@ -719,7 +754,7 @@ tOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png Graphic file (type png)
 Only_Avg_M_vs_Score_ProcTest_SaveForPaper.png>
 Package pdftex.def Info: imgs/ProcBoostPt_Background_July20_Background_July20_W
 eights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png  used on inpu
-t line 769.
+t line 784.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
  [9 <./imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_C
 onstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png> <./imgs/ProcBoostPt_Backgrou
@@ -729,13 +764,13 @@ aveForPaper.png>]
 File: imgs/Anom_Score_CompPt_SaveForPaper.png Graphic file (type png)
 <use imgs/Anom_Score_CompPt_SaveForPaper.png>
 Package pdftex.def Info: imgs/Anom_Score_CompPt_SaveForPaper.png  used on input
- line 790.
+ line 805.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
 <imgs/Anom_Score_CompKt_SaveForPaper.png, id=57, 462.528pt x 346.896pt>
 File: imgs/Anom_Score_CompKt_SaveForPaper.png Graphic file (type png)
 <use imgs/Anom_Score_CompKt_SaveForPaper.png>
 Package pdftex.def Info: imgs/Anom_Score_CompKt_SaveForPaper.png  used on input
- line 791.
+ line 806.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
  [10 <./imgs/Anom_Score_CompPt_SaveForPaper.png> <./imgs/Anom_Score_CompKt_Save
 ForPaper.png>]
@@ -743,132 +778,134 @@ ForPaper.png>]
 File: imgs/auc_vs_epoch_SaveForPaper.png Graphic file (type png)
 <use imgs/auc_vs_epoch_SaveForPaper.png>
 Package pdftex.def Info: imgs/auc_vs_epoch_SaveForPaper.png  used on input line
- 815.
+ 845.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
- [11 <./imgs/auc_vs_epoch_SaveForPaper.png>]
-<imgs/2Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png, id=68, 462.528pt 
+ [11]
+<imgs/2Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png, id=67, 462.528pt 
 x 346.896pt>
 File: imgs/2Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png Graphic file 
 (type png)
 <use imgs/2Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png>
 Package pdftex.def Info: imgs/2Prong_Contaminated_10p0_J_Mass_Multi_SaveForPape
-r.png  used on input line 838.
+r.png  used on input line 855.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
 <imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png, id=
-69, 462.528pt x 346.896pt>
+68, 462.528pt x 346.896pt>
 File: imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png
  Graphic file (type png)
 <use imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png>
 
 Package pdftex.def Info: imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Mul
-ti_SaveForPaper.png  used on input line 839.
+ti_SaveForPaper.png  used on input line 856.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
-<imgs/3Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png, id=70, 462.528pt 
+<imgs/3Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png, id=69, 462.528pt 
 x 346.896pt>
 File: imgs/3Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png Graphic file 
 (type png)
 <use imgs/3Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png>
 Package pdftex.def Info: imgs/3Prong_Contaminated_10p0_J_Mass_Multi_SaveForPape
-r.png  used on input line 847.
+r.png  used on input line 864.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
 <imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png, id=
-71, 462.528pt x 346.896pt>
+70, 462.528pt x 346.896pt>
 File: imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png
  Graphic file (type png)
 <use imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png>
 
 Package pdftex.def Info: imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Mul
-ti_SaveForPaper.png  used on input line 848.
+ti_SaveForPaper.png  used on input line 865.
 (pdftex.def)             Requested size: 225.0pt x 168.7525pt.
- [12 <./imgs/2Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png> <./imgs/2P
-rong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png> <./imgs/3Pr
-ong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png> <./imgs/3Prong_Contaminate
-d_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png>]
+ [12 <./imgs/auc_vs_epoch_SaveForPaper.png> <./imgs/2Prong_Contaminated_10p0_J_
+Mass_Multi_SaveForPaper.png> <./imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0
+p65_Multi_SaveForPaper.png>]
 <imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_SaveForPaper.
-png, id=80, 462.528pt x 346.896pt>
+png, id=78, 462.528pt x 346.896pt>
 File: imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_SaveForP
 aper.png Graphic file (type png)
 <use imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_SaveForPa
 per.png>
 Package pdftex.def Info: imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Mu
-lti_D2Comp_SaveForPaper.png  used on input line 865.
+lti_D2Comp_SaveForPaper.png  used on input line 882.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
-<imgs/AUC_vs_Contam_SaveForPaper.png, id=81, 462.528pt x 346.896pt>
+
+[13 <./imgs/3Prong_Contaminated_10p0_J_Mass_Multi_SaveForPaper.png> <./imgs/3Pr
+ong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_SaveForPaper.png>]
+<imgs/AUC_vs_Contam_SaveForPaper.png, id=84, 462.528pt x 346.896pt>
 File: imgs/AUC_vs_Contam_SaveForPaper.png Graphic file (type png)
 <use imgs/AUC_vs_Contam_SaveForPaper.png>
 Package pdftex.def Info: imgs/AUC_vs_Contam_SaveForPaper.png  used on input lin
-e 888.
+e 905.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
- [13 <./imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_SaveFo
+ [14 <./imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_SaveFo
 rPaper.png>]
 <imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_Con
-stOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper.png, id=86, 462.528pt x 346.896pt>
+stOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper.png, id=89, 462.528pt x 346.896pt>
 File: imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Even
 t_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper.png Graphic file (type png)
 <use imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event
 _ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper.png>
 Package pdftex.def Info: imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminate
 d_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper.png  used o
-n input line 910.
+n input line 927.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
- [14 <./imgs/AUC_vs_Contam_SaveForPaper.png>]
-Overfull \hbox (6.4393pt too wide) in paragraph at lines 919--920
+[15 <./imgs/AUC_vs_Contam_SaveForPaper.png>]
+Overfull \hbox (6.4393pt too wide) in paragraph at lines 936--937
 []\OT1/ptm/m/n/12 Figure 12[] shows the di-jet mass dis-tri-bu-tions of the sig
 -nal, back-ground, and con-tam-i-nated datasets,
  []
 
-<imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png, id=91, 462.528pt 
+<imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png, id=94, 462.528pt 
 x 520.344pt>
 File: imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png Graphic file 
 (type png)
 <use imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png>
 Package pdftex.def Info: imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPape
-r.png  used on input line 925.
+r.png  used on input line 942.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
 <imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png, id
-=92, 462.528pt x 520.344pt>
+=95, 462.528pt x 520.344pt>
 File: imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.pn
 g Graphic file (type png)
 <use imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png
 >
 Package pdftex.def Info: imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Mu
-lti_SaveForPaper.png  used on input line 926.
+lti_SaveForPaper.png  used on input line 943.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
-[15 <./imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Eve
+[16 <./imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Eve
 nt_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper.png>]
-<imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png, id=97, 462.528pt 
-x 520.344pt>
+<imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png, id=100, 462.528pt
+ x 520.344pt>
 File: imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png Graphic file 
 (type png)
 <use imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png>
 Package pdftex.def Info: imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPape
-r.png  used on input line 935.
+r.png  used on input line 952.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
 <imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png, id
-=98, 462.528pt x 520.344pt>
+=101, 462.528pt x 520.344pt>
 File: imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.pn
 g Graphic file (type png)
 <use imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png
 >
 Package pdftex.def Info: imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Mu
-lti_SaveForPaper.png  used on input line 936.
+lti_SaveForPaper.png  used on input line 953.
 (pdftex.def)             Requested size: 225.0pt x 253.12875pt.
- [16 <./imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png> <./imgs/2P
+ [17 <./imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png> <./imgs/2P
 rong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png> <./imgs/3P
 rong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper.png> <./imgs/3Prong_Contaminat
-ed_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png>] [17
+ed_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper.png>] [18
 
-] [18] (vrnn.bbl [19
+] [19] (vrnn.bbl [20
 
-]) [20] (vrnn.aux) ) 
+]) [21] (vrnn.aux) ) 
 Here is how much of TeX's memory you used:
- 16407 strings out of 481556
- 336837 string characters out of 2923634
- 600435 words of memory out of 3000000
- 31305 multiletter control sequences out of 15000+200000
+ 16962 strings out of 481556
+ 346652 string characters out of 2923634
+ 614001 words of memory out of 3000000
+ 31850 multiletter control sequences out of 15000+200000
  563886 words of font info for 91 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,22n,68p,1363b,1050s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,22n,68p,1363b,1057s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C
 :/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/
@@ -884,9 +921,9 @@ Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
 w/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on vrnn.pdf (21 pages, 656917 bytes).
+Output written on vrnn.pdf (22 pages, 660056 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
+ 170 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  93 words of extra memory for PDF output out of 10000 (max. 10000000)
 
