@@ -840,7 +840,7 @@ where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the m
 
 %Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
 
-In the jet-level assessment, the model is trained on the leading jet of each event for 500 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the contaminated training set or the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
+In the jet-level assessment, the model is trained on the leading jet of each event for 100 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the contaminated training set or the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -906,7 +906,7 @@ Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated je
 Another important study involves the model's performance over a range of signal contamination
 levels. Figure~\ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses
 after training on each of the contaminated datasets as described in Section 3. 
-At each level of contamination, the VRNN is trained on both the respective two-prong signal and three-prong signal contaminated datasets for 500 epochs. 
+At each level of contamination, the VRNN is trained on both the respective two-prong signal and three-prong signal contaminated datasets for 100 epochs. 
 The resulting trained network is then used to assign an Anomaly Score to each jet in the dataset. 
 AUC values for each level of contamination are determined from a ROC curve built from 1000 randomly selected jets from both the background and signal sets after training.
 Error bars are computed by repeating this process 100 times and determining the standard deviation of the resulting distribution of AUC values.
