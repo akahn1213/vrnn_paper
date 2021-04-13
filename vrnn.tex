@@ -850,6 +850,16 @@ In the jet-level assessment, the model is trained on the leading jet of each eve
 	\label{fig:auc_vs_epoch}
 \end{figure}
 
+To optimally evaluate the model's performance, the weights corresponding to a training period of 100 epochs were chosen in the following studies. Figure \ref{fig:score_transform} shows the distributions of the Anomaly Score for leading jets in both the background sample and the two-prong signal sample after applying the transformation in equation 18.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=250pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+	\end{center}
+	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs on a 10\% signal-contaminated dataset. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}
+	\label{fig:score_transform}
+\end{figure}
+
 Figure \ref{fig:2P_lj_mass} shows the mass distributions of the leading jet in signal, background-only, and signal-contaminated datasets, before and after a jet-level selection requiring the Anomaly Score to exceed a value of 0.65, corresponding to an efficiency of \textcolor{red}{16.5}\% in the background dataset. 
 This value is chosen in the interest of displaying the discriminating power of the Anomaly Score while retaining enough background statistics to observe the background shape sculpting. 
 The presence of the known resonances at 100 GeV and 500 GeV is enhanced after the selection. Sculpting in the background distribution is observed, which is an effect of mass correlation mainly introduced by the $k_{t}$-ordered sequencing, as there is a non-trivial correlation between the number of hard cores in a jet and its mass. However, the observed sculpting is mainly a suppression of low mass events, and does not result in the generation of peaks in the mass distribution. Both the signal enhancement and background sculpting are similarly observed on three-pronged signatures in Figure \ref{fig:3P_lj_mass}, also shown for a 10\% contaminated dataset. 
