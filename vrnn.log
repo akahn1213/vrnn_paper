@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  13 APR 2021 11:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  13 APR 2021 17:47
 entering extended mode
 **./vrnn.tex
 (vrnn.tex
@@ -841,11 +841,12 @@ ad_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore
 0p65_Multi_D2Comp_Lead_SaveForPaper.png  used on input line 896.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
-<imgs/AUC_vs_Contam_SaveForPaper.png, id=86, 462.528pt x 346.896pt>
-File: imgs/AUC_vs_Contam_SaveForPaper.png Graphic file (type png)
-<use imgs/AUC_vs_Contam_SaveForPaper.png>
-Package pdftex.def Info: imgs/AUC_vs_Contam_SaveForPaper.png  used on input lin
-e 919.
+<imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png, id=86, 462.528pt x 346.896pt>
+
+File: imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png Graphic file (type png)
+<use imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png>
+Package pdftex.def Info: imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png  used 
+on input line 919.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
  [14 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp
 _Lead_SaveForPaper.png>]
@@ -862,7 +863,7 @@ aminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead
 .png  used on input line 941.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
 
-[15 <./imgs/AUC_vs_Contam_SaveForPaper.png>]
+[15 <./imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png>]
 Overfull \hbox (6.4393pt too wide) in paragraph at lines 950--951
 []\OT1/ptm/m/n/12 Figure 13[] shows the di-jet mass dis-tri-bu-tions of the sig
 -nal, back-ground, and con-tam-i-nated datasets,
@@ -915,7 +916,7 @@ SaveForPaper_Lead.png>] [18
 ]) [21] (vrnn.aux) ) 
 Here is how much of TeX's memory you used:
  16970 strings out of 481556
- 347922 string characters out of 2923634
+ 347987 string characters out of 2923634
  614011 words of memory out of 3000000
  31856 multiletter control sequences out of 15000+200000
  563886 words of font info for 91 fonts, out of 3000000 for 9000
@@ -936,7 +937,7 @@ Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
 w/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on vrnn.pdf (22 pages, 677520 bytes).
+Output written on vrnn.pdf (22 pages, 677334 bytes).
 PDF statistics:
  172 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
