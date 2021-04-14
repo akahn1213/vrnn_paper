@@ -841,13 +841,13 @@ where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the m
 
 %Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
 
-In the jet-level assessment, the model is trained on the leading jet of each event for 100 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the contaminated training set or the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 10\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
+In the jet-level assessment, the model is trained on the leading jet of each event for 100 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by comparing events in either the contaminated training set or the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 1\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=250pt]{imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png}
 	\end{center}
-	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs on a 10\% signal-contaminated dataset. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}
+	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs on a 1\% signal-contaminated dataset. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}
 	\label{fig:auc_vs_epoch}
 \end{figure}
 
@@ -855,9 +855,10 @@ To optimally evaluate the model's performance, the weights corresponding to a tr
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
 	\end{center}
-	\caption{Anomaly Score after applying the transformation described in Equation~\ref{eq:transformation}. The Anomaly Score in this figure is computed from the leading jets of each event, for both the background sample and two-prong signal sample.}
+	\caption{Anomaly Score distributions after applying the transformation described in Equation~\ref{eq:transformation}. The Anomaly Score in these figures is computed from the leading jets of each event, for both the background sample and two-prong (left) or three-prong (right) signal samples.}
 	\label{fig:score_transform}
 \end{figure}
 

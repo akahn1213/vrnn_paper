@@ -6,63 +6,64 @@
 \citation{bank2020autoencoders}
 \citation{Farina_2020}
 \citation{Heimel_2019}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Autoencoders}{1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Autoencoders}{1}}
 \citation{Farina_2020}
 \citation{Heimel_2019}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A standard autoencoder.}}{2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A standard autoencoder.}}{2}}
 \newlabel{fig:AE}{{1}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Variational Autoencoders}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Variational Autoencoders}{2}}
 \citation{kingma2014autoencoding}
 \citation{Goodfellow-et-al-2016}
 \citation{kingma2014autoencoding}
 \citation{An2015VariationalAB}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A Variational Autoencoder with a Gaussian latent space parametrization.}}{4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A Variational Autoencoder with a Gaussian latent space parametrization.}}{4}}
 \newlabel{fig:VAE}{{2}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Variational Recurrent Neural Network}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Variational Recurrent Neural Network}{4}}
 \citation{chung2016recurrent}
 \citation{lstm}
 \citation{cho2014learning}
 \citation{activations}
 \citation{activations}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A Variational Recurrent Neural Network cell.}}{6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A Variational Recurrent Neural Network cell.}}{6}}
 \newlabel{fig:VRNN}{{3}{6}}
 \citation{dataset}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Data Samples and Pre-Processing}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Data Samples and Pre-Processing}{7}}
 \citation{Cacciari_2008}
 \citation{adversarial}
 \citation{Purushotham2017VariationalRA}
 \citation{roy2020robust}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Boosting}{8}\protected@file@percent }
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Jet Boosting}}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Boosting}{8}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Jet Boosting}}{9}}
 \newlabel{alg:boost}{{1}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Leading jet mass vs Anomaly Score distributions before (left) and after (right) applying the boosting method detailed in Algorithm\nobreakspace  {}1\hbox {}.}}{9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Leading jet mass vs Anomaly Score distributions before (left) and after (right) applying the boosting method detailed in Algorithm\nobreakspace  {}1\hbox {}.}}{9}}
 \newlabel{fig:mass_vs_score_boost}{{4}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequence Ordering}{10}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Leading jet Anomaly Score distributions for background and two-prong signal events, with $p_T$-sorted (left) and $k_{t}$-sorted (right) ordering of constituents for input jets.}}{10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequence Ordering}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Leading jet Anomaly Score distributions for background and two-prong signal events, with $p_T$-sorted (left) and $k_{t}$-sorted (right) ordering of constituents for input jets.}}{10}}
 \newlabel{fig:score_comp}{{5}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Jet Level Performance}{11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Area Under the Curve (ROC AUC) vs. training time in epochs on a 10\% signal-contaminated dataset. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}}{12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}}
+\newlabel{eq:transformation}{{18}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Jet Level Performance}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Area Under the Curve (ROC AUC) vs. training time in epochs on a 1\% signal-contaminated dataset. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}}{12}}
 \newlabel{fig:auc_vs_epoch}{{6}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Anomaly Score after applying the transformation described in equation 18. The Anomaly Score in this figure is computed from the leading jets of each event, for both the background sample and two-prong signal sample.}}{12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Anomaly Score distributions after applying the transformation described in Equation\nobreakspace  {}18\hbox {}. The Anomaly Score in these figures is computed from the leading jets of each event, for both the background sample and two-prong (left) or three-prong (right) signal samples.}}{12}}
 \newlabel{fig:score_transform}{{7}{12}}
 \citation{d2}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}}{13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}}{13}}
 \newlabel{fig:2P_lj_mass}{{8}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}}{13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) a cut on the Anomaly Score.}}{13}}
 \newlabel{fig:3P_lj_mass}{{9}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Comparison of the leading jet mass distribution in a contaminated dataset between equivalent background acceptance selections on Anomaly Score and the $D_2$ variable. The $D_2$ selection causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}}{14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Comparison of the leading jet mass distribution in a contaminated dataset between equivalent background acceptance selections on Anomaly Score and the $D_2$ variable. The $D_2$ selection causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}}{14}}
 \newlabel{fig:d2_comp}{{10}{14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces ROC AUC vs. percent signal contamination in training datasets. The performance of the Anomaly Score is consistent across a wide range of contamination levels.}}{15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces ROC AUC vs. percent signal contamination in training datasets. The performance of the Anomaly Score is consistent across a wide range of contamination levels.}}{15}}
 \newlabel{fig:aucs_vs_contam}{{11}{15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Event Level Performance}{15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Event Level Performance}{15}}
 \citation{moneta2011roostats}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Dijet invariant mass vs. Event Score.}}{16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Dijet invariant mass vs. Event Score.}}{16}}
 \newlabel{fig:mjj_vs_evscore}{{12}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Two-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides a significant improvement in signal sensitivity from $0.5\sigma $ to $4\sigma $ while retaining the smoothly falling background distribution.}}{17}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Two-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides a significant improvement in signal sensitivity from $0.5\sigma $ to $4\sigma $ while retaining the smoothly falling background distribution.}}{17}}
 \newlabel{fig:2p_dijet}{{13}{17}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Three-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma $ to $1.5\sigma $ while retaining the smoothly falling background distribution.}}{17}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Three-prong dijet mass distributions before (left) and after (right) a cut on the Event Score, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma $ to $1.5\sigma $ while retaining the smoothly falling background distribution.}}{17}}
 \newlabel{fig:3p_dijet}{{14}{17}}
 \bibstyle{unsrt}
 \bibdata{vrnn}
