@@ -20,7 +20,7 @@ Eric~M. Metodiev, Benjamin Nachman, and Jesse Thaler.
 
 \bibitem{bank2020autoencoders}
 Dor Bank, Noam Koenigstein, and Raja Giryes.
-\newblock Autoencoders, 2020.
+\newblock Autoencoders, 2020, arXiv, 2003.05991.
 
 \bibitem{Farina_2020}
 Marco Farina, Yuichiro Nakai, and David Shih.
@@ -34,7 +34,7 @@ Theo Heimel, Gregor Kasieczka, Tilman Plehn, and Jennifer Thompson.
 
 \bibitem{kingma2014autoencoding}
 Diederik~P Kingma and Max Welling.
-\newblock {Auto-Encoding Variational Bayes}, 2014.
+\newblock {Auto-Encoding Variational Bayes}, 2014, arXiv, 1312.6114.
 
 \bibitem{Goodfellow-et-al-2016}
 Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
@@ -51,7 +51,8 @@ Jinwon An and S.~Cho.
 \bibitem{chung2016recurrent}
 Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron Courville, and
   Yoshua Bengio.
-\newblock A {Recurrent} {Latent} {Variable Model for Sequential Data}, 2016.
+\newblock A {Recurrent} {Latent} {Variable Model for Sequential Data}, 2016,
+  arXiv, 1506.02216.
 
 \bibitem{lstm}
 Sepp Hochreiter and J\"{u}rgen Schmidhuber.
@@ -62,17 +63,17 @@ Sepp Hochreiter and J\"{u}rgen Schmidhuber.
 Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi
   Bougares, Holger Schwenk, and Yoshua Bengio.
 \newblock {Learning Phrase Representations using RNN Encoder-Decoder for
-  Statistical Machine Translation}, 2014.
+  Statistical Machine Translation}, 2014, arXiv, 1406.1078.
 
 \bibitem{activations}
 Chigozie Nwankpa, Winifred Ijomah, Anthony Gachagan, and Stephen Marshall.
 \newblock Activation {Functions}: {Comparison} of trends in {Practice} and
-  {Research} for {Deep} {Learning}, 2018.
+  {Research} for {Deep} {Learning}, 2018, arXiv, 1811.03378.
 
 \bibitem{dataset}
 Gregor Kasieczka, Ben Nachman, and David Shih.
 \newblock {R\&D Dataset for LHC Olympics 2020 Anomaly Detection Challenge},
-  April 2019.
+  April 2019, Zenodo, https://doi.org/10.5281/zenodo.2629073.
 
 \bibitem{Cacciari_2008}
 Matteo Cacciari, Gavin~P Salam, and Gregory Soyez.
@@ -91,7 +92,8 @@ S.~Purushotham, Wilka Carvalho, Tanachat Nilanon, and Y.~Liu.
 
 \bibitem{roy2020robust}
 Tuhin~S. Roy and Aravind~H. Vijay.
-\newblock A robust anomaly finder based on autoencoders, 2020.
+\newblock A robust anomaly finder based on autoencoders, 2020, arXiv,
+  1903.02032.
 
 \bibitem{d2}
 Simone Marzani, Gregory Soyez, and Michael Spannowsky.
@@ -101,6 +103,6 @@ Simone Marzani, Gregory Soyez, and Michael Spannowsky.
 \bibitem{moneta2011roostats}
 Lorenzo Moneta, Kevin Belasco, Kyle Cranmer, Sven Kreiss, Alfio Lazzaro, Danilo
   Piparo, Gregory Schott, Wouter Verkerke, and Matthias Wolf.
-\newblock {The RooStats Project}, 2011.
+\newblock {The RooStats Project}, 2011, arXiv, 1009.1003.
 
 \end{thebibliography}
