@@ -860,14 +860,18 @@ In the jet-level assessment, the model is trained on the leading jet of each eve
 	\label{fig:auc_vs_epoch}
 \end{figure}
 
+
 To evaluate the model's performance, the weights corresponding to a training period of 100 epochs were chosen in the following studies. Figure \ref{fig:score_transform} shows the distributions of the Anomaly Score for leading jets in the background sample and both the two-prong and three-prong signal samples after applying the transformation in Equation~\ref{eq:transformation}.
+
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
 		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
 	\end{center}
-	\caption{Anomaly Score distributions after applying the transformation described in Equation~\ref{eq:transformation}. The Anomaly Score in these figures is computed from the leading jet in each event, for both the background sample and two-prong (left) or three-prong (right) signal samples.}
+
+	\caption{Anomaly Score distributions from training over a dataset with 10\% signal contamination after applying the transformation described in Equation~\ref{eq:transformation}. The Anomaly Score in these figures is computed from the leading jets of each event, for both the background sample and two-prong (left) or three-prong (right) signal samples.}
+
 	\label{fig:score_transform}
 \end{figure}
 
@@ -918,6 +922,7 @@ Another important study involves the model's performance over a range of signal 
 levels. Figure~\ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses
 after training on each of the contaminated datasets described in Section 3. 
 At each level of contamination, the VRNN is trained on both the respective two-prong and three-prong contaminated datasets for 100 epochs. 
+
 The resulting trained network is then used to assign an Anomaly Score to each jet in the dataset. 
 AUC values for each level of contamination are determined from a ROC curve built from 1000 randomly selected jets from both the background and signal sets after training.
 Error bars are computed by repeating this process 100 times and determining the standard deviation of the resulting distribution of AUC values.
