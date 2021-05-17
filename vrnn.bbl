@@ -79,11 +79,9 @@ M.~Cacciari, G.~P. Salam, and G.~Soyez, {\it The anti-kt jet clustering
   algorithm},  {\em Journal of High Energy Physics} {\bf 2008} (Apr, 2008)
   063–063.
 
-\bibitem{adversarial}
-{\relax ATLAS Collaboration}, {\it {Performance of mass-decorrelated jet
-  substructure observables for hadronic two-body decay tagging in ATLAS}},
-  2018.
-\newblock ATL-PHYS-PUB-2018-014.
+\bibitem{louppe2017learning}
+G.~Louppe, M.~Kagan, and K.~Cranmer, {\it Learning to pivot with adversarial
+  networks},  \href{http://arxiv.org/abs/1611.01046}{{\tt arXiv:1611.01046}}.
 
 \bibitem{Purushotham2017VariationalRA}
 S.~Purushotham, W.~Carvalho, T.~Nilanon, and Y.~Liu, {\it {Variational

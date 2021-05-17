@@ -5,36 +5,36 @@ The style file: jhep.bst
 Database file #1: vrnn.bib
 You've used 22 entries,
             2195 wiz_defined-function locations,
-            633 strings with 6848 characters,
-and the built_in function-call counts, 4519 in all, are:
-= -- 391
-> -- 263
+            634 strings with 6827 characters,
+and the built_in function-call counts, 4534 in all, are:
+= -- 392
+> -- 270
 < -- 0
-+ -- 96
-- -- 74
-* -- 362
-:= -- 720
-add.period$ -- 27
++ -- 98
+- -- 76
+* -- 372
+:= -- 726
+add.period$ -- 26
 call.type$ -- 22
 change.case$ -- 21
 chr.to.int$ -- 0
 cite$ -- 22
 duplicate$ -- 214
-empty$ -- 402
-format.name$ -- 74
-if$ -- 1075
+empty$ -- 392
+format.name$ -- 76
+if$ -- 1073
 int.to.chr$ -- 0
 int.to.str$ -- 22
-missing$ -- 67
-newline$ -- 73
+missing$ -- 70
+newline$ -- 72
 num.names$ -- 22
-pop$ -- 99
+pop$ -- 94
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 94
+skip$ -- 92
 stack$ -- 0
-substring$ -- 92
+substring$ -- 97
 swap$ -- 48
 text.length$ -- 0
 text.prefix$ -- 0
@@ -43,4 +43,4 @@ type$ -- 0
 warning$ -- 0
 while$ -- 26
 width$ -- 24
-write$ -- 188
+write$ -- 186
