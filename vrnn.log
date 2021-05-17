@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  17 MAY 2021 14:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  17 MAY 2021 14:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2018-04-01> patch level 2
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@section=\count81
@@ -848,57 +848,22 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \bframesep=\dimen274
 \bframebox=\box60
 LaTeX Info: Redefining \\ on input line 3056.
+) (./jheppub.sty
+Package: jheppub 2013/03/21 r534
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
-Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count288
-\algocf@hangindent=\skip62
-
-(/usr/local/texlive/2018/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
-Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count289
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
+\epsfxsize=\dimen275
+\epsfysize=\dimen276
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/tools/xspace.sty
-Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
-)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/relsize/relsize.sty
-Package: relsize 2013/03/29 ver 4.1
-)
-\skiptotal=\skip63
-\skiplinenumber=\skip64
-\skiprule=\skip65
-\skiphlne=\skip66
-\skiptext=\skip67
-\skiplength=\skip68
-\algomargin=\skip69
-\skipalgocfslide=\skip70
-\algowidth=\dimen275
-\inoutsize=\dimen276
-\inoutindent=\dimen277
-\interspacetitleruled=\dimen278
-\interspacealgoruled=\dimen279
-\interspacetitleboxruled=\dimen280
-\algocf@ruledwidth=\skip71
-\algocf@inoutbox=\box61
-\algocf@inputbox=\box62
-\AlCapSkip=\skip72
-\AlCapHSkip=\skip73
-\algoskipindent=\skip74
-\algocf@nlbox=\box63
-\algocf@hangingbox=\box64
-\algocf@untilbox=\box65
-\algocf@skipuntil=\skip75
-\algocf@capbox=\box66
-\algocf@lcaptionbox=\skip76
-\algoheightruledefault=\skip77
-\algoheightrule=\skip78
-\algotitleheightruledefault=\skip79
-\algotitleheightrule=\skip80
-\c@algocfline=\count290
-\c@algocfproc=\count291
-\c@algocf=\count292
-\algocf@algoframe=\box67
-\algocf@algobox=\box68
+(/usr/local/texlive/2018/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip62
+\bibsep=\skip63
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count288
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
@@ -956,20 +921,27 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen281
-\Hy@linkcounter=\count293
-\Hy@pagecounter=\count294
+\@linkdim=\dimen277
+\Hy@linkcounter=\count289
+\Hy@pagecounter=\count290
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count295
+\Hy@SavedSpaceFactor=\count291
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
+Package hyperref Info: Option `colorlinks' set `true' on input line 4383.
+
+
+Package hyperref Warning: Option `pagecolor' is not available anymore.
+
+Package hyperref Info: Option `linktocpage' set `true' on input line 4383.
+Package hyperref Info: Option `pdfa' set `true' on input line 4383.
 Package hyperref Info: Hyper figures OFF on input line 4509.
 Package hyperref Info: Link nesting OFF on input line 4514.
 Package hyperref Info: Hyper index ON on input line 4517.
@@ -977,43 +949,104 @@ Package hyperref Info: Plain pages OFF on input line 4524.
 Package hyperref Info: Backreferencing OFF on input line 4529.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4762.
-\c@Hy@tempcnt=\count296
-
+\c@Hy@tempcnt=\count292
 (/usr/local/texlive/2018/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip20
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5115.
-\XeTeXLinkMargin=\dimen282
-\Fld@menulength=\count297
-\Field@Width=\dimen283
-\Fld@charsize=\dimen284
+\XeTeXLinkMargin=\dimen278
+\Fld@menulength=\count293
+\Field@Width=\dimen279
+\Fld@charsize=\dimen280
 Package hyperref Info: Hyper figures OFF on input line 6369.
 Package hyperref Info: Link nesting OFF on input line 6374.
 Package hyperref Info: Hyper index ON on input line 6377.
 Package hyperref Info: backreferencing OFF on input line 6384.
-Package hyperref Info: Link coloring OFF on input line 6389.
+Package hyperref Info: Link coloring ON on input line 6387.
 Package hyperref Info: Link coloring with OCG OFF on input line 6394.
-Package hyperref Info: PDF/A mode OFF on input line 6399.
+Package hyperref Info: PDF/A mode ON on input line 6397.
 LaTeX Info: Redefining \ref on input line 6439.
 LaTeX Info: Redefining \pageref on input line 6443.
-\Hy@abspage=\count298
-\c@Item=\count299
-\c@Hfootnote=\count300
+\Hy@abspage=\count294
+\c@Item=\count295
+\c@Hfootnote=\count296
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
-\Fld@listcount=\count301
-\c@bookmark@seq@number=\count302
+\Fld@listcount=\count297
+\c@bookmark@seq@number=\count298
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip81
+\Hy@SectionHShift=\skip64
+)
+\auth@toks=\toks42
+\affil@toks=\toks43
+\email@toks=\toks44
+\c@email@counter=\count299
+\affiliationsSep=\skip65
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 158.
+
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2017/07/18 v5.2 algorithms environments
+\c@AlgoLine=\count300
+\algocf@hangindent=\skip66
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count301
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+\skiptotal=\skip67
+\skiplinenumber=\skip68
+\skiprule=\skip69
+\skiphlne=\skip70
+\skiptext=\skip71
+\skiplength=\skip72
+\algomargin=\skip73
+\skipalgocfslide=\skip74
+\algowidth=\dimen281
+\inoutsize=\dimen282
+\inoutindent=\dimen283
+\interspacetitleruled=\dimen284
+\interspacealgoruled=\dimen285
+\interspacetitleboxruled=\dimen286
+\algocf@ruledwidth=\skip75
+\algocf@inoutbox=\box61
+\algocf@inputbox=\box62
+\AlCapSkip=\skip76
+\AlCapHSkip=\skip77
+\algoskipindent=\skip78
+\algocf@nlbox=\box63
+\algocf@hangingbox=\box64
+\algocf@untilbox=\box65
+\algocf@skipuntil=\skip79
+\algocf@capbox=\box66
+\algocf@lcaptionbox=\skip80
+\algoheightruledefault=\skip81
+\algoheightrule=\skip82
+\algotitleheightruledefault=\skip83
+\algotitleheightrule=\skip84
+\c@algocfline=\count302
+\c@algocfproc=\count303
+\c@algocf=\count304
+\algocf@algoframe=\box67
+\algocf@algobox=\box68
 )
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarydecorations.pathreplacing.code.tex
@@ -1021,14 +1054,14 @@ s/tikzlibrarydecorations.pathreplacing.code.tex
 s/tikzlibrarydecorations.code.tex
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduledecoration
 s.code.tex
-\pgfdecoratedcompleteddistance=\dimen285
-\pgfdecoratedremainingdistance=\dimen286
-\pgfdecoratedinputsegmentcompleteddistance=\dimen287
-\pgfdecoratedinputsegmentremainingdistance=\dimen288
-\pgf@decorate@distancetomove=\dimen289
-\pgf@decorate@repeatstate=\count303
-\pgfdecorationsegmentamplitude=\dimen290
-\pgfdecorationsegmentlength=\dimen291
+\pgfdecoratedcompleteddistance=\dimen287
+\pgfdecoratedremainingdistance=\dimen288
+\pgfdecoratedinputsegmentcompleteddistance=\dimen289
+\pgfdecoratedinputsegmentremainingdistance=\dimen290
+\pgf@decorate@distancetomove=\dimen291
+\pgf@decorate@repeatstate=\count305
+\pgfdecorationsegmentamplitude=\dimen292
+\pgfdecorationsegmentlength=\dimen293
 )
 \tikz@lib@dec@box=\box69
 )
@@ -1046,32 +1079,34 @@ File: pgflibraryshapes.misc.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.5)
 s/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.1a (rcs-revision 1.7)
 )
-\c@lastnote=\count304
+\c@lastnote=\count306
  (./vrnn.aux)
 \openout1 = `vrnn.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 88.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 88.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 123.
+
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 88.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 123.
+
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -1079,17 +1114,17 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ABD: EveryShipout initializing macros
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count305
-\scratchdimen=\dimen292
+\scratchcounter=\count307
+\scratchdimen=\dimen294
 \scratchbox=\box70
-\nofMPsegments=\count306
-\nofMParguments=\count307
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count308
-\MPscratchDim=\dimen293
-\MPnumerator=\count309
-\makeMPintoPDFobject=\count310
-\everyMPtoPDFconversion=\toks43
+\nofMPsegments=\count308
+\nofMParguments=\count309
+\everyMPshowfont=\toks45
+\MPscratchCnt=\count310
+\MPscratchDim=\dimen295
+\MPnumerator=\count311
+\makeMPintoPDFobject=\count312
+\everyMPtoPDFconversion=\toks46
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1108,7 +1143,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box71
-Package hyperref Info: Link coloring OFF on input line 88.
+Package hyperref Info: Link coloring ON on input line 123.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1116,45 +1151,48 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count311
+\c@section@level=\count313
 )
-LaTeX Info: Redefining \ref on input line 88.
-LaTeX Info: Redefining \pageref on input line 88.
-LaTeX Info: Redefining \nameref on input line 88.
+LaTeX Info: Redefining \ref on input line 123.
+LaTeX Info: Redefining \pageref on input line 123.
+LaTeX Info: Redefining \nameref on input line 123.
 
 (./vrnn.out) (./vrnn.out)
 \@outlinefile=\write4
 \openout4 = `vrnn.out'.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 96.
-LaTeX Font Info:    Try loading font information for U+msa on input line 96.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 130.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 130.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 130.
+LaTeX Font Info:    Try loading font information for U+msa on input line 130.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 96.
+LaTeX Font Info:    Try loading font information for U+msb on input line 130.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (20.44276pt too wide) in paragraph at lines 96--96
- [][] 
- []
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 130.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
-[1
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 145.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 180.
-
-[1
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 155.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.197 
+       [1
 
 
 ]
@@ -1162,6 +1200,8 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 283.
  [2] [3]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -1169,148 +1209,145 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
  [4] [5]
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
- [6] [7]
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 730.
+<imgs/VRNN_Diagram.pdf, id=139, 490.19963pt x 360.63042pt>
+File: imgs/VRNN_Diagram.pdf Graphic file (type pdf)
+<use imgs/VRNN_Diagram.pdf>
+Package pdftex.def Info: imgs/VRNN_Diagram.pdf  used on input line 680.
+(pdftex.def)             Requested size: 420.0pt x 308.99153pt.
+ [6] [7 <./imgs/VRNN_Diagram.pdf>] [8]
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 746.
 
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [8]
+) [9]
 <imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOn
-ly_Avg_M_vs_Score_ProcTest_SaveForPaper.png, id=175, 462.528pt x 346.896pt>
+ly_Avg_M_vs_Score_ProcTest_SaveForPaper.png, id=233, 462.528pt x 346.896pt>
 File: imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_Co
 nstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png Graphic file (type png)
 <use imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_Con
 stOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png>
 Package pdftex.def Info: imgs/ProcNoBoostPt_Background_July20_Background_July20
 _Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png  used on in
-put line 795.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
+put line 811.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly
-_Avg_M_vs_Score_ProcTest_SaveForPaper.png, id=177, 462.528pt x 346.896pt>
+_Avg_M_vs_Score_ProcTest_SaveForPaper.png, id=235, 462.528pt x 346.896pt>
 File: imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_Cons
 tOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png Graphic file (type png)
 <use imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_Const
 Only_Avg_M_vs_Score_ProcTest_SaveForPaper.png>
 Package pdftex.def Info: imgs/ProcBoostPt_Background_July20_Background_July20_W
 eights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png  used on inpu
-t line 796.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
- [9 <./imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_C
+t line 812.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
+ [10]
+[11 <./imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_C
 onstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png> <./imgs/ProcBoostPt_Backgrou
 nd_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_S
 aveForPaper.png>]
-<imgs/Anom_Score_CompPt_SaveForPaper.png, id=193, 462.528pt x 346.896pt>
+<imgs/Anom_Score_CompPt_SaveForPaper.png, id=258, 462.528pt x 346.896pt>
 File: imgs/Anom_Score_CompPt_SaveForPaper.png Graphic file (type png)
 <use imgs/Anom_Score_CompPt_SaveForPaper.png>
 Package pdftex.def Info: imgs/Anom_Score_CompPt_SaveForPaper.png  used on input
- line 817.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
-<imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png, id=194, 462.528pt x 3
+ line 833.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
+<imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png, id=259, 462.528pt x 3
 46.896pt>
 File: imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png Graphic file (typ
 e png)
 <use imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.pn
-g  used on input line 818.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
- [10 <./imgs/Anom_Score_CompPt_SaveForPaper.png> <./imgs/bugfix/Anom_Score_Comp
+g  used on input line 834.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
+ [12 <./imgs/Anom_Score_CompPt_SaveForPaper.png> <./imgs/bugfix/Anom_Score_Comp
 Kt_Rev_Lead_SaveForPaper.png>]
-<imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png, id=205, 462.528pt x 346.896pt>
+<imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png, id=270, 462.528pt x 346.896pt>
 File: imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png Graphic file (type png)
 <use imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png  used on
- input line 858.
+ input line 874.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
- [11]
 <imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png, id=2
-14, 462.528pt x 346.896pt>
+73, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png 
 Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lea
-d_SaveForPaper.png  used on input line 870.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
+d_SaveForPaper.png  used on input line 886.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png, id=2
-15, 462.528pt x 346.896pt>
+74, 462.528pt x 346.896pt>
 File: imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png 
 Graphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lea
-d_SaveForPaper.png  used on input line 871.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
- [12 <./imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png> <./imgs/bugfix/2Prong_Co
-ntaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png> <./imgs/bugfix/3Prong_Cont
-aminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>]
-<imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=23
-0, 462.528pt x 346.896pt>
+d_SaveForPaper.png  used on input line 887.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
+ [13 <./imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png>]
+<imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=28
+6, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png G
 raphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead
-_SaveForPaper.png  used on input line 885.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
+_SaveForPaper.png  used on input line 901.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPa
-per.png, id=231, 462.528pt x 346.896pt>
+per.png, id=287, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_Save
 ForPaper.png Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveF
 orPaper.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0
-p65_Multi_Lead_SaveForPaper.png  used on input line 886.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
-<imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=23
-2, 462.528pt x 346.896pt>
+p65_Multi_Lead_SaveForPaper.png  used on input line 902.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
+ [14 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.pn
+g> <./imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>
+]
+<imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=29
+6, 462.528pt x 346.896pt>
 File: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png G
 raphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead
-_SaveForPaper.png  used on input line 894.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
+_SaveForPaper.png  used on input line 910.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPa
-per.png, id=233, 462.528pt x 346.896pt>
+per.png, id=297, 462.528pt x 346.896pt>
 File: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_Save
 ForPaper.png Graphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveF
 orPaper.png>
 Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0
-p65_Multi_Lead_SaveForPaper.png  used on input line 895.
-(pdftex.def)             Requested size: 225.0pt x 168.7525pt.
- [13 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png
+p65_Multi_Lead_SaveForPaper.png  used on input line 911.
+(pdftex.def)             Requested size: 213.0pt x 159.74876pt.
+ [15 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png
 > <./imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveF
 orPaper.png> <./imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForP
 aper.png> <./imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Le
 ad_SaveForPaper.png>]
 <imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Lead_S
-aveForPaper.png, id=247, 462.528pt x 346.896pt>
+aveForPaper.png, id=310, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_L
 ead_SaveForPaper.png Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Le
 ad_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore
-0p65_Multi_D2Comp_Lead_SaveForPaper.png  used on input line 912.
+0p65_Multi_D2Comp_Lead_SaveForPaper.png  used on input line 928.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
-<imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png, id=249, 462.528pt x 346.896pt
+<imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png, id=312, 462.528pt x 346.896pt
 >
 File: imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png Graphic file (type png)
 <use imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png  used 
-on input line 936.
+on input line 952.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
- [14 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp
-_Lead_SaveForPaper.png>]
+ [16 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp
+_Lead_SaveForPaper.png>] [17 <./imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png
+>]
 <imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Ev
-ent_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png, id=257, 462.528pt 
+ent_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png, id=328, 462.528pt 
 x 346.896pt>
 File: imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weigh
 ts_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png Graphic file (
@@ -1319,103 +1356,104 @@ type png)
 s_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png>
 Package pdftex.def Info: imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Cont
 aminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead
-.png  used on input line 958.
+.png  used on input line 974.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
- [15 <./imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png>]
-Overfull \hbox (6.4393pt too wide) in paragraph at lines 967--968
-[]\OT1/ptm/m/n/12 Figure []13[] shows the di-jet mass dis-tri-bu-tions of the s
-ig-nal, back-ground, and con-tam-i-nated datasets,
- []
-
-<imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=26
-7, 462.528pt x 520.344pt>
+<imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=33
+2, 462.528pt x 520.344pt>
 File: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png G
 raphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_Save
-ForPaper_Lead.png  used on input line 973.
-(pdftex.def)             Requested size: 225.0pt x 253.12875pt.
+ForPaper_Lead.png  used on input line 989.
+(pdftex.def)             Requested size: 213.0pt x 239.62315pt.
 <imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_
-Lead.png, id=268, 462.528pt x 520.344pt>
+Lead.png, id=333, 462.528pt x 520.344pt>
 File: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForP
 aper_Lead.png Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPa
 per_Lead.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore
-0p65_Multi_SaveForPaper_Lead.png  used on input line 974.
-(pdftex.def)             Requested size: 225.0pt x 253.12875pt.
-[16 <./imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weig
-hts_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png>]
-<imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=27
-7, 462.528pt x 520.344pt>
+0p65_Multi_SaveForPaper_Lead.png  used on input line 990.
+(pdftex.def)             Requested size: 213.0pt x 239.62315pt.
+ [18 <./imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Wei
+ghts_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png>]
+<imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=34
+3, 462.528pt x 520.344pt>
 File: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png G
 raphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png>
 Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_Save
-ForPaper_Lead.png  used on input line 983.
-(pdftex.def)             Requested size: 225.0pt x 253.12875pt.
+ForPaper_Lead.png  used on input line 999.
+(pdftex.def)             Requested size: 213.0pt x 239.62315pt.
 <imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_
-Lead.png, id=278, 462.528pt x 520.344pt>
+Lead.png, id=344, 462.528pt x 520.344pt>
 File: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForP
 aper_Lead.png Graphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPa
 per_Lead.png>
 Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore
-0p65_Multi_SaveForPaper_Lead.png  used on input line 984.
-(pdftex.def)             Requested size: 225.0pt x 253.12875pt.
- [17 <./imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png
+0p65_Multi_SaveForPaper_Lead.png  used on input line 1000.
+(pdftex.def)             Requested size: 213.0pt x 239.62315pt.
+ [19 <./imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png
 > <./imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPa
 per_Lead.png> <./imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper
 _Lead.png> <./imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_
-SaveForPaper_Lead.png>] (./vrnn.bbl [18
+SaveForPaper_Lead.png>] [20
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 29.
+Overfull \hbox (18.30037pt too wide) in paragraph at lines 1047--1048
+[]\OT1/ptm/m/n/10.95 IO is sup-ported by the fel-low-ship LCF/BQ/PI20/11760025 
+from "la Caixa" Foun-da-tion (ID 100010434)
+ []
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [19]) [20]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1042.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1042.
+(./vrnn.bbl [21
 
-(./vrnn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1042.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1042.
+]) [22]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1059.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1059.
+ (./vrnn.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1059.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1059.
 
 Package rerunfilecheck Info: File `vrnn.out' has not changed.
 (rerunfilecheck)             Checksum: 3DCC948471E17D9E6C3985647D92CE15;626.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1042.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1059.
  ) 
 Here is how much of TeX's memory you used:
- 28561 strings out of 492649
- 564318 string characters out of 6129622
- 643434 words of memory out of 5000000
- 31927 multiletter control sequences out of 15000+600000
- 565948 words of font info for 97 fonts, out of 8000000 for 9000
+ 29076 strings out of 492649
+ 569576 string characters out of 6129622
+ 654480 words of memory out of 5000000
+ 32414 multiletter control sequences out of 15000+600000
+ 569899 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,22n,68p,10372b,968s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/te
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/tex
-live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
-ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texli
-ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive
-/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/tex
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive
+/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2
 018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/201
-8/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/texmf
--dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texmf-dist/fo
-nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
-urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/
-utmri8a.pfb>
-Output written on vrnn.pdf (21 pages, 705178 bytes).
+8/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/fon
+ts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/ur
+w/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/ut
+mr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+
+Output written on vrnn.pdf (23 pages, 917218 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
- 308 compressed objects within 4 object streams
- 92 named destinations out of 1000 (max. 500000)
- 183 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 465 PDF objects out of 1000 (max. 8388607)
+ 370 compressed objects within 4 object streams
+ 96 named destinations out of 1000 (max. 500000)
+ 188 words of extra memory for PDF output out of 10000 (max. 10000000)
 

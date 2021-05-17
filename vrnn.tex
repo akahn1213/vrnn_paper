@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[11pt, a4paper]{article}
 %\usepackage{jheppub}
 %\usepackage{scicite}
 \usepackage{times}
@@ -13,16 +13,17 @@
 \usepackage{xfrac}
 \usepackage{soul}
 \usepackage{lineno}
+\usepackage{jheppub}
 \usepackage[ruled,vlined]{algorithm2e}
-\usepackage[hidelinks]{hyperref}
+%\usepackage[hidelinks]{hyperref}
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{shapes.misc, positioning}
 \sectionfont{\fontsize{14}{15}\selectfont}
-\topmargin -2.0cm
-\oddsidemargin 0.2cm
-\textwidth 16cm 
-\textheight 26cm
-\footskip 1cm
+%\topmargin -2.0cm
+%\oddsidemargin 0.2cm
+%\textwidth 16cm 
+%\textheight 26cm
+%\footskip 1cm
 
 \setlength\parindent{0pt}
 \setlength\parskip{8pt}
@@ -69,21 +70,55 @@
 
 %%%%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%%
 
-\linethickness{0.5mm}
-\title{\bf{Anomalous Jet Tagging via Sequence Modeling}\\\line(1,0){450}} 
 
-\author
-{Alan Kahn$^{\dagger}$, Julia Gonski$^{\dagger}$, In\^{e}s Ochoa$^{\ddagger}$, Daniel Williams$^{\dagger}$, Gustaaf Brooijmans$^{\dagger}$\\
-\\
-\normalsize{$^{\dagger}$Nevis Laboratories, Columbia University, Irvington, USA}\\
-\normalsize{$^{\ddagger}$Laboratory of Instrumentation and Experimental Particle Physics, Lisbon, Portugal}
-}
+\title{Anomalous Jet Tagging via Sequence Modeling} 
 
-\date{}
+\author[a]{Alan Kahn}
+\author[a]{Julia Gonski}
+\author[b]{In\^{e}s Ochoa}
+\author[a]{Daniel Williams}
+\author[a]{Gustaaf Brooijmans}
+
+\affiliation[a]{Nevis Laboratories, Columbia University, \\Irvington, USA}
+\affiliation[b]{Laboratory of Instrumentation and Experimental Particle Physics, \\Lisbon, Portugal}
+
+\emailAdd{ak3978@columbia.edu}
+\emailAdd{julia.lynne.gonski@gmail.com}
+\emailAdd{ines.ochoa@cern.ch}
+\emailAdd{dmw2174@columbia.edu}
+\emailAdd{gusbroo@nevis.columbia.edu}
+
+\arxivnumber{1234.5678}
 
 %%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%
 
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%
+
+\abstract{This paper presents a novel method of searching for boosted hadronically
+  decaying objects by treating them as anomalous elements of
+  a contaminated dataset.  
+ A \textit{Variational Recurrent Neural Network} (VRNN) is used to model jets as sequences of constituent four-vectors. 
+After applying a pre-processing method which boosts each jet to the same reference mass and energy, the VRNN provides each jet an \textit{Anomaly Score} that distinguishes between the structure of signal and background jets.
+The model is trained in an entirely unsupervised setting and without high level variables, making the score more robust against mass and $p_{T}$ correlations when compared to methods based primarily on jet substructure. 
+Performance is evaluated on the jet level, as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. 
+The Anomaly Score shows consistent performance along a wide range of signal contamination amounts, for both two and three-pronged jet substructure hypotheses. 
+Analysis results demonstrate that the use of Anomaly Score as a classifier enhances signal sensitivity while retaining a smoothly falling background jet mass distribution. 
+The model's discriminatory performance resulting from an unsupervised training scenario opens up the possibility to train directly on data without a pre-defined signal hypothesis.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\notoc
 
 \begin{document} 
 
@@ -98,31 +133,6 @@
 \setlength{\belowdisplayskip}{5pt}
 \setlength{\abovedisplayshortskip}{0pt}
 \setlength{\belowdisplayshortskip}{0pt}
-
-
-%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%
-
-\begin{sciabstract}
-  \begin{center}
-  {\large\bf{Abstract}\\}
-  \end{center}
-  
-  \vspace{0.4cm}
-
-This paper presents a novel method of searching for boosted hadronically
-  decaying objects by treating them as anomalous elements of
-  a contaminated dataset.  
- A \textit{Variational Recurrent Neural Network} (VRNN) is used to model jets as sequences of constituent four-vectors. 
-After applying a pre-processing method which boosts each jet to the same reference mass and energy, the VRNN provides each jet an \textit{Anomaly Score} that distinguishes between the structure of signal and background jets.
-The model is trained in an entirely unsupervised setting and without high level variables, making the score more robust against mass and $p_{T}$ correlations when compared to methods based primarily on jet substructure. 
-Performance is evaluated on the jet level, as well as in an analysis context by searching for a heavy resonance with a final state of two boosted jets. 
-The Anomaly Score shows consistent performance along a wide range of signal contamination amounts, for both two and three-pronged jet substructure hypotheses. 
-Analysis results demonstrate that the use of Anomaly Score as a classifier enhances signal sensitivity while retaining a smoothly falling background jet mass distribution. 
-The model's discriminatory performance resulting from an unsupervised training scenario opens up the possibility to train directly on data without a pre-defined signal hypothesis.
-
-    
-  
-\end{sciabstract}
 
 
 \clearpage
@@ -146,7 +156,7 @@ The model's discriminatory performance resulting from an unsupervised training s
 
 
 
-Many of the open questions in physics, such as the nature of dark matter or the origin of the universe's matter-antimatter asymmetry, could potentially be addressed by the ATLAS and CMS experiments at the CERN Large Hadron Collider (LHC).\blfootnote{A code package demonstrating the model used in this study can be found at: https://gitlab.cern.ch/alkahn/vrnn}
+Many of the open questions in physics, such as the nature of dark matter or the origin of the universe's matter-antimatter asymmetry, could potentially be addressed by the ATLAS and CMS experiments at the CERN Large Hadron Collider (LHC).\blfootnote{A code package demonstrating the model used in this study can be found at: \url{https://gitlab.cern.ch/alkahn/vrnn}.}
 Since the discovery of the Higgs boson in 2012~\cite{atlas_higgs,cms_higgs}, no signals of new beyond the Standard Model (BSM) physics have been found. 
 However, sophisticated analysis tools utilizing novel machine learning models hold promise to increase the sensitivity to rare signals. 
  
@@ -514,158 +524,164 @@ This loss function performs the same role as the VAE's loss function, acting bot
 
 
 %VRNN Diagram
+%\begin{figure}[H]
+%  \begin{center}
+%  
+%    \def\layersep{2.5cm}
+%    
+%    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+%        \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+%        \tikzstyle{neuron}=[rectangle,fill=black!25, draw=black!80, very thick, minimum width=0.75cm, minimum height=2.5cm, inner sep=0pt]
+%        \tikzstyle{input neuron}=[neuron, fill=iocolor, rotate=90, minimum width = 3cm, minimum height = 1cm];
+%        \tikzstyle{gru}=[rounded rectangle, draw=black!80, very thick, rotate=90, minimum width = 2.5cm, minimum height = 0.75cm, inner sep=0pt];
+%        \tikzstyle{output neuron}=[neuron, fill=red!50];
+%        \tikzstyle{latent neuron musig}=[neuron, fill=black!10!yellow];
+%        \tikzstyle{latent neuron}=[neuron, fill=layercolor, minimum height=0.75cm, minimum width=0.75cm];
+%        \tikzstyle{layer neuron}=[neuron, fill=layercolor];
+%        \tikzstyle{hidden neuron}=[neuron, fill=hscolor];
+%        \tikzstyle{feature neuron}=[neuron, fill=featcolor];
+%        \tikzstyle{hlv neuron}=[neuron, fill=hlvcolor];
+%        \tikzstyle{annot} = [text width=4em, text centered]
+%        \tikzstyle{kldash} = [rounded rectangle, draw=black!80, dashed, very thick, minimum width=1cm, minimum height=10cm, inner sep=0pt];
+%    
+%        % Draw the input layer nodes
+%        %\foreach \name / \y in {1,...,6}
+%        % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+%        %    \node[input neuron] (I-\name) at (0,-\y) {};
+%
+%
+%        %INPUTS
+%        \node[input neuron] (Ix) at (0, -1) {x(t)};
+%        %\node[input neuron, fill=hlvcolor] (Ihlv) at (0, -5) {HLV};
+%        \node[input neuron, fill=hscolor] (Ihs) at (0, -9) {h(t-1)};
+%        \node[input neuron] (Oy) at (14.85, -1) {y(t)};
+%        \node[input neuron, fill=hscolor] (Ohs) at (14.85, -7.25) {h(t)};
+%
+%        %Intermediate Layers
+%        \node[layer neuron] (h1) at (1.35, -1) {};
+%        \node[feature neuron] (phix) at (2.7, -1) {$\phi_{x}$};
+%        \node[feature neuron] (phiz) at (10.8, -1) {$\phi_{z}$};
+%
+%        %Concatenated Layers
+%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixi) at (4.05, -0.375) {$\phi_{x}$};
+%        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvi) at (4.05, -1) {\small HLV};
+%        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsi) at (4.05, -1.625) {\small h(t-1)};
+%
+%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizo) at (12.15, -0.375) {$\phi_{z}$};
+%        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvo) at (12.15, -1) {\small HLV};
+%        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathso) at (12.15, -1.625) {\small h(t-1)};
+%
+%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizh) at (12.15, -4.25) {$\phi_{z}$};
+%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixh) at (12.15, -5.5) {$\phi_{x}$};
+%        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvh) at (12.15, -6.75) {\small HLV};
+%        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsh) at (12.15, -9) {\small h(t-1)};
+%        
+%
+%        %Intermediate Layers
+%        \node[layer neuron] (h2) at (5.4, -1) {};
+%        \node[layer neuron] (h3) at (6.75, -1) {};
+%        \node[layer neuron, fill=hscolor, rotate=90, minimum width=2.5cm, minimum height=0.75cm] (hs1) at (5.4, -7) {h(t-1)};
+%        \node[layer neuron] (hs2) at (6.75, -7) {};
+%        \node[layer neuron] (h4) at (13.5, -1) {};
+%        
+%        %Latent layers
+%        \node[latent neuron] (lmuz) at (8.1, 0) {$\mu$};
+%        \node[latent neuron] (lsiz) at (8.1, -2) {$\sigma$};
+%        \node[latent neuron] (lmuh) at (8.1, -6) {$\mu_{t}$};
+%        \node[latent neuron] (lsih) at (8.1, -8) {$\sigma_{t}$};
+%        \node[latent neuron] (lz) at (9.45, -1) {$z$};
+%
+%
+%        %GRU
+%        \node[gru, fill=grucolor] (gru) at (13.5, -7.25) {GRU};
+%  
+%
+%
+%
+%
+%        %Arrows
+%        %Hidden Layers
+%        \path (Ix) edge (h1);
+%        \path (h1) edge (phix);
+%        \path (h2) edge (h3);
+%        \path (hs1) edge (hs2);
+%        \path (lz) edge (phiz);
+%        \path (h4) edge (Oy);
+%        \path (gru) edge (Ohs);
+%        %\path (cathlvi) edge (h2);
+%        %\path (cathlvo) edge (h4);
+%        \path (catphixh) edge (gru);
+%        \path (cathsh) edge (gru);
+%      
+%
+%
+%        %Latent Space
+%        \path (h3) edge (lmuz);
+%        \path (h3) edge (lsiz);
+%        \path (hs2) edge (lmuh);
+%        \path (hs2) edge (lsih);
+%        \path (lmuz) edge (lz);
+%        \path (lsiz) edge (lz);
+%
+%        
+%
+%        %Other
+%        %\path (phix) edge (catphixi);
+%        %\path (phiz) edge (catphizo);
+%
+%
+%
+%        %HLV Lines
+%        %\draw[->, draw=hlvlinecolor, thick] (0.5, -5) -- (3.3, -5) -- (3.3, -1) -- (3.55, -1);
+%        %\draw[->, draw=hlvlinecolor, thick] (3.2, -5) -- (11.4, -5) -- (11.4, -1) -- (11.65, -1);
+%        %\draw[->, draw=hlvlinecolor, thick] (11.4, -5) -- (11.4, -6.75) -- (11.65, -6.75);
+%
+%
+%        %Hidden State Lines
+%        \draw[->, draw=hslinecolor, thick] (0.5, -9) -- (4.05, -9) -- (4.05, -2.25);
+%        \draw[->, draw=hslinecolor, thick] (4.05, -7) -- (5.0, -7);
+%        \draw[->, draw=hslinecolor, thick] (4.05, -9) -- (11.62, -9);               
+%        \draw[->, draw=hslinecolor, thick] (11.1, -9) -- (11.1, -2.9375) -- (12.15, -2.9375) -- (12.15, -2.25);
+%
+%
+%
+%        %phix,z lines
+%        
+%		\draw[->, draw=hscolor, thick] (4.56, -1) -- (5.025, -1);       
+%		\draw[->, draw=hscolor, thick] (12.66, -1) -- (13.125, -1);   
+%        
+%        \draw[->, draw=featurelinecolor, thick] (2.7, -2.25) -- (2.7, -4.625) -- (9.95, -4.625) -- (9.95, -5.5) -- (11.62, -5.5);
+%        \draw[->, draw=featurelinecolor, thick] (3.075, -0.375) -- (3.55, -0.375);
+%
+%        \draw[->, draw=featurelinecolor, thick] (11.175, -0.375) -- (11.65, -0.375);
+%        \draw[->, draw=featurelinecolor, thick] (10.8, -2.25) -- (10.8, -4.25) -- (11.62, -4.25);
+%    
+%  
+%
+%
+%
+%        %KL dashed box
+%        \node[gru, minimum width=10cm, minimum height=1.25cm, dashed] (kld) at (8.1, -4) {\rotatebox{-45}{$D_{KL}$}};
+%
+%
+%
+%
+%    
+%
+%  
+%    \end{tikzpicture}
+%    \caption{A Variational Recurrent Neural Network cell.}
+%    \label{fig:VRNN}
+%  \end{center}
+%\end{figure}
+
 \begin{figure}[H]
-  \begin{center}
-  
-    \def\layersep{2.5cm}
-    
-    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
-        \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-        \tikzstyle{neuron}=[rectangle,fill=black!25, draw=black!80, very thick, minimum width=0.75cm, minimum height=2.5cm, inner sep=0pt]
-        \tikzstyle{input neuron}=[neuron, fill=iocolor, rotate=90, minimum width = 3cm, minimum height = 1cm];
-        \tikzstyle{gru}=[rounded rectangle, draw=black!80, very thick, rotate=90, minimum width = 2.5cm, minimum height = 0.75cm, inner sep=0pt];
-        \tikzstyle{output neuron}=[neuron, fill=red!50];
-        \tikzstyle{latent neuron musig}=[neuron, fill=black!10!yellow];
-        \tikzstyle{latent neuron}=[neuron, fill=layercolor, minimum height=0.75cm, minimum width=0.75cm];
-        \tikzstyle{layer neuron}=[neuron, fill=layercolor];
-        \tikzstyle{hidden neuron}=[neuron, fill=hscolor];
-        \tikzstyle{feature neuron}=[neuron, fill=featcolor];
-        \tikzstyle{hlv neuron}=[neuron, fill=hlvcolor];
-        \tikzstyle{annot} = [text width=4em, text centered]
-        \tikzstyle{kldash} = [rounded rectangle, draw=black!80, dashed, very thick, minimum width=1cm, minimum height=10cm, inner sep=0pt];
-    
-        % Draw the input layer nodes
-        %\foreach \name / \y in {1,...,6}
-        % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-        %    \node[input neuron] (I-\name) at (0,-\y) {};
-
-
-        %INPUTS
-        \node[input neuron] (Ix) at (0, -1) {x(t)};
-        %\node[input neuron, fill=hlvcolor] (Ihlv) at (0, -5) {HLV};
-        \node[input neuron, fill=hscolor] (Ihs) at (0, -9) {h(t-1)};
-        \node[input neuron] (Oy) at (14.85, -1) {y(t)};
-        \node[input neuron, fill=hscolor] (Ohs) at (14.85, -7.25) {h(t)};
-
-        %Intermediate Layers
-        \node[layer neuron] (h1) at (1.35, -1) {};
-        \node[feature neuron] (phix) at (2.7, -1) {$\phi_{x}$};
-        \node[feature neuron] (phiz) at (10.8, -1) {$\phi_{z}$};
-
-        %Concatenated Layers
-        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixi) at (4.05, -0.375) {$\phi_{x}$};
-        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvi) at (4.05, -1) {\small HLV};
-        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsi) at (4.05, -1.625) {\small h(t-1)};
-
-        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizo) at (12.15, -0.375) {$\phi_{z}$};
-        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvo) at (12.15, -1) {\small HLV};
-        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathso) at (12.15, -1.625) {\small h(t-1)};
-
-        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizh) at (12.15, -4.25) {$\phi_{z}$};
-        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixh) at (12.15, -5.5) {$\phi_{x}$};
-        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvh) at (12.15, -6.75) {\small HLV};
-        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsh) at (12.15, -9) {\small h(t-1)};
-        
-
-        %Intermediate Layers
-        \node[layer neuron] (h2) at (5.4, -1) {};
-        \node[layer neuron] (h3) at (6.75, -1) {};
-        \node[layer neuron, fill=hscolor, rotate=90, minimum width=2.5cm, minimum height=0.75cm] (hs1) at (5.4, -7) {h(t-1)};
-        \node[layer neuron] (hs2) at (6.75, -7) {};
-        \node[layer neuron] (h4) at (13.5, -1) {};
-        
-        %Latent layers
-        \node[latent neuron] (lmuz) at (8.1, 0) {$\mu$};
-        \node[latent neuron] (lsiz) at (8.1, -2) {$\sigma$};
-        \node[latent neuron] (lmuh) at (8.1, -6) {$\mu_{t}$};
-        \node[latent neuron] (lsih) at (8.1, -8) {$\sigma_{t}$};
-        \node[latent neuron] (lz) at (9.45, -1) {$z$};
-
-
-        %GRU
-        \node[gru, fill=grucolor] (gru) at (13.5, -7.25) {GRU};
-  
-
-
-
-
-        %Arrows
-        %Hidden Layers
-        \path (Ix) edge (h1);
-        \path (h1) edge (phix);
-        \path (h2) edge (h3);
-        \path (hs1) edge (hs2);
-        \path (lz) edge (phiz);
-        \path (h4) edge (Oy);
-        \path (gru) edge (Ohs);
-        %\path (cathlvi) edge (h2);
-        %\path (cathlvo) edge (h4);
-        \path (catphixh) edge (gru);
-        \path (cathsh) edge (gru);
-      
-
-
-        %Latent Space
-        \path (h3) edge (lmuz);
-        \path (h3) edge (lsiz);
-        \path (hs2) edge (lmuh);
-        \path (hs2) edge (lsih);
-        \path (lmuz) edge (lz);
-        \path (lsiz) edge (lz);
-
-        
-
-        %Other
-        %\path (phix) edge (catphixi);
-        %\path (phiz) edge (catphizo);
-
-
-
-        %HLV Lines
-        %\draw[->, draw=hlvlinecolor, thick] (0.5, -5) -- (3.3, -5) -- (3.3, -1) -- (3.55, -1);
-        %\draw[->, draw=hlvlinecolor, thick] (3.2, -5) -- (11.4, -5) -- (11.4, -1) -- (11.65, -1);
-        %\draw[->, draw=hlvlinecolor, thick] (11.4, -5) -- (11.4, -6.75) -- (11.65, -6.75);
-
-
-        %Hidden State Lines
-        \draw[->, draw=hslinecolor, thick] (0.5, -9) -- (4.05, -9) -- (4.05, -2.25);
-        \draw[->, draw=hslinecolor, thick] (4.05, -7) -- (5.0, -7);
-        \draw[->, draw=hslinecolor, thick] (4.05, -9) -- (11.62, -9);               
-        \draw[->, draw=hslinecolor, thick] (11.1, -9) -- (11.1, -2.9375) -- (12.15, -2.9375) -- (12.15, -2.25);
-
-
-
-        %phix,z lines
-        
-		\draw[->, draw=hscolor, thick] (4.56, -1) -- (5.025, -1);       
-		\draw[->, draw=hscolor, thick] (12.66, -1) -- (13.125, -1);   
-        
-        \draw[->, draw=featurelinecolor, thick] (2.7, -2.25) -- (2.7, -4.625) -- (9.95, -4.625) -- (9.95, -5.5) -- (11.62, -5.5);
-        \draw[->, draw=featurelinecolor, thick] (3.075, -0.375) -- (3.55, -0.375);
-
-        \draw[->, draw=featurelinecolor, thick] (11.175, -0.375) -- (11.65, -0.375);
-        \draw[->, draw=featurelinecolor, thick] (10.8, -2.25) -- (10.8, -4.25) -- (11.62, -4.25);
-    
-  
-
-
-
-        %KL dashed box
-        \node[gru, minimum width=10cm, minimum height=1.25cm, dashed] (kld) at (8.1, -4) {\rotatebox{-45}{$D_{KL}$}};
-
-
-
-
-    
-
-  
-    \end{tikzpicture}
-    \caption{A Variational Recurrent Neural Network cell.}
-    \label{fig:VRNN}
-  \end{center}
+	\begin{center}
+		\includegraphics[width=420pt]{imgs/VRNN_Diagram.pdf}
+	\end{center}
+	\caption{A Variational Recurrent Neural Network cell.}
+	\label{fig:VRNN}
 \end{figure}
-
-
 
 
 %\subsection{Implementation}
@@ -752,7 +768,7 @@ Algorithm~\ref{alg:boost} describes in detail the implementation of the rescalin
   Rotate jet about $x$ axis until hardest constituent has $\eta_{1} = 0, \phi_{1} > 0$
  
  
-  \eIf{Any constituents have\footnote{$\Delta R$ is computed as $\sqrt{\eta^2 + \phi^2}$ for each constituent, where $\eta$ and $\phi$ are measured relative to the x axis.} $\Delta R > 1$}{
+  \eIf{Any constituents have $\Delta R > 1$\footnote{$\Delta R$ is computed as $\sqrt{\eta^2 + \phi^2}$ for each constituent, where $\eta$ and $\phi$ are measured relative to the x axis.}}{
  
   Remove all constituents with $\Delta R > 1$
  
@@ -792,8 +808,8 @@ To evaluate the efficacy of this procedure, the model is trained on a dataset of
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
-		\includegraphics[width=225pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet mass vs Anomaly Score distributions before (left) and after (right) applying the boosting method detailed in Algorithm~\ref{alg:boost}.}
 	\label{fig:mass_vs_score_boost}
@@ -814,8 +830,8 @@ The effect on performance due to this choice of constituent ordering can be easi
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/Anom_Score_CompPt_SaveForPaper.png}
-		\includegraphics[width=225pt]{imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/Anom_Score_CompPt_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet Anomaly Score distributions for background and two-prong signal events, with $p_T$-sorted (left) and $k_{t}$-sorted (right) ordering of constituents for input jets.}
 	\label{fig:score_comp}
@@ -867,8 +883,8 @@ To evaluate the model's performance, the weights corresponding to a training per
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
-		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
 	\end{center}
 
 	\caption{Anomaly Score distributions from training over a dataset with 10\% signal contamination after applying the transformation described in Equation~\ref{eq:transformation}. The Anomaly Score in these figures is computed from the leading jets of each event, for both the background sample and two-prong (left) or three-prong (right) signal samples.}
@@ -882,8 +898,8 @@ The visibility of the resonances at 100 GeV and 500 GeV is enhanced after the se
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
-		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) requiring the Anomaly Score to exceed a value of 0.65.}
 	\label{fig:2P_lj_mass}
@@ -891,8 +907,8 @@ The visibility of the resonances at 100 GeV and 500 GeV is enhanced after the se
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
-		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) requiring the Anomaly Score to exceed a value of 0.65.}
 	\label{fig:3P_lj_mass}
@@ -970,8 +986,8 @@ The selection on the Event Score increases the significance of the excess from $
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
-		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
 	\end{center}
 	\caption{Two-prong dijet mass distributions before (left) and after (right) requiring the Event Score to exceed a value of 0.65, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma$ to $4\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:2p_dijet}
@@ -980,8 +996,8 @@ The selection on the Event Score increases the significance of the excess from $
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
-		\includegraphics[width=225pt]{imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
 	\end{center}
 	\caption{Three-prong dijet mass distributions before (left) and after (right) requiring the Event Score to exceed a value of 0.65, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma$ to $1.5\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:3p_dijet}
@@ -1020,6 +1036,7 @@ Examples of possible additions include adversarial mass de-correlation networks,
 %%%%%%%%% Acknowledgements and References %%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\clearpage
 
 \section*{Acknowledgements}
 
