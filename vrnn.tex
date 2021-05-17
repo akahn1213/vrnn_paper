@@ -41,7 +41,7 @@
 {\setlength{\labelsep}{.5em}}}
 {\end{list}}
 
-\linenumbers
+%\linenumbers
 
 
 \newcommand\blfootnote[1]{%
@@ -156,7 +156,7 @@ While these models show promising performance, they are developed to identify a 
 
 One way to circumvent these issues is to develop a model that trains directly on data, without requiring the need for simulated inputs.
 %(JG: I dont get this sentence) Such data-driven approaches are difficult mainly due to the inability to provide training labels, and are therefore incompatible with any method of supervised learning.
-Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{qcdorwhat, deepAutoencoders, CWoLa, cheng2021variational}. 
+Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{Heimel_2019, deepAutoencoders, CWoLa, cheng2021variational}. 
 This paper demonstrates a way to identify BSM signals that present as anomalous substructure in jets using unsupervised, data-driven anomaly detection. 
 
 Anomaly detection refers to a process in which anomalous elements are identified within a dataset that is mostly homogenous, but contaminated with outliers. 
@@ -285,7 +285,7 @@ is intractable.
 The goal of a VAE is to learn an approximate posterior distribution, $q(\textbf{z}|\textbf{x})$, through training.
 
 The architecture of a VAE, as shown in Figure \ref{fig:VAE}, is very close to that of a standard AE. 
-The main difference is a latent space that can accommodate an encoder, which maps data to a distribution in the latent space rather than a single vector. 
+The main difference is a latent space that can accommodate an encoder which maps data to a distribution in the latent space rather than a single vector. 
 A common choice for the form of the latent space is a multivariate Gaussian of diagonal covariance. 
 In this case, the encoder can map a given input to two independent layers, 
 each with the same dimensionality as the latent space.
@@ -483,7 +483,7 @@ conventional VAEs in the following ways:
 \end{enumerate}
 
 The inclusion of a learned, time-dependent prior distribution is an important component of the VRNN architecture. Without this feature, the decoder network would only be able to access information about the current time-step from the hidden state, and the loss function would motivate the posterior distributions for each time-step to be identical. As a result, this allows the VRNN the flexibility to model complex structured sequences with high variability, as is expected from a jet represented by a sequence of constituent four-vectors.
-In more detail, each time-step's latent space prior distribution parameters $\mu_{t}$ and $\sigma_{t}$ are functions of the current time-step's hidden state:
+In more detail, each time-step's latent space prior distribution parameters $\mu_{t}$ and $\sigma_{t}$ are functions of the current time-step's hidden state~\cite{chung2016recurrent}:
 \begin{equation}
 	z_{t} \sim \mathcal{N}(\mu_{t}, \sigma_{t}), \text{ where } \mu_{t}, \sigma_{t} = f^{prior}(h_{t-1}).
 \end{equation} 
@@ -716,7 +716,7 @@ After the network is trained, an \textit{Anomaly Score} can be determined for ea
 
 The performance of the VRNN is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying to hadrons forming a boosted jet $J$. Two types of signal events are generated. One type is comprised of events where the X and Y both decay to two quarks, resulting in boosted jets with two-pronged substructure. The other type differs in that the X and Y both decay to three quarks, resulting in boosted jets with three-pronged substructure. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated for each substructure hypothesis, along with 995,453 background events. The events were generated using {\sc Pythia8} and the detector response was simulated using {\sc Delphes 3.4.1} with no pile-up or multiple parton interactions included, and events were selected using a single large-radius ($R$=1.0) jet trigger with a $p_T$ threshold of 1.2 TeV. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop~\cite{dataset}. 
 
-The data were provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. In this study, only the highest $p_{T}$ (leading) and second-highest $p_{T}$ (sub-leading) jets are considered in each event. To test the model's performance with varying amounts of signal contamination, contaminated datasets were produced with 13 different signal event fractions, 10 of which were generated in the range of 0.01\% to 10.0\% along a logarithmic scale, with three higher signal event fractions of 25\%, 50\%, and 75\%. For contamination levels up to and including 10\%, contaminated datasets were created using the same set of background events while only the amount of signal was varied to match the desired contamination. For the three highest contamination levels, contaminated datasets were created using the same 99457 signal events while the number of background events was limited. 
+The data were provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008}. In this study, only the highest $p_{T}$ (leading) and second-highest $p_{T}$ (sub-leading) jets are considered in each event. To test the model's performance with varying amounts of signal contamination, contaminated datasets were produced with 12 different signal event fractions, 10 of which were generated in the range of 0.01\% to 10.0\% along a logarithmic scale, with two higher signal event fractions of 25\% and 50\%. For contamination levels up to and including 10\%, contaminated datasets were created using the same set of background events while only the amount of signal was varied to match the desired contamination. For the two highest contamination levels, contaminated datasets were created using the same 99457 signal events while the number of background events was limited. 
 %Three datasets were generated at each level of contamination: a contaminated dataset containing both signal and background events, a background-only validation set, and a signal-only signal set. 
 Independent datasets were generated for both two-prong and three-prong signal substructure hypotheses at each level of contamination.
 
@@ -751,7 +751,8 @@ Algorithm~\ref{alg:boost} describes in detail the implementation of the rescalin
  
   Rotate jet about $x$ axis until hardest constituent has $\eta_{1} = 0, \phi_{1} > 0$
  
-  \eIf{Any constituents have $\Delta R > 1$}{
+ 
+  \eIf{Any constituents have\footnote{$\Delta R$ is computed as $\sqrt{\eta^2 + \phi^2}$ for each constituent, where $\eta$ and $\phi$ are measured relative to the x axis.} $\Delta R > 1$}{
  
   Remove all constituents with $\Delta R > 1$
  
@@ -850,7 +851,7 @@ where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the m
 
 %Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
 
-In the jet-level assessment, the model is trained on the leading jet of each event for 100 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by examining events in the contaminated training set or comparing events in the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 1\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
+In the jet-level assessment, the model is trained on the leading jet of each event for 500 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by examining events in the contaminated training set or comparing events in the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 1\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -861,7 +862,7 @@ In the jet-level assessment, the model is trained on the leading jet of each eve
 \end{figure}
 
 
-To evaluate the model's performance, the weights corresponding to a training period of 100 epochs were chosen in the following studies. Figure \ref{fig:score_transform} shows the distributions of the Anomaly Score for leading jets in the background sample and both the two-prong and three-prong signal samples after applying the transformation in Equation~\ref{eq:transformation}.
+To evaluate the model's performance, the weights corresponding to a training period of 100 epochs were chosen in the following studies. Figure \ref{fig:score_transform} shows the distributions of the Anomaly Score for leading jets in the background sample and both the two-prong and three-prong signal samples after training over a contaminated training set with 10\% signal contamination and applying the transformation in Equation~\ref{eq:transformation}.
 
 
 \begin{figure}[H]
@@ -921,9 +922,9 @@ Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated je
 Another important study involves the model's performance over a range of signal contamination
 levels. Figure~\ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses
 after training on each of the contaminated datasets described in Section 3. 
-At each level of contamination, the VRNN is trained on both the respective two-prong and three-prong contaminated datasets for 100 epochs. 
+At each level of contamination, the VRNN is trained on the leading jets of both the respective two-prong and three-prong contaminated datasets for 100 epochs. 
 
-The resulting trained network is then used to assign an Anomaly Score to each jet in the dataset. 
+The resulting trained network is then used to assign an Anomaly Score to each leading jet in the dataset. 
 AUC values for each level of contamination are determined from a ROC curve built from 1000 randomly selected jets from both the background and signal sets after training.
 Error bars are computed by repeating this process 100 times and determining the standard deviation of the resulting distribution of AUC values.
 Notably, the performance is consistent along all contaminations, and able to distinguish both two and three-pronged signals without any prior substructure hypothesis. 
@@ -948,7 +949,7 @@ The consistent performance observed can be attributed to the choice of $k_t$-ord
 \subsection{Event Level Performance}
 
 
-A natural benchmark of Anomaly Score's ability to distinguish anomalous jets is to apply the score in an analysis-like context. In this study, the goal is to reconstruct the $Z'$ particle in the invariant mass spectrum $M_{JJ}$ of the two jets in each signal event. To do this, the network is trained on both the leading and sub-leading jets, with one set of network weights saved for each amount of contamination. 
+A natural benchmark of the Anomaly Score's ability to distinguish anomalous jets is to apply the score in an analysis-like context. In this study, the goal is to reconstruct the $Z'$ particle in the invariant mass spectrum $M_{JJ}$ of the two jets in each signal event. To do this, the network is trained on both the leading and sub-leading jets, with one set of network weights saved for each amount of contamination. 
 
 Since the model produces one Anomaly Score per jet, the Anomaly Scores for the leading and sub-leading jet must be combined to arrive at an overall \textit{Event Score}. In this study, the Event Score is chosen to be the highest of the two individual Anomaly Scores between the leading and sub-leading jets. This constructs an event-level discriminant which uses the most anomalous jet in the event to discriminate. The ability of the Event Score to distinguish signal from background is illustrated in Figure \ref{fig:mjj_vs_evscore}, showing the correlations between the dijet invariant mass and the assigned Event Score in a dataset with 10\% signal contamination. The significant feature of the $3500$ GeV $Z'$ occupies high values of the Event Score, validating the Event Score as a discriminant of anomalous events from background.
 
@@ -972,7 +973,7 @@ The selection on the Event Score increases the significance of the excess from $
 		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
 		\includegraphics[width=225pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
 	\end{center}
-	\caption{Two-prong dijet mass distributions before (left) and after (right) requiring the Event Score to exceed a value of 0.65, at a signal contamination of 1.0\%. The Event Score selection provides a significant improvement in signal sensitivity from $0.5\sigma$ to $4\sigma$ while retaining the smoothly falling background distribution.}
+	\caption{Two-prong dijet mass distributions before (left) and after (right) requiring the Event Score to exceed a value of 0.65, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma$ to $4\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:2p_dijet}
 \end{figure}
 
@@ -1020,8 +1021,6 @@ Examples of possible additions include adversarial mass de-correlation networks,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
 \section*{Acknowledgements}
 
 The authors would like to thank Gregor Kasieczka, Ben Nachman, and David Shih, the organizers of the LHC Olympics 2020 Anomaly Detection Challenge, for providing the datasets used in this study and for the opportunity to develop and test the VRNN architecture.
@@ -1031,7 +1030,7 @@ This material is based upon work supported by the National Science Foundation un
 IO is supported by the fellowship LCF/BQ/PI20/11760025 from ”la Caixa” Foundation (ID 100010434) and by the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 847648.
 
 
-\clearpage
+%\clearpage
 
 %\section*{References}
 

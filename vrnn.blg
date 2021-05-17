@@ -1,49 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: vrnn.aux
-The style file: hunsrt.bst
+The style file: jhep.bst
 Database file #1: vrnn.bib
-Warning--empty booktitle in An2015VariationalAB
-Warning--empty author in adversarial
-You've used 20 entries,
-            1895 wiz_defined-function locations,
-            590 strings with 7222 characters,
-and the built_in function-call counts, 3900 in all, are:
-= -- 270
-> -- 232
-< -- 1
-+ -- 85
-- -- 65
-* -- 258
-:= -- 623
-add.period$ -- 52
-call.type$ -- 20
-change.case$ -- 19
+You've used 22 entries,
+            2195 wiz_defined-function locations,
+            633 strings with 6848 characters,
+and the built_in function-call counts, 4519 in all, are:
+= -- 391
+> -- 263
+< -- 0
++ -- 96
+- -- 74
+* -- 362
+:= -- 720
+add.period$ -- 27
+call.type$ -- 22
+change.case$ -- 21
 chr.to.int$ -- 0
 cite$ -- 22
-duplicate$ -- 178
-empty$ -- 442
-format.name$ -- 65
-if$ -- 874
+duplicate$ -- 214
+empty$ -- 402
+format.name$ -- 74
+if$ -- 1075
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 12
-newline$ -- 95
-num.names$ -- 19
-pop$ -- 103
+int.to.str$ -- 22
+missing$ -- 67
+newline$ -- 73
+num.names$ -- 22
+pop$ -- 99
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 72
+skip$ -- 94
 stack$ -- 0
-substring$ -- 93
-swap$ -- 21
-text.length$ -- 1
+substring$ -- 92
+swap$ -- 48
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 2
-while$ -- 23
-width$ -- 22
-write$ -- 210
-(There were 2 warnings)
+warning$ -- 0
+while$ -- 26
+width$ -- 24
+write$ -- 188

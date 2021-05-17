@@ -1,108 +1,106 @@
-\begin{thebibliography}{10}
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{10}
 
 \bibitem{atlas_higgs}
-ATLAS Collaboration.
-\newblock Observation of a new particle in the search for the {Standard}
-  {Model} {Higgs} boson with the {ATLAS} detector at the {LHC}.
-\newblock {\em Physics Letters B}, 716(1):1--29, Sep 2012.
+{\relax ATLAS Collaboration}, {\it Observation of a new particle in the search
+  for the {Standard} {Model} {Higgs} boson with the {ATLAS} detector at the
+  {LHC}},  {\em Physics Letters B} {\bf 716} (Sep, 2012) 1--29.
 
 \bibitem{cms_higgs}
-CMS Collaboration.
-\newblock Observation of a new boson at a mass of 125 {GeV} with the {CMS}
-  experiment at the {LHC}.
-\newblock {\em Physics Letters B}, 716(1):30–61, Sep 2012.
-
-\bibitem{CWoLa}
-Eric~M. Metodiev, Benjamin Nachman, and Jesse Thaler.
-\newblock Classification without labels: learning from mixed samples in high
-  energy physics.
-\newblock {\em Journal of High Energy Physics}, 2017(10), Oct 2017.
-
-\bibitem{bank2020autoencoders}
-Dor Bank, Noam Koenigstein, and Raja Giryes.
-\newblock Autoencoders, 2020, arXiv, 2003.05991.
-
-\bibitem{Farina_2020}
-Marco Farina, Yuichiro Nakai, and David Shih.
-\newblock Searching for new physics with deep autoencoders.
-\newblock {\em Physical Review D}, 101(7), Apr 2020.
+{\relax CMS Collaboration}, {\it {Observation of a new boson at a mass of 125
+  {GeV} with the {CMS} experiment at the {LHC}}},  {\em Physics Letters B} {\bf
+  716} (Sep, 2012) 30–61.
 
 \bibitem{Heimel_2019}
-Theo Heimel, Gregor Kasieczka, Tilman Plehn, and Jennifer Thompson.
-\newblock {QCD} or what?
-\newblock {\em SciPost Physics}, 6(3), Mar 2019.
+T.~Heimel, G.~Kasieczka, T.~Plehn, and J.~Thompson, {\it {QCD} or what?},  {\em
+  SciPost Physics} {\bf 6} (Mar, 2019).
+
+\bibitem{deepAutoencoders}
+M.~Farina, Y.~Nakai, and D.~Shih, {\it Searching for new physics with deep
+  autoencoders},  {\em Physical Review D} {\bf 101} (Apr, 2020).
+
+\bibitem{CWoLa}
+E.~M. Metodiev, B.~Nachman, and J.~Thaler, {\it Classification without labels:
+  learning from mixed samples in high energy physics},  {\em Journal of High
+  Energy Physics} {\bf 2017} (Oct, 2017).
+
+\bibitem{cheng2021variational}
+T.~Cheng, J.-F. Arguin, J.~Leissner-Martin, J.~Pilette, and T.~Golling, {\it
+  {Variational Autoencoders for Anomalous Jet Tagging}},
+  \href{http://arxiv.org/abs/2007.01850}{{\tt arXiv:2007.01850}}.
+
+\bibitem{bank2020autoencoders}
+D.~Bank, N.~Koenigstein, and R.~Giryes, {\it {Autoencoders}},
+  \href{http://arxiv.org/abs/2003.05991}{{\tt arXiv:2003.05991}}.
+
+\bibitem{Farina_2020}
+M.~Farina, Y.~Nakai, and D.~Shih, {\it Searching for new physics with deep
+  autoencoders},  {\em Physical Review D} {\bf 101} (Apr, 2020).
 
 \bibitem{kingma2014autoencoding}
-Diederik~P Kingma and Max Welling.
-\newblock {Auto-Encoding Variational Bayes}, 2014, arXiv, 1312.6114.
+D.~P. Kingma and M.~Welling, {\it {Auto-Encoding Variational Bayes}},
+  \href{http://arxiv.org/abs/1312.6114}{{\tt arXiv:1312.6114}}.
 
 \bibitem{Goodfellow-et-al-2016}
-Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
-\newblock {\em {Deep Learning}}.
+I.~Goodfellow, Y.~Bengio, and A.~Courville, {\em {Deep Learning}}.
 \newblock MIT Press, 2016.
 \newblock http://www.deeplearningbook.org.
 
 \bibitem{An2015VariationalAB}
-Jinwon An and S.~Cho.
-\newblock {Variational Autoencoder based Anomaly Detection using Reconstruction
-  Probability}.
-\newblock 2015.
+J.~An and S.~Cho, {\it {Variational Autoencoder based Anomaly Detection using
+  Reconstruction Probability}},  {\em Semantic Scholar} (2015). 36663713.
 
 \bibitem{chung2016recurrent}
-Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron Courville, and
-  Yoshua Bengio.
-\newblock A {Recurrent} {Latent} {Variable Model for Sequential Data}, 2016,
-  arXiv, 1506.02216.
+J.~Chung, K.~Kastner, L.~Dinh, K.~Goel, A.~Courville, and Y.~Bengio, {\it A
+  {Recurrent} {Latent} {Variable Model for Sequential Data}},
+  \href{http://arxiv.org/abs/1506.02216}{{\tt arXiv:1506.02216}}.
 
 \bibitem{lstm}
-Sepp Hochreiter and J\"{u}rgen Schmidhuber.
-\newblock {Long Short-Term Memory}.
-\newblock {\em Neural Comput.}, 9(8):1735–1780, November 1997.
+S.~Hochreiter and J.~Schmidhuber, {\it {Long Short-Term Memory}},  {\em Neural
+  Comput.} {\bf 9} (Nov., 1997).
 
 \bibitem{cho2014learning}
-Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi
-  Bougares, Holger Schwenk, and Yoshua Bengio.
-\newblock {Learning Phrase Representations using RNN Encoder-Decoder for
-  Statistical Machine Translation}, 2014, arXiv, 1406.1078.
+K.~Cho, B.~van Merrienboer, C.~Gulcehre, D.~Bahdanau, F.~Bougares, H.~Schwenk,
+  and Y.~Bengio, {\it {Learning Phrase Representations using RNN
+  Encoder-Decoder for Statistical Machine Translation}},
+  \href{http://arxiv.org/abs/1406.1078}{{\tt arXiv:1406.1078}}.
 
 \bibitem{activations}
-Chigozie Nwankpa, Winifred Ijomah, Anthony Gachagan, and Stephen Marshall.
-\newblock Activation {Functions}: {Comparison} of trends in {Practice} and
-  {Research} for {Deep} {Learning}, 2018, arXiv, 1811.03378.
+C.~Nwankpa, W.~Ijomah, A.~Gachagan, and S.~Marshall, {\it Activation
+  {Functions}: {Comparison} of trends in {Practice} and {Research} for {Deep}
+  {Learning}},  \href{http://arxiv.org/abs/1811.03378}{{\tt arXiv:1811.03378}}.
 
 \bibitem{dataset}
-Gregor Kasieczka, Ben Nachman, and David Shih.
-\newblock {R\&D Dataset for LHC Olympics 2020 Anomaly Detection Challenge},
-  April 2019, Zenodo, https://doi.org/10.5281/zenodo.2629073.
+G.~Kasieczka, B.~Nachman, and D.~Shih, {\it {R\&D Dataset for LHC Olympics 2020
+  Anomaly Detection Challenge}},  Apr., 2019.
+\newblock 10.5281/zenodo.2629073.
 
 \bibitem{Cacciari_2008}
-Matteo Cacciari, Gavin~P Salam, and Gregory Soyez.
-\newblock The anti-kt jet clustering algorithm.
-\newblock {\em Journal of High Energy Physics}, 2008(04):063–063, Apr 2008.
+M.~Cacciari, G.~P. Salam, and G.~Soyez, {\it The anti-kt jet clustering
+  algorithm},  {\em Journal of High Energy Physics} {\bf 2008} (Apr, 2008)
+  063–063.
 
 \bibitem{adversarial}
-{Performance of mass-decorrelated jet substructure observables for hadronic
-  two-body decay tagging in ATLAS}.
-\newblock Technical Report ATL-PHYS-PUB-2018-014, CERN, Geneva, Jul 2018.
+{\relax ATLAS Collaboration}, {\it {Performance of mass-decorrelated jet
+  substructure observables for hadronic two-body decay tagging in ATLAS}},
+  2018.
+\newblock ATL-PHYS-PUB-2018-014.
 
 \bibitem{Purushotham2017VariationalRA}
-S.~Purushotham, Wilka Carvalho, Tanachat Nilanon, and Y.~Liu.
-\newblock {Variational Recurrent Adversarial Deep Domain Adaptation}.
-\newblock In {\em ICLR}, 2017.
+S.~Purushotham, W.~Carvalho, T.~Nilanon, and Y.~Liu, {\it {Variational
+  Recurrent Adversarial Deep Domain Adaptation}},  in {\em ICLR}, 2017.
 
 \bibitem{roy2020robust}
-Tuhin~S. Roy and Aravind~H. Vijay.
-\newblock A robust anomaly finder based on autoencoders, 2020, arXiv,
-  1903.02032.
+T.~S. Roy and A.~H. Vijay, {\it A robust anomaly finder based on autoencoders},
+   \href{http://arxiv.org/abs/1903.02032}{{\tt arXiv:1903.02032}}.
 
 \bibitem{d2}
-Simone Marzani, Gregory Soyez, and Michael Spannowsky.
-\newblock Looking {Inside} {Jets}.
-\newblock {\em Lecture Notes in Physics}, 2019.
+S.~Marzani, G.~Soyez, and M.~Spannowsky, {\it Looking {Inside} {Jets}},  {\em
+  Lecture Notes in Physics} (2019) [\href{http://arxiv.org/abs/1901.10342}{{\tt
+  arXiv:1901.10342}}].
 
 \bibitem{moneta2011roostats}
-Lorenzo Moneta, Kevin Belasco, Kyle Cranmer, Sven Kreiss, Alfio Lazzaro, Danilo
-  Piparo, Gregory Schott, Wouter Verkerke, and Matthias Wolf.
-\newblock {The RooStats Project}, 2011, arXiv, 1009.1003.
+L.~Moneta, K.~Belasco, K.~Cranmer, S.~Kreiss, A.~Lazzaro, D.~Piparo, G.~Schott,
+  W.~Verkerke, and M.~Wolf, {\it {The RooStats Project}},
+  \href{http://arxiv.org/abs/1009.1003}{{\tt arXiv:1009.1003}}.
 
-\end{thebibliography}
+\end{thebibliography}\endgroup
