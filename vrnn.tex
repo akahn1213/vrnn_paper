@@ -294,40 +294,47 @@ In this case, the encoder can map a given input to two independent layers,
 each with the same dimensionality as the latent space.
 One of these layers represents the means of the encoded Gaussian distribution while the other represents the respective standard deviations for each dimension.
 Decoding then requires sampling from this resulting distribution. 
-This can be easily performed in the case of a Gaussian approximate posterior by use of the \textit{reparametrization trick}.
-Instead of sampling the distribution directly, a particular value of $z$ can be represented in the following way:
+This can be easily performed in the case of a Gaussian approximate posterior by use of the \textit{reparameterization trick}.
+Instead of sampling the distribution directly, a particular value of $\textbf{z}$ can be represented in the following way:
 \begin{equation}
-z=\mu + \sigma \epsilon,
+	{\textbf z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \epsilon,
 \end{equation}
 where $\epsilon$ is sampled from a unit isotropic normal distribution $\epsilon \sim \mathcal{N}(0, 1)$~\cite{kingma2014autoencoding}.
 
 
-The VAE performs Bayesian inference by determining the marginal likelihood, which is the result of an often intractable calculation:
+
+
+
+%The VAE performs Bayesian inference by determining the marginal likelihood, which is the result of an often intractable calculation:
+%
+%\begin{equation}
+%p(x) = \int p(z)p(x|z)dz.
+%\end{equation}
+%
+%By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL)-Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. The derivation follows first from expressing the log likelihood as the expectation of itself:
+%
+%\begin{equation}
+%	\begin{split}
+%		\log(p(x))  &= \mathbb{E}[\log p(x)] \\
+%  		&= \mathbb{E}\bigg[\log \frac{p(x|z)p(z)}{p(z|x)}\bigg] \\
+%  		&= \mathbb{E}\bigg[\log \frac{p(x|z)p(z)}{p(z|x)} \frac{q(z|x)}{q(z|x)}\bigg] \\
+%  		&= \mathbb{E}[\log p(x|z)] - \mathbb{E}\bigg[\log \frac{q(z|x)}{p(z)}\bigg] + \mathbb{E} \bigg[\log \frac{q(z|x)}{p(z|x)}\bigg] \\
+%  		&= \underbrace{\mathbb{E}[\log p(x|z)]}_\text{Reconstruction Error} - \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz}_{D_{KL}(q(z|x)||p(z))} + \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz.}_{D_{KL}(q(z|x)||p(z|x))}
+%  \end{split}
+%\end{equation} 
+%
+%While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. The first two terms of this result can therefore be described as a lower bound on the evidence. 
+%When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
+%Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
+%The reconstruction error term is chosen to be the mean-squared-error loss as used in the ordinary AE. 
+%The total loss function therefore takes the following form: 
+
+
+The VAE loss function includes both a reconstruction error term as well as an additional Kullback-Leibler (KL)-Divergence term from a chosen prior distribution $p(\textbf{z})$ to the approximate posterior distribution $q(\textbf{z}|\textbf{x})$:
+
 
 \begin{equation}
-p(x) = \int p(z)p(x|z)dz.
-\end{equation}
-
-By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL)-Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. The derivation follows first from expressing the log likelihood as the expectation of itself:
-
-\begin{equation}
-	\begin{split}
-		\log(p(x))  &= \mathbb{E}[\log p(x)] \\
-  		&= \mathbb{E}\bigg[\log \frac{p(x|z)p(z)}{p(z|x)}\bigg] \\
-  		&= \mathbb{E}\bigg[\log \frac{p(x|z)p(z)}{p(z|x)} \frac{q(z|x)}{q(z|x)}\bigg] \\
-  		&= \mathbb{E}[\log p(x|z)] - \mathbb{E}\bigg[\log \frac{q(z|x)}{p(z)}\bigg] + \mathbb{E} \bigg[\log \frac{q(z|x)}{p(z|x)}\bigg] \\
-  		&= \underbrace{\mathbb{E}[\log p(x|z)]}_\text{Reconstruction Error} - \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz}_{D_{KL}(q(z|x)||p(z))} + \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz.}_{D_{KL}(q(z|x)||p(z|x))}
-  \end{split}
-\end{equation} 
-
-While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. The first two terms of this result can therefore be described as a lower bound on the evidence. 
-When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
-Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
-The reconstruction error term is chosen to be the mean-squared-error loss as used in the ordinary AE. 
-The total loss function therefore takes the following form: 
-
-\begin{equation}
-	\mathcal{L} = |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q(z|x)||p(z)).
+	\mathcal{L} = |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q({\textbf z}|{\textbf x})||p({\textbf z})).
 \end{equation} 
 
 
@@ -425,12 +432,12 @@ Variational Autoencoders provide a number of improvements over standard Autoenco
         \node[annot] (hla) at (5cm, 0cm) {\textbf{Latent layer}};
         \node[annot,above of=H2-1, node distance=2cm] (hl2) {\textbf{Hidden layer 2}};
         \node[annot,above of=O-1, node distance=1cm] {\textbf{Output layer}};
-        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=$\mu$] (r1) at (4cm, -2.5cm) {};
-        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:$\sigma$] (r1) at (4cm, -4.5cm) {};
-        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:{$z=\mu + \sigma \epsilon$}] (r1) at (6cm, -3.5cm) {};
+        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=$\boldsymbol{\mu}$] (r1) at (4cm, -2.5cm) {};
+        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:$\boldsymbol{\sigma}$] (r1) at (4cm, -4.5cm) {};
+        \node[draw, rectangle, very thick, minimum width=1cm, minimum height=2cm, label=below:{$\textbf{z}=\boldsymbol{\mu} + \boldsymbol{\sigma} \epsilon$}] (r1) at (6cm, -3.5cm) {};
 
-        \draw [decorate,decoration={brace,amplitude=10pt, mirror},xshift=-4pt,yshift=0pt] (-0.25cm,-0.75cm) -- (-0.25cm,-6.25cm) node [black,midway,xshift=-0.6cm] {\footnotesize $x$}; 
-        \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (10.5cm,-0.75cm) -- (10.5cm,-6.25cm) node [black,midway,xshift=0.6cm] {\footnotesize $y$}; 
+        \draw [decorate,decoration={brace,amplitude=10pt, mirror},xshift=-4pt,yshift=0pt] (-0.25cm,-0.75cm) -- (-0.25cm,-6.25cm) node [black,midway,xshift=-0.6cm] {\footnotesize $\textbf{x}$}; 
+        \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (10.5cm,-0.75cm) -- (10.5cm,-6.25cm) node [black,midway,xshift=0.6cm] {\footnotesize $\textbf{y}$}; 
 
   
     \end{tikzpicture}
@@ -472,7 +479,7 @@ After each time-step, the hidden state is updated via a recurrence relation, in 
 \begin{equation}
 	h(t) = f(\phi_{x}, \phi_{z}, h(t-1)).
 \end{equation} 
-Performing this particular step is the primary function of traditional RNN architectures such as Long Short-Term Memory Networks (LSTMs)~\cite{lstm} and Gated Recurrent Units (GRUs)~\cite{cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
+Performing this particular step is the primary function of traditional RNN architectures)~\cite{lstm, cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
 
 The VAE present in each cell of the VRNN notably differs from
 conventional VAEs in the following ways:
