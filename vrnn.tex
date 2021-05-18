@@ -662,14 +662,11 @@ The effect on performance due to this choice of constituent ordering can be easi
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=213pt]{imgs/Anom_Score_CompPt_SaveForPaper.png}
-		\includegraphics[width=213pt]{imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet Anomaly Score distributions for background and two-prong signal events, with $p_T$-sorted (left) and $k_{t}$-sorted (right) ordering of constituents for input jets.}
 	\label{fig:score_comp}
 \end{figure}
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% Results %%%%%%%%%%%%%%%%%%%%
@@ -700,7 +697,7 @@ In the jet-level assessment, the model is trained on the leading jet of each eve
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png}
+		\includegraphics[width=250pt]{imgs/auc_vs_epoch_1p0_SaveForPaper.png}
 	\end{center}
 	\caption{Area Under the Curve (ROC AUC) vs. training time in epochs on a 1\% signal-contaminated dataset. The VRNN reaches an optimal performance quickly, and retains this performance over a long training period. The difference in performance between the training and validation sets is a result of the former containing elements of signal.}
 	\label{fig:auc_vs_epoch}
@@ -712,8 +709,8 @@ To evaluate the model's performance, the weights corresponding to a training per
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
-		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png}
 	\end{center}
 
 	\caption{Anomaly Score distributions from training over a dataset with 10\% signal contamination after applying the transformation described in Equation~\ref{eq:transformation}. The Anomaly Score in these figures is computed from the leading jets of each event, for both the background sample and two-prong (left) or three-prong (right) signal samples.}
@@ -727,8 +724,8 @@ The visibility of the resonances at 100 GeV and 500 GeV is enhanced after the se
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
-		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet mass distributions with a two-prong signal hypothesis before (left) and after (right) requiring the Anomaly Score to exceed a value of 0.65.}
 	\label{fig:2P_lj_mass}
@@ -736,8 +733,8 @@ The visibility of the resonances at 100 GeV and 500 GeV is enhanced after the se
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
-		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Leading jet mass distributions with a three-prong signal hypothesis before (left) and after (right) requiring the Anomaly Score to exceed a value of 0.65.}
 	\label{fig:3P_lj_mass}
@@ -751,7 +748,7 @@ Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated je
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Lead_SaveForPaper.png}
+		\includegraphics[width=250pt]{imgs/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{Comparison of the leading jet mass distribution in a contaminated dataset between equivalent background acceptance selections on Anomaly Score and the $D_2$ variable. The $D_2$ selection causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}
 	\label{fig:d2_comp}
@@ -772,7 +769,7 @@ This feature is valuable in model-independent searches, or those without a pre-d
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png}
+		\includegraphics[width=250pt]{imgs/AUC_vs_Contam_Lead_SaveForPaper.png}
 	\end{center}
 	\caption{ROC AUC vs. percent signal contamination in training datasets. The performance of the Anomaly Score is consistent across a wide range of contamination levels.}
 	\label{fig:aucs_vs_contam}
@@ -794,7 +791,7 @@ Since the model produces one Anomaly Score per jet, the Anomaly Scores for the l
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png}
+		\includegraphics[width=250pt]{imgs/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png}
 	\end{center}
 	\caption{Dijet invariant mass vs. Event Score.}
 	\label{fig:mjj_vs_evscore}
@@ -809,8 +806,8 @@ The selection on the Event Score increases the significance of the excess from $
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
-		\includegraphics[width=213pt]{imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
 	\end{center}
 	\caption{Two-prong dijet mass distributions before (left) and after (right) requiring the Event Score to exceed a value of 0.65, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma$ to $4\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:2p_dijet}
@@ -819,8 +816,8 @@ The selection on the Event Score increases the significance of the excess from $
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
-		\includegraphics[width=213pt]{imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png}
+		\includegraphics[width=213pt]{imgs/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_Lead.png}
 	\end{center}
 	\caption{Three-prong dijet mass distributions before (left) and after (right) requiring the Event Score to exceed a value of 0.65, at a signal contamination of 1.0\%. The Event Score selection provides an improvement in signal sensitivity from $0.5\sigma$ to $1.5\sigma$ while retaining the smoothly falling background distribution.}
 	\label{fig:3p_dijet}
