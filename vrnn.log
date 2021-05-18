@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  18 MAY 2021 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  18 MAY 2021 13:06
 entering extended mode
 **./vrnn.tex
 (vrnn.tex
@@ -895,20 +895,23 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
  [5] [6]
-<imgs/VRNN_Diagram.pdf, id=156, 490.19963pt x 360.63042pt>
+<imgs/VRNN_Diagram.pdf, id=161, 490.19963pt x 360.63042pt>
 File: imgs/VRNN_Diagram.pdf Graphic file (type pdf)
 <use imgs/VRNN_Diagram.pdf>
 Package pdftex.def Info: imgs/VRNN_Diagram.pdf  used on input line 680.
 (pdftex.def)             Requested size: 420.0pt x 308.99153pt.
  [7] [8 <./imgs/VRNN_Diagram.pdf>] [9]
+
+Package natbib Warning: Citation `fastjet' on page 10 undefined on input line 7
+35.
+
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 7
 46.
-
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [10]
 <imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOn
-ly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png, id=246, 462.528pt x 346.8
+ly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png, id=251, 462.528pt x 346.8
 96pt>
 File: imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_Co
 nstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png Graphic file (type pn
@@ -920,7 +923,7 @@ _Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png  u
 sed on input line 811.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly
-_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png, id=248, 462.528pt x 346.896
+_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png, id=253, 462.528pt x 346.896
 pt>
 File: imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_Cons
 tOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png Graphic file (type png)
@@ -935,13 +938,13 @@ d on input line 812.
 ding_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png> <./imgs/ProcB
 oostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_S
 core_ProcTest_SaveForPaper_Colorbar.png>]
-<imgs/Anom_Score_CompPt_SaveForPaper.png, id=272, 462.528pt x 346.896pt>
+<imgs/Anom_Score_CompPt_SaveForPaper.png, id=277, 462.528pt x 346.896pt>
 File: imgs/Anom_Score_CompPt_SaveForPaper.png Graphic file (type png)
 <use imgs/Anom_Score_CompPt_SaveForPaper.png>
 Package pdftex.def Info: imgs/Anom_Score_CompPt_SaveForPaper.png  used on input
  line 833.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
-<imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png, id=273, 462.528pt x 3
+<imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png, id=278, 462.528pt x 3
 46.896pt>
 File: imgs/bugfix/Anom_Score_CompKt_Rev_Lead_SaveForPaper.png Graphic file (typ
 e png)
@@ -951,14 +954,14 @@ g  used on input line 834.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
  [13 <./imgs/Anom_Score_CompPt_SaveForPaper.png> <./imgs/bugfix/Anom_Score_Comp
 Kt_Rev_Lead_SaveForPaper.png>]
-<imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png, id=283, 462.528pt x 346.896pt>
+<imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png, id=288, 462.528pt x 346.896pt>
 File: imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png Graphic file (type png)
 <use imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png  used on
  input line 874.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
 <imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png, id=2
-86, 462.528pt x 346.896pt>
+91, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png 
 Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>
@@ -966,7 +969,7 @@ Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lea
 d_SaveForPaper.png  used on input line 886.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png, id=2
-87, 462.528pt x 346.896pt>
+92, 462.528pt x 346.896pt>
 File: imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png 
 Graphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>
@@ -974,8 +977,8 @@ Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lea
 d_SaveForPaper.png  used on input line 887.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
  [14 <./imgs/bugfix/auc_vs_epoch_1p0_SaveForPaper.png>]
-<imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=29
-9, 462.528pt x 346.896pt>
+<imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=30
+4, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png G
 raphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png>
@@ -983,7 +986,7 @@ Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_Multi_Lead
 _SaveForPaper.png  used on input line 901.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPa
-per.png, id=300, 462.528pt x 346.896pt>
+per.png, id=305, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_Save
 ForPaper.png Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveF
@@ -994,8 +997,8 @@ p65_Multi_Lead_SaveForPaper.png  used on input line 902.
  [15 <./imgs/bugfix/2Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.pn
 g> <./imgs/bugfix/3Prong_Contaminated_10p0_J_Score_Multi_Lead_SaveForPaper.png>
 ]
-<imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=30
-9, 462.528pt x 346.896pt>
+<imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png, id=31
+4, 462.528pt x 346.896pt>
 File: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png G
 raphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForPaper.png>
@@ -1003,7 +1006,7 @@ Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead
 _SaveForPaper.png  used on input line 910.
 (pdftex.def)             Requested size: 213.0pt x 159.74876pt.
 <imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveForPa
-per.png, id=310, 462.528pt x 346.896pt>
+per.png, id=315, 462.528pt x 346.896pt>
 File: imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_Save
 ForPaper.png Graphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Lead_SaveF
@@ -1017,7 +1020,7 @@ orPaper.png> <./imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_Multi_Lead_SaveForP
 aper.png> <./imgs/bugfix/3Prong_Contaminated_10p0_J_Mass_AnomScore0p65_Multi_Le
 ad_SaveForPaper.png>]
 <imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Lead_S
-aveForPaper.png, id=323, 462.528pt x 346.896pt>
+aveForPaper.png, id=328, 462.528pt x 346.896pt>
 File: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_L
 ead_SaveForPaper.png Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore0p65_Multi_D2Comp_Le
@@ -1025,7 +1028,7 @@ ad_SaveForPaper.png>
 Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_10p0_J_Mass_EventScore
 0p65_Multi_D2Comp_Lead_SaveForPaper.png  used on input line 928.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
-<imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png, id=325, 462.528pt x 346.896pt
+<imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png, id=330, 462.528pt x 346.896pt
 >
 File: imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png Graphic file (type png)
 <use imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png>
@@ -1036,7 +1039,7 @@ on input line 952.
 _Lead_SaveForPaper.png>]
 [18 <./imgs/bugfix/AUC_vs_Contam_Lead_SaveForPaper.png>]
 <imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Ev
-ent_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png, id=341, 4
+ent_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png, id=346, 4
 62.528pt x 346.896pt>
 File: imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weigh
 ts_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png Graph
@@ -1047,8 +1050,8 @@ Package pdftex.def Info: imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Cont
 aminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead
 _Colorbar.png  used on input line 974.
 (pdftex.def)             Requested size: 250.0pt x 187.501pt.
-<imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=34
-5, 462.528pt x 520.344pt>
+<imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=35
+0, 462.528pt x 520.344pt>
 File: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png G
 raphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png>
@@ -1056,7 +1059,7 @@ Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_Multi_Save
 ForPaper_Lead.png  used on input line 989.
 (pdftex.def)             Requested size: 213.0pt x 239.62315pt.
 <imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_
-Lead.png, id=346, 462.528pt x 520.344pt>
+Lead.png, id=351, 462.528pt x 520.344pt>
 File: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForP
 aper_Lead.png Graphic file (type png)
 <use imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPa
@@ -1066,8 +1069,8 @@ Package pdftex.def Info: imgs/bugfix/2Prong_Contaminated_1p0_JJ_Mass_EventScore
 (pdftex.def)             Requested size: 213.0pt x 239.62315pt.
  [19 <./imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Wei
 ghts_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png>]
-<imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=35
-5, 462.528pt x 520.344pt>
+<imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png, id=36
+0, 462.528pt x 520.344pt>
 File: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png G
 raphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_SaveForPaper_Lead.png>
@@ -1075,7 +1078,7 @@ Package pdftex.def Info: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_Multi_Save
 ForPaper_Lead.png  used on input line 999.
 (pdftex.def)             Requested size: 213.0pt x 239.62315pt.
 <imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPaper_
-Lead.png, id=356, 462.528pt x 520.344pt>
+Lead.png, id=361, 462.528pt x 520.344pt>
 File: imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForP
 aper_Lead.png Graphic file (type png)
 <use imgs/bugfix/3Prong_Contaminated_1p0_JJ_Mass_EventScore0p65_Multi_SaveForPa
@@ -1098,7 +1101,11 @@ from "la Caixa" Foun-da-tion (ID 100010434)
 
 (vrnn.bbl [22
 
-]) [23]
+])
+
+Package natbib Warning: There were undefined citations.
+
+[23]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1059.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1059.
  (vrnn.aux)
@@ -1106,14 +1113,14 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1059.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1059.
 
 Package rerunfilecheck Info: File `vrnn.out' has not changed.
-(rerunfilecheck)             Checksum: 3DCC948471E17D9E6C3985647D92CE15;626.
+(rerunfilecheck)             Checksum: 0CD9C2596EB65613F30A75ABA4E9714A;672.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1059.
  ) 
 Here is how much of TeX's memory you used:
- 21712 strings out of 481556
- 418830 string characters out of 2923634
- 710001 words of memory out of 3000000
- 36360 multiletter control sequences out of 15000+200000
+ 21713 strings out of 481556
+ 418840 string characters out of 2923634
+ 710228 words of memory out of 3000000
+ 36361 multiletter control sequences out of 15000+200000
  571965 words of font info for 107 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,22n,68p,1338b,1059s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1137,9 +1144,9 @@ sy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/time
 s/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on vrnn.pdf (24 pages, 990088 bytes).
+Output written on vrnn.pdf (24 pages, 991291 bytes).
 PDF statistics:
- 476 PDF objects out of 1000 (max. 8388607)
+ 480 PDF objects out of 1000 (max. 8388607)
  99 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 196 words of extra memory for PDF output out of 10000 (max. 10000000)
 
