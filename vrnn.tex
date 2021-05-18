@@ -73,16 +73,16 @@
 
 \title{Anomalous Jet Identification via Sequence Modeling} 
 
-\author[a]{Alan Kahn}
-\author[a]{Julia Gonski}
-\author[b]{In\^{e}s Ochoa}
-\author[a]{Daniel Williams}
-\author[a]{Gustaaf Brooijmans}
+\author[a]{Alan Kahn,}
+\author[a]{Julia Gonski,}
+\author[b]{In\^{e}s Ochoa,}
+\author[a]{Daniel Williams,}
+\author[a]{and Gustaaf Brooijmans}
 
-\affiliation[a]{Nevis Laboratories, Columbia University, \\Irvington, USA}
-\affiliation[b]{Laboratory of Instrumentation and Experimental Particle Physics, \\Lisbon, Portugal}
+\affiliation[a]{Nevis Laboratories, Columbia University, Irvington, NY, USA}
+\affiliation[b]{Laboratory of Instrumentation and Experimental Particle Physics, Lisbon, Portugal}
 
-\emailAdd{ak3978@columbia.edu}
+\emailAdd{alan.kahn@cern.ch}
 \emailAdd{julia.gonski@cern.ch}
 \emailAdd{ines.ochoa@cern.ch}
 \emailAdd{dmw2174@columbia.edu}
@@ -679,7 +679,7 @@ The effect on performance due to this choice of constituent ordering can be easi
 
 One way in which the VRNN's performance is studied is by assessing signal acceptance and background rejection at the jet level by using only the leading jet of each event. In addition, the Anomaly Score can be applied to both the X and Y jets in an event and used to discriminate between signal and background in an event-level analysis context. Results of the VRNN's performance are provided for both approaches below.
 
-Training is performed using the \texttt{PyTorch} deep learning library~\cite{pytorch}. Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
+Training is performed using the \texttt{PyTorch} deep learning library~\cite{pytorch}. The network is updated using the Adam optimizer with a learning rate parameter of $10^{-5}$~\cite{kingma2017adam}. No regularization via weight decay is applied, however gradient clipping is implemented with a clip value of 10. Since the training scenario is entirely unsupervised, the resulting Anomaly Score distributions from each training dataset may vary. To arrive at a consistent score distribution, a transformation is applied on the resulting Anomaly Score which aims to satisfy two conditions:
 \begin{itemize}
 	\item{The mean of the resulting distribution is at an Anomaly Score value of 0.5.}
 	\item{Anomaly Scores closer to a value of 1 correspond to more signal-like jets. Note that this reverses the previously observed feature displayed in Figure~\ref{fig:score_comp} where more signal-like jets are assigned a lower Anomaly Score.}

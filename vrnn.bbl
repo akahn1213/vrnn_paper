@@ -79,6 +79,10 @@ M.~Cacciari, G.~P. Salam, and G.~Soyez, {\it The anti-kt jet clustering
   algorithm},  {\em Journal of High Energy Physics} {\bf 2008} (Apr, 2008)
   063–063.
 
+\bibitem{fastjet}
+M.~Cacciari, G.~P. Salam, and G.~Soyez, {\it Fastjet user manual},  {\em The
+  European Physical Journal C} {\bf 72} (Mar, 2012).
+
 \bibitem{louppe2017learning}
 G.~Louppe, M.~Kagan, and K.~Cranmer, {\it Learning to pivot with adversarial
   networks},  \href{http://arxiv.org/abs/1611.01046}{{\tt arXiv:1611.01046}}.
@@ -90,6 +94,20 @@ S.~Purushotham, W.~Carvalho, T.~Nilanon, and Y.~Liu, {\it {Variational
 \bibitem{roy2020robust}
 T.~S. Roy and A.~H. Vijay, {\it A robust anomaly finder based on autoencoders},
    \href{http://arxiv.org/abs/1903.02032}{{\tt arXiv:1903.02032}}.
+
+\bibitem{pytorch}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
+  Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito,
+  M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and
+  S.~Chintala, {\it Pytorch: An imperative style, high-performance deep
+  learning library},  in {\em Advances in Neural Information Processing Systems
+  32} (H.~Wallach, H.~Larochelle, A.~Beygelzimer, F.~d\textquotesingle
+  Alch\'{e}-Buc, E.~Fox, and R.~Garnett, eds.), pp.~8024--8035.
+\newblock Curran Associates, Inc., 2019.
+
+\bibitem{kingma2017adam}
+D.~P. Kingma and J.~Ba, {\it Adam: A method for stochastic optimization},
+  \href{http://arxiv.org/abs/1412.6980}{{\tt arXiv:1412.6980}}.
 
 \bibitem{d2}
 S.~Marzani, G.~Soyez, and M.~Spannowsky, {\it Looking {Inside} {Jets}},  {\em
