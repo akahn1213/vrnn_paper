@@ -146,7 +146,7 @@ The model's discriminatory performance resulting from an unsupervised training s
 
 
 
-Many of the open questions in physics, such as the nature of dark matter or the origin of the universe's matter-antimatter asymmetry, could potentially be addressed by the ATLAS and CMS experiments at the CERN Large Hadron Collider (LHC).\blfootnote{A code package demonstrating the model used in this study can be found at: https://gitlab.cern.ch/alkahn/vrnn}
+Many of the open questions in physics, such as the nature of dark matter or the origin of the universe's matter-antimatter asymmetry, could potentially be addressed by the ATLAS and CMS experiments at the CERN Large Hadron Collider (LHC).\blfootnote{A code package demonstrating the model used in this study can be found at: \url{https://github.com/akahn1213/vrnn}}
 Since the discovery of the Higgs boson in 2012~\cite{atlas_higgs,cms_higgs}, no signals of new beyond the Standard Model (BSM) physics have been found. 
 However, sophisticated analysis tools utilizing novel machine learning models hold promise to increase the sensitivity to rare signals. 
  
@@ -792,8 +792,8 @@ To evaluate the efficacy of this procedure, the model is trained on a dataset of
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=225pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
-		\includegraphics[width=225pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
+		\includegraphics[width=225pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png}
+		\includegraphics[width=225pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png}
 	\end{center}
 	\caption{Leading jet mass vs Anomaly Score distributions before (left) and after (right) applying the boosting method detailed in Algorithm~\ref{alg:boost}.}
 	\label{fig:mass_vs_score_boost}
@@ -955,7 +955,7 @@ Since the model produces one Anomaly Score per jet, the Anomaly Scores for the l
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png}
+		\includegraphics[width=250pt]{imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png}
 	\end{center}
 	\caption{Dijet invariant mass vs. Event Score.}
 	\label{fig:mjj_vs_evscore}
