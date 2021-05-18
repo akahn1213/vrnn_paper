@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  18 MAY 2021 12:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.2.26)  18 MAY 2021 12:25
 entering extended mode
 **./vrnn.tex
 (vrnn.tex
@@ -1112,7 +1112,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1059.
 Here is how much of TeX's memory you used:
  21712 strings out of 481556
  418830 string characters out of 2923634
- 709994 words of memory out of 3000000
+ 710001 words of memory out of 3000000
  36360 multiletter control sequences out of 15000+200000
  571965 words of font info for 107 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1137,7 +1137,7 @@ sy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/time
 s/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on vrnn.pdf (24 pages, 989553 bytes).
+Output written on vrnn.pdf (24 pages, 990088 bytes).
 PDF statistics:
  476 PDF objects out of 1000 (max. 8388607)
  99 named destinations out of 1000 (max. 500000)
