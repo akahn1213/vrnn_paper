@@ -112,12 +112,6 @@ The model's discriminatory performance resulting from an unsupervised training s
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
 %\notoc
 
 \begin{document} 
@@ -165,7 +159,6 @@ Many of these techniques use classifier models to search for particular model hy
 While these models show promising performance, they are developed to identify a specific model hypothesis, and often have little to no sensitivity to other models. In addition, they are subject to inaccuracies between simulated samples and data, such as those which occur in the non-perturbative regime of QCD processes.
 
 One way to circumvent these issues is to develop a model that trains directly on data, without requiring the need for simulated inputs.
-%(JG: I dont get this sentence) Such data-driven approaches are difficult mainly due to the inability to provide training labels, and are therefore incompatible with any method of supervised learning.
 Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{Heimel_2019, deepAutoencoders, CWoLa, cheng2021variational}. 
 This paper demonstrates a way to identify BSM signals that present as anomalous substructure in jets using unsupervised, data-driven anomaly detection. 
 
@@ -173,9 +166,9 @@ Anomaly detection refers to a process in which anomalous elements are identified
 In a machine learning context, this can be done with a model that learns an underlying distribution of data points, as characterized by high-level features of the data. 
 Such a model can then identify out-of-distribution data solely on how poorly they are represented by the learned underlying distribution. 
 Several candidate architectures have been developed for this purpose, and are described in the following subsections.
-%The examination of their features is instructive in choosing an architecture for the specific task presented here. 
+The examination of their features is instructive in choosing an architecture for the task of anomalous jet identification.
 
-
+%------------------------------------------------------------------------------%
 \subsection{Autoencoders}
 
 A popular candidate architecture for anomaly detection is the \textit{autoencoder} 
@@ -316,7 +309,6 @@ p(x) = \int p(z)p(x|z)dz.
 \end{equation}
 
 By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL)-Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. The derivation follows first from expressing the log likelihood as the expectation of itself:
-% JG: explain role of KL divergence? 
 
 \begin{equation}
 	\begin{split}
@@ -517,164 +509,9 @@ An overall loss $\mathcal{L}$ over the sequence is then computed by averaging th
 \mathcal{L} = \frac{\mathcal{L}(t)}{N}.
 \end{equation} 
 
-%\textcolor{red}{JG: put some sort of wrap up/conclusion statement here before moving on?} 
-
 This loss function performs the same role as the VAE's loss function, acting both as an appropriate means of optimizing the architecture as well as a discriminatory quantity between nominal and anomalous elements of the dataset.
 
-
-
-%VRNN Diagram
-%\begin{figure}[H]
-%  \begin{center}
-%  
-%    \def\layersep{2.5cm}
-%    
-%    \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
-%        \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-%        \tikzstyle{neuron}=[rectangle,fill=black!25, draw=black!80, very thick, minimum width=0.75cm, minimum height=2.5cm, inner sep=0pt]
-%        \tikzstyle{input neuron}=[neuron, fill=iocolor, rotate=90, minimum width = 3cm, minimum height = 1cm];
-%        \tikzstyle{gru}=[rounded rectangle, draw=black!80, very thick, rotate=90, minimum width = 2.5cm, minimum height = 0.75cm, inner sep=0pt];
-%        \tikzstyle{output neuron}=[neuron, fill=red!50];
-%        \tikzstyle{latent neuron musig}=[neuron, fill=black!10!yellow];
-%        \tikzstyle{latent neuron}=[neuron, fill=layercolor, minimum height=0.75cm, minimum width=0.75cm];
-%        \tikzstyle{layer neuron}=[neuron, fill=layercolor];
-%        \tikzstyle{hidden neuron}=[neuron, fill=hscolor];
-%        \tikzstyle{feature neuron}=[neuron, fill=featcolor];
-%        \tikzstyle{hlv neuron}=[neuron, fill=hlvcolor];
-%        \tikzstyle{annot} = [text width=4em, text centered]
-%        \tikzstyle{kldash} = [rounded rectangle, draw=black!80, dashed, very thick, minimum width=1cm, minimum height=10cm, inner sep=0pt];
-%    
-%        % Draw the input layer nodes
-%        %\foreach \name / \y in {1,...,6}
-%        % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-%        %    \node[input neuron] (I-\name) at (0,-\y) {};
-%
-%
-%        %INPUTS
-%        \node[input neuron] (Ix) at (0, -1) {x(t)};
-%        %\node[input neuron, fill=hlvcolor] (Ihlv) at (0, -5) {HLV};
-%        \node[input neuron, fill=hscolor] (Ihs) at (0, -9) {h(t-1)};
-%        \node[input neuron] (Oy) at (14.85, -1) {y(t)};
-%        \node[input neuron, fill=hscolor] (Ohs) at (14.85, -7.25) {h(t)};
-%
-%        %Intermediate Layers
-%        \node[layer neuron] (h1) at (1.35, -1) {};
-%        \node[feature neuron] (phix) at (2.7, -1) {$\phi_{x}$};
-%        \node[feature neuron] (phiz) at (10.8, -1) {$\phi_{z}$};
-%
-%        %Concatenated Layers
-%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixi) at (4.05, -0.375) {$\phi_{x}$};
-%        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvi) at (4.05, -1) {\small HLV};
-%        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsi) at (4.05, -1.625) {\small h(t-1)};
-%
-%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizo) at (12.15, -0.375) {$\phi_{z}$};
-%        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvo) at (12.15, -1) {\small HLV};
-%        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathso) at (12.15, -1.625) {\small h(t-1)};
-%
-%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphizh) at (12.15, -4.25) {$\phi_{z}$};
-%        \node[feature neuron, minimum width=1cm, minimum height=1.25cm] (catphixh) at (12.15, -5.5) {$\phi_{x}$};
-%        %\node[hlv neuron, minimum width=1cm, minimum height=1.25cm] (cathlvh) at (12.15, -6.75) {\small HLV};
-%        \node[hidden neuron, minimum width=1cm, minimum height=1.25cm] (cathsh) at (12.15, -9) {\small h(t-1)};
-%        
-%
-%        %Intermediate Layers
-%        \node[layer neuron] (h2) at (5.4, -1) {};
-%        \node[layer neuron] (h3) at (6.75, -1) {};
-%        \node[layer neuron, fill=hscolor, rotate=90, minimum width=2.5cm, minimum height=0.75cm] (hs1) at (5.4, -7) {h(t-1)};
-%        \node[layer neuron] (hs2) at (6.75, -7) {};
-%        \node[layer neuron] (h4) at (13.5, -1) {};
-%        
-%        %Latent layers
-%        \node[latent neuron] (lmuz) at (8.1, 0) {$\mu$};
-%        \node[latent neuron] (lsiz) at (8.1, -2) {$\sigma$};
-%        \node[latent neuron] (lmuh) at (8.1, -6) {$\mu_{t}$};
-%        \node[latent neuron] (lsih) at (8.1, -8) {$\sigma_{t}$};
-%        \node[latent neuron] (lz) at (9.45, -1) {$z$};
-%
-%
-%        %GRU
-%        \node[gru, fill=grucolor] (gru) at (13.5, -7.25) {GRU};
-%  
-%
-%
-%
-%
-%        %Arrows
-%        %Hidden Layers
-%        \path (Ix) edge (h1);
-%        \path (h1) edge (phix);
-%        \path (h2) edge (h3);
-%        \path (hs1) edge (hs2);
-%        \path (lz) edge (phiz);
-%        \path (h4) edge (Oy);
-%        \path (gru) edge (Ohs);
-%        %\path (cathlvi) edge (h2);
-%        %\path (cathlvo) edge (h4);
-%        \path (catphixh) edge (gru);
-%        \path (cathsh) edge (gru);
-%      
-%
-%
-%        %Latent Space
-%        \path (h3) edge (lmuz);
-%        \path (h3) edge (lsiz);
-%        \path (hs2) edge (lmuh);
-%        \path (hs2) edge (lsih);
-%        \path (lmuz) edge (lz);
-%        \path (lsiz) edge (lz);
-%
-%        
-%
-%        %Other
-%        %\path (phix) edge (catphixi);
-%        %\path (phiz) edge (catphizo);
-%
-%
-%
-%        %HLV Lines
-%        %\draw[->, draw=hlvlinecolor, thick] (0.5, -5) -- (3.3, -5) -- (3.3, -1) -- (3.55, -1);
-%        %\draw[->, draw=hlvlinecolor, thick] (3.2, -5) -- (11.4, -5) -- (11.4, -1) -- (11.65, -1);
-%        %\draw[->, draw=hlvlinecolor, thick] (11.4, -5) -- (11.4, -6.75) -- (11.65, -6.75);
-%
-%
-%        %Hidden State Lines
-%        \draw[->, draw=hslinecolor, thick] (0.5, -9) -- (4.05, -9) -- (4.05, -2.25);
-%        \draw[->, draw=hslinecolor, thick] (4.05, -7) -- (5.0, -7);
-%        \draw[->, draw=hslinecolor, thick] (4.05, -9) -- (11.62, -9);               
-%        \draw[->, draw=hslinecolor, thick] (11.1, -9) -- (11.1, -2.9375) -- (12.15, -2.9375) -- (12.15, -2.25);
-%
-%
-%
-%        %phix,z lines
-%        
-%		\draw[->, draw=hscolor, thick] (4.56, -1) -- (5.025, -1);       
-%		\draw[->, draw=hscolor, thick] (12.66, -1) -- (13.125, -1);   
-%        
-%        \draw[->, draw=featurelinecolor, thick] (2.7, -2.25) -- (2.7, -4.625) -- (9.95, -4.625) -- (9.95, -5.5) -- (11.62, -5.5);
-%        \draw[->, draw=featurelinecolor, thick] (3.075, -0.375) -- (3.55, -0.375);
-%
-%        \draw[->, draw=featurelinecolor, thick] (11.175, -0.375) -- (11.65, -0.375);
-%        \draw[->, draw=featurelinecolor, thick] (10.8, -2.25) -- (10.8, -4.25) -- (11.62, -4.25);
-%    
-%  
-%
-%
-%
-%        %KL dashed box
-%        \node[gru, minimum width=10cm, minimum height=1.25cm, dashed] (kld) at (8.1, -4) {\rotatebox{-45}{$D_{KL}$}};
-%
-%
-%
-%
-%    
-%
-%  
-%    \end{tikzpicture}
-%    \caption{A Variational Recurrent Neural Network cell.}
-%    \label{fig:VRNN}
-%  \end{center}
-%\end{figure}
-
+%------------ VRNN diagram
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=420pt]{imgs/VRNN_Diagram.pdf}
@@ -684,8 +521,6 @@ This loss function performs the same role as the VAE's loss function, acting bot
 \end{figure}
 
 
-%\subsection{Implementation}
-%JG: is having only 1 subsection a thing? 
 
 The details of the VRNN architecture used in this study are as follows: the number of neurons in each intermediate layer, including the hidden state and feature extracting layers, but not including the latent space and its $\mu$ and $\sigma$ layers, is 16. The latent space is chosen to be two-dimensional. Since constituent four-vectors of jets are being modeled, the input $x(t)$ and output $y(t)$ layers are three dimensional, corresponding to the $p_{T}, \eta, $and $\phi$ of each constituent. ReLU~\cite{activations} activations are used in each layer of the network, except for $\sigma$ and $\sigma_{t}$, which have softmax~\cite{activations} activations, and $z$ and $y(t)$, which have linear activations. 
 
@@ -733,7 +568,6 @@ After the network is trained, an \textit{Anomaly Score} can be determined for ea
 The performance of the VRNN is investigated by studying its ability to discriminate signal from background in a contaminated dataset of background QCD dijet events with varying amounts of signal. The signal events are a process of the form of $Z'\rightarrow XY \rightarrow JJ$ where $X$ and $Y$ are two heavy resonances each decaying to hadrons forming a boosted jet $J$. Two types of signal events are generated. One type is comprised of events where the X and Y both decay to two quarks, resulting in boosted jets with two-pronged substructure. The other type differs in that the X and Y both decay to three quarks, resulting in boosted jets with three-pronged substructure. The masses of the particles in the signal hypothesis are 3.5 TeV, 500 GeV, and 100 GeV for $Z'$, $X$, and $Y$ respectively. A total of 99457 signal events were generated for each substructure hypothesis, along with 995,453 background events. The events were generated using {\sc Pythia8} and the detector response was simulated using {\sc Delphes 3.4.1} with no pile-up or multiple parton interactions included, and events were selected using a single large-radius ($R$=1.0) jet trigger with a $p_T$ threshold of 1.2 TeV. The dataset was provided as part of the LHC Olympics challenge for the ML4Jets2020 Workshop~\cite{dataset}. 
 
 The data were provided as a list of hadrons for each event. The hadrons were then clustered into jets using the anti-$k_{t}$ jet-clustering algorithm with a radius parameter of 1.0~\cite{Cacciari_2008} as implemented by \texttt{FastJet 3.3.3}~\cite{fastjet}. In this study, only the highest $p_{T}$ (leading) and second-highest $p_{T}$ (sub-leading) jets are considered in each event. To test the model's performance with varying amounts of signal contamination, contaminated datasets were produced with 12 different signal event fractions, 10 of which were generated in the range of 0.01\% to 10.0\% along a logarithmic scale, with two higher signal event fractions of 25\% and 50\%. For contamination levels up to and including 10\%, contaminated datasets were created using the same set of background events while only the amount of signal was varied to match the desired contamination. For the two highest contamination levels, contaminated datasets were created using the same 99457 signal events while the number of background events was limited. 
-%Three datasets were generated at each level of contamination: a contaminated dataset containing both signal and background events, a background-only validation set, and a signal-only signal set. 
 Independent datasets were generated for both two-prong and three-prong signal substructure hypotheses at each level of contamination.
 
 Since the goal is to identify jets mainly due to their substructure, it is important that the model's Anomaly Score does not correlate with other jet features, namely mass and $p_{T}$. A common practice to avoid such a correlation in neural network jet modeling architectures is the use of adversarial de-correlation networks~\cite{louppe2017learning}. Applying such adversarial architectures to a VRNN is a complex task which is outside of the scope of this study~\cite{Purushotham2017VariationalRA}. Instead, the de-correlation is achieved through a pre-processing procedure, which can be divided into two steps: one which directly removes mass and $p_{T}$ information from the input jets, and another which orders constituents in a way that improves the VRNN's discriminatory performance.
@@ -754,7 +588,6 @@ Algorithm~\ref{alg:boost} describes in detail the implementation of the rescalin
 \begin{algorithm}[H]
 \SetAlgoLined
 \SetKw{Beginning}{Start}
-%\KwResult{Write here the result }
   \Beginning{}
 
   Boost jet in $z$ direction until $\eta_{Jet} = 0$
@@ -803,7 +636,6 @@ Reflect constituents about $\phi$ axis such that the second hardest constituent 
 
 
 To evaluate the efficacy of this procedure, the model is trained on a dataset of background jets both before and after boosting, and the resulting correlation between Anomaly Score and jet mass is compared. Figure \ref{fig:mass_vs_score_boost} shows the two-dimensional distribution of the mass of the highest $p_T$ (leading) jet in each event vs. its Anomaly Score before and after boosting the input jets. The results depict a significantly smaller amount of correlation between the jet's mass and its Anomaly Score after boosting, as desired.
-%The results depict the significantly increased ambiguity in the mass of the input jet given a value of the Anomaly Score, as desired. (Quantify this??).
 
 
 \begin{figure}[H]
@@ -814,7 +646,6 @@ To evaluate the efficacy of this procedure, the model is trained on a dataset of
 	\caption{Leading jet mass vs Anomaly Score distributions before (left) and after (right) applying the boosting method detailed in Algorithm~\ref{alg:boost}.}
 	\label{fig:mass_vs_score_boost}
 \end{figure}
-%JG: figure titles ought to say "Jet Mass"? 
 
 
 \subsection{Sequence Ordering}
@@ -865,8 +696,6 @@ where $\rho '$ is the transformed Anomaly Score, and  $\overline{\rho}$ is the m
 
 \subsection{Jet Level Performance}
 
-%Points to consider: Dataset composition. Mass distributions. ROC AUC vs time?? AUC vs Contam. S over B 1D. SoB vs Contam. Mass distros after cut. Comparison to D2.
-
 In the jet-level assessment, the model is trained on the leading jet of each event for 500 epochs. To evaluate the trend in performance during training, a computation of the Receiver Operating Characteristic's Area Under the Curve (ROC AUC) is performed after each epoch by examining events in the contaminated training set or comparing events in the background-only validation set to those in the signal-only set. Figure \ref{fig:auc_vs_epoch} shows the results of this training scenario in the case of 1\% contamination. The VRNN quickly reaches its optimal performance, and retains a stable performance throughout the training period. 
 
 \begin{figure}[H]
@@ -916,12 +745,9 @@ The visibility of the resonances at 100 GeV and 500 GeV is enhanced after the se
 
 
 
-
-%A number of substructure variables exist which distinguish two-pronged jet substructure. Among them is the popular D2 variable. 
 As the Anomaly Score in this context distinguishes multi-pronged substructure from homogenous jets, it is useful to compare it to a commonly used high-level variable sensitive to two-pronged signals. The energy correlation function ratio $D_2$~\cite{d2} is selected and used as a benchmark to contextualize the Anomaly Score in both signal discrimination and jet mass correlation. The $D_2$ variable is such that values closer to zero correlate with two-prong jet substructure. 
 
 Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated jet mass distributions with a two-prong signal hypothesis when subject to a cut on Anomaly Score or $D_2$. The Anomaly Score is again selected to exceed a value of 0.65, and the $D_2$ selection is chosen to be less than 1.4 to provide an equivalent background rejection of about 6. The shape of the jet mass distribution is more significantly sculpted after the $D_2$ selection than the Anomaly Score selection, as can be seen most prominently in the 200 to 400 GeV range of jet mass. This indicates that there is a more significant correlation of $D_2$ with jet mass while the Anomaly Score selection retains more of the smoothly falling characteristics of the background jet mass distribution. Such a result can be attributed largely to the boosting method used during pre-processing, as well as to the Anomaly Score being determined only from jet constituent four-vector information, without any high-level information being input into the model. 
-%The result shows the notable difference in the effect of the respective selections on the shape of the background distribution, where a $D_2$ selection results in more severe sculpting when compared to a selection on the Anomaly Score. It is important to note once again that the Anomaly Score is determined only from jet constituent four-vector information, without any external high-level information being input into the model.
 
 \begin{figure}[H]
 	\begin{center}
@@ -930,9 +756,6 @@ Figure \ref{fig:d2_comp} shows a comparison of the shapes of the contaminated je
 	\caption{Comparison of the leading jet mass distribution in a contaminated dataset between equivalent background acceptance selections on Anomaly Score and the $D_2$ variable. The $D_2$ selection causes more severe sculpting in the jet mass distribution than the Anomaly Score, indicating that selections on the Anomaly Score provide a more faithful representation of the original background mass distribution while still enhancing the presence of signal-like jets.}
 	\label{fig:d2_comp}
 \end{figure}
-
-%Another important study involves the model's performance over a range of signal contamination levels. Figure \ref{fig:aucs_vs_contam} shows the ROC AUC values of both two and three-pronged signal hypotheses after training on each of the contaminated sets. Notably, the performance is consistent along a wide range of contaminations, with performance decreasing for contaminations above 10\%. This is expected in the context of Anomaly Detection, where it is assumed that a high percentage of signal contamination will sufficiently dilute the training set with elements of the signal set, resulting in lower performance. However, its consistent performance among all reasonably low levels of contamination leads the Anomaly Score to be interpreted as a quantity which is capable of adequately and consistently parametrizing a range of substructure hypotheses via anomaly detection. This feature of the Anomaly Score is notably valuable in searches which allow for multiple final-state substructure hypotheses. The consistent performance can be attributed to the choice of $k_{t}$-ordered sequencing, which directly highlights non-QCD-like substructure, and to the model's ability to process and represent input jets as sequences of constituents rather than a fixed set of input values. 
-
 
 
 Another important study involves the model's performance over a range of signal contamination
@@ -1049,23 +872,9 @@ IO is supported by the fellowship LCF/BQ/PI20/11760025 from ”la Caixa” Found
 
 %\clearpage
 
-%\section*{References}
-
-
-% TODO: why are letters all uncaps? Fix Initials
-%\bibliographystyle{hunsrt}
 \bibliographystyle{jhep}
 \bibliography{vrnn}
 \end{document}
-
-
-%\begin{enumerate}
-%\item \label{ref:vrnn} Junyoung Chung et. al. (2015). A Recurrent Latent Variable Model for Sequential Data. \\\emph{arXiv:1506.02216 [cs.LG]}
-%\item \label{ref:aevb} Diederik P. Kingma, Max Welling. (2013). Auto-Encoding Variational Bayes. \\\emph{arXiv:1312.6114 [stat.ML]}
-%\item \label{ref:robust_study} Tuhin S. Roy, Aravind H. Vijay. (2019). A robust anomaly finder based on autoencoders. \emph{arXiv:1903.02032 [hep-ph]}
-%\item \label{ref:dataset} Gregor Kasieczka, Ben Nachman, \& David Shih. (2019). R\&D Dataset for LHC \\Olympics 2020 Anomaly Detection Challenge (Version v1) [Data set]. Zenodo. \\\emph{http://doi.org/10.5281/zenodo.2629073}
-%\item \label{ref:vae_ad} Jinwon An and S. Cho, (2015). Variational Autoencoder based Anomaly Detection using Reconstruction Probability
-%\end{enumerate}
 
 
 \end{document}
