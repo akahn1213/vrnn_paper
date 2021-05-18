@@ -88,7 +88,7 @@
 \emailAdd{dmw2174@columbia.edu}
 \emailAdd{gusbroo@nevis.columbia.edu}
 
-\arxivnumber{1234.5678}
+%\arxivnumber{1234.5678}
 
 %%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%
 
@@ -118,7 +118,7 @@ The model's discriminatory performance resulting from an unsupervised training s
 
 
 
-\notoc
+%\notoc
 
 \begin{document} 
 
@@ -135,11 +135,11 @@ The model's discriminatory performance resulting from an unsupervised training s
 \setlength{\belowdisplayshortskip}{0pt}
 
 
-\clearpage
+%\clearpage
 
 %\tableofcontents
 
-\clearpage
+%\clearpage
 
 
 
@@ -768,7 +768,7 @@ Algorithm~\ref{alg:boost} describes in detail the implementation of the rescalin
   Rotate jet about $x$ axis until hardest constituent has $\eta_{1} = 0, \phi_{1} > 0$
  
  
-  \eIf{Any constituents have $\Delta R > 1$\footnote{$\Delta R$ is computed as $\sqrt{\eta^2 + \phi^2}$ for each constituent, where $\eta$ and $\phi$ are measured relative to the x axis.}}{
+  \eIf{Any constituents have\footnote{$\Delta R$ is computed as $\sqrt{\eta^2 + \phi^2}$ for each constituent, where $\eta$ and $\phi$ are measured relative to the x axis.} $\Delta R > 1$}{
  
   Remove all constituents with $\Delta R > 1$
  
@@ -808,8 +808,8 @@ To evaluate the efficacy of this procedure, the model is trained on a dataset of
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=213pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
-		\includegraphics[width=213pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper.png}
+		\includegraphics[width=213pt]{imgs/ProcNoBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png}
+		\includegraphics[width=213pt]{imgs/ProcBoostPt_Background_July20_Background_July20_Weights_Leading_ConstOnly_Avg_M_vs_Score_ProcTest_SaveForPaper_Colorbar.png}
 	\end{center}
 	\caption{Leading jet mass vs Anomaly Score distributions before (left) and after (right) applying the boosting method detailed in Algorithm~\ref{alg:boost}.}
 	\label{fig:mass_vs_score_boost}
@@ -971,7 +971,7 @@ Since the model produces one Anomaly Score per jet, the Anomaly Scores for the l
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=250pt]{imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead.png}
+		\includegraphics[width=250pt]{imgs/bugfix/ProcR_2Prong_Contaminated_10p0_2Prong_Contaminated_10p0_Weights_Event_ConstOnly_Avg_JJ_M_vs_Event_Score_SaveForPaper_Lead_Colorbar.png}
 	\end{center}
 	\caption{Dijet invariant mass vs. Event Score.}
 	\label{fig:mjj_vs_evscore}
