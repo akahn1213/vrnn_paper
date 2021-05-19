@@ -301,44 +301,14 @@ Instead of sampling the distribution directly, a particular value of $\textbf{z}
 \end{equation}
 where $\epsilon$ is sampled from a unit isotropic normal distribution $\epsilon \sim \mathcal{N}(0, 1)$~\cite{kingma2014autoencoding}.
 
-
-
-
-
-%The VAE performs Bayesian inference by determining the marginal likelihood, which is the result of an often intractable calculation:
-%
-%\begin{equation}
-%p(x) = \int p(z)p(x|z)dz.
-%\end{equation}
-%
-%By using Bayes' Theorem, and inserting the approximate posterior distribution $q(z|x)$, the log likelihood can be expressed in terms of two Kullback-Leibler (KL)-Divergences, one from a prior distribution $p(z)$ to the approximate posterior $q(z|x)$, and the other from the true posterior distribution $p(z|x)$ to the same approximate posterior $q(z|x)$. The remaining term is the log likelihood of data, and can be interpreted as the reconstruction accuracy of generating $x$ from the underlying variable $z$. The derivation follows first from expressing the log likelihood as the expectation of itself:
-%
-%\begin{equation}
-%	\begin{split}
-%		\log(p(x))  &= \mathbb{E}[\log p(x)] \\
-%  		&= \mathbb{E}\bigg[\log \frac{p(x|z)p(z)}{p(z|x)}\bigg] \\
-%  		&= \mathbb{E}\bigg[\log \frac{p(x|z)p(z)}{p(z|x)} \frac{q(z|x)}{q(z|x)}\bigg] \\
-%  		&= \mathbb{E}[\log p(x|z)] - \mathbb{E}\bigg[\log \frac{q(z|x)}{p(z)}\bigg] + \mathbb{E} \bigg[\log \frac{q(z|x)}{p(z|x)}\bigg] \\
-%  		&= \underbrace{\mathbb{E}[\log p(x|z)]}_\text{Reconstruction Error} - \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz}_{D_{KL}(q(z|x)||p(z))} + \underbrace{\int q(z|x)\log \frac{q(z|x)}{p(z)}dz.}_{D_{KL}(q(z|x)||p(z|x))}
-%  \end{split}
-%\end{equation} 
-%
-%While the true posterior distribution is still intractable, the KL-Divergence is by definition non-negative. The first two terms of this result can therefore be described as a lower bound on the evidence. 
-%When this lower bound is maximized, the remaining intractable KL-Divergence approaches zero, corresponding to a situation in which the reconstruction error is zero, and the approximate posterior is equivalent to the true posterior. 
-%Therefore, the negative of this lower bound is chosen as the loss function of the VAE, and is minimized through training. 
-%The reconstruction error term is chosen to be the mean-squared-error loss as used in the ordinary AE. 
-%The total loss function therefore takes the following form: 
-
-
 The VAE loss function includes both a reconstruction error term as well as an additional Kullback-Leibler (KL)-Divergence term from a chosen prior distribution $p(\textbf{z})$ to the approximate posterior distribution $q(\textbf{z}|\textbf{x})$:
-
 
 \begin{equation}
 	\mathcal{L} = |{\textbf y} - {\textbf x}|^{2} + D_{KL}(q({\textbf z}|{\textbf x})||p({\textbf z})).
 \end{equation} 
 
 
-For the prior, it is common to choose a unit isotropic Gaussian centered at the origin, as the KL-Divergence between a Gaussian approximate posterior and a Gaussian prior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
+For the prior, it is common to choose a unit isotropic Gaussian centered at the origin, as the KL-Divergence from a Gaussian prior to a Gaussian approximate posterior takes on a closed form solution~\cite{Goodfellow-et-al-2016}.
 
 
 
@@ -479,7 +449,7 @@ After each time-step, the hidden state is updated via a recurrence relation, in 
 \begin{equation}
 	h(t) = f(\phi_{x}, \phi_{z}, h(t-1)).
 \end{equation} 
-Performing this particular step is the primary function of traditional RNN architectures)~\cite{lstm, cho2014learning}. %so any such architecture can be conveniently chosen to perform this task.
+Performing this particular step is the primary function of traditional RNN architectures~\cite{lstm, cho2014learning}.
 
 The VAE present in each cell of the VRNN notably differs from
 conventional VAEs in the following ways:
