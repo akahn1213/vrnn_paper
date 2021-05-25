@@ -159,7 +159,7 @@ Many of these techniques use classifier models to search for particular model hy
 While these models show promising performance, they are developed to identify a specific model hypothesis, and often have little to no sensitivity to other models. In addition, they are subject to inaccuracies between simulated samples and data, such as those which occur in the non-perturbative regime of QCD processes.
 
 One way to circumvent these issues is to develop a model that trains directly on data, without requiring the need for simulated inputs.
-Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{Heimel_2019, deepAutoencoders, CWoLa, cheng2021variational}. 
+Distinguishing new physics from Standard Model background at the LHC without a signal hypothesis is a novel and promising effort~\cite{Heimel_2019, deepAutoencoders, CWoLa, cheng2021variational, bortolato2021bump}. 
 This paper demonstrates a way to identify BSM signals that present as anomalous substructure in jets using unsupervised, data-driven anomaly detection. 
 
 Anomaly detection refers to a process in which anomalous elements are identified within a dataset that is mostly homogenous, but contaminated with outliers. 
@@ -776,7 +776,7 @@ Since the model produces one Anomaly Score per jet, the Anomaly Scores for the l
 \end{figure}
 
 The goal of this search is to observe an excess of signal events in the dijet invariant mass distribution at a mass corresponding to the Z' particle. 
-This is commonly referred to as a ``bump hunt" search, in which the signal is expected to appear as a bump upon an otherwise smoothly falling background distribution. 
+This is commonly referred to as a ``bump hunt" search, in which the signal is expected to appear as a bump upon an otherwise smoothly falling background distribution.\footnote{This model was also demonstrated in a similar context in the LHC Olympics Anomaly Detection challenge as part of the ML4Jets2020 workshop~\cite{kasieczka2021lhc}.}
 
 Figure \ref{fig:2p_dijet} shows the dijet mass distributions of the signal, background, and contaminated datasets, before and after applying a selection on the Event Score at a value of 0.65 (the same value as was used in the jet-level performance assessment) providing a background rejection factor of about 33. Also plotted is the local significance $\sigma$ in each bin of the corresponding histogram, where a total uncertainty of 15\% on the number of background events is assumed. The local significance is computed using the {\sc BinomialExpZ} function from {\sc RooStats}~\cite{moneta2011roostats}. 
 

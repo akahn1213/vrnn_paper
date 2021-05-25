@@ -28,6 +28,11 @@ T.~Cheng, J.-F. Arguin, J.~Leissner-Martin, J.~Pilette, and T.~Golling, {\it
   {Variational Autoencoders for Anomalous Jet Tagging}},
   \href{http://arxiv.org/abs/2007.01850}{{\tt arXiv:2007.01850}}.
 
+\bibitem{bortolato2021bump}
+B.~Bortolato, B.~M. Dillon, J.~F. Kamenik, and A.~Smolkovič, {\it Bump hunting
+  in latent space},  \href{http://arxiv.org/abs/2103.06595}{{\tt
+  arXiv:2103.06595}}.
+
 \bibitem{bank2020autoencoders}
 D.~Bank, N.~Koenigstein, and R.~Giryes, {\it {Autoencoders}},
   \href{http://arxiv.org/abs/2003.05991}{{\tt arXiv:2003.05991}}.
@@ -108,6 +113,11 @@ D.~P. Kingma and J.~Ba, {\it Adam: A method for stochastic optimization},
 S.~Marzani, G.~Soyez, and M.~Spannowsky, {\it Looking {Inside} {Jets}},  {\em
   Lecture Notes in Physics} (2019) [\href{http://arxiv.org/abs/1901.10342}{{\tt
   arXiv:1901.10342}}].
+
+\bibitem{kasieczka2021lhc}
+{G. Kasieczka, B. Nachman, D. Shih et. al.}, {\it The lhc olympics 2020: A
+  community challenge for anomaly detection in high energy physics},
+  \href{http://arxiv.org/abs/2101.08320}{{\tt arXiv:2101.08320}}.
 
 \bibitem{moneta2011roostats}
 L.~Moneta, K.~Belasco, K.~Cranmer, S.~Kreiss, A.~Lazzaro, D.~Piparo, G.~Schott,
